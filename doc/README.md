@@ -1,2 +1,7 @@
-# DominionKifu
-This repository provides a service for a game record feature using logs from Dominion Online.
+# doc
+
+ドミニオン棋譜についてドキュメント類を配置したフォルダです。
+
+* ビジョン
+* ロードマップ
+* DomainModel
