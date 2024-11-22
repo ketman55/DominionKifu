@@ -1,4 +1,7 @@
+# 基本セットのドメインモデル
+
 ```mermaid
+
 erDiagram
 game ||--|{player: "1:1..4"
 game ||--||kingdom: "1:1"
@@ -97,5 +100,6 @@ inPlay {
 card {
   string name
 }
+
 ```
 
