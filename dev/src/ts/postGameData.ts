@@ -1,22 +1,23 @@
-import axios from 'axios';
-
-interface GameData {
-    gameId: string;
-    supply: string;
-    gameLog: string;
-}
-
-async function postGameData(gameId: string, supply: string, gameLog: string): Promise<boolean> {
-    const url = 'https://your-api-endpoint.com/register-game-data';
-    const data: GameData = { gameId, supply, gameLog };
-
+export async function postGameData(gameNumber: string, gameSupply: string, gameLog: string): Promise<boolean> {
     try {
-        const response = await axios.post(url, data);
-        return response.status === 200;
-    } catch (error) {
-        console.error('Error posting game data:', error);
+      const response = await fetch('/api/gameData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ gameNumber, gameSupply, gameLog })
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Success:', data);
+        return true;
+      } else {
+        console.error('Error:', response.statusText);
         return false;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      return false;
     }
-}
-
-export default postGameData;
+  }

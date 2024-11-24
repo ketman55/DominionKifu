@@ -20,20 +20,24 @@
         </div>
 
         <!-- ゲーム番号とログの入力欄 -->
-        <div style="flex: 1;">
+        <div id="gameForm" style="flex: 1;">
             <form>
                 <label for="gameNumber">Game Number:</label><br>
                 <input type="text" id="gameNumber" name="gameNumber" required><br><br>
                 
-                <label for="supplyInput">Supply Input:</label><br>
-                <textarea id="supplyInput" name="supplyInput" rows="5" cols="50" required></textarea><br><br>
+                <label for="gameSupply">Game Supply:</label><br>
+                <textarea id="gameSupply" name="gameSupply" rows="5" cols="50" required></textarea><br><br>
                 
-                <label for="logInput">Log Input:</label><br>
-                <textarea id="logInput" name="logInput" rows="20" cols="50" required></textarea><br>
+                <label for="gameLog">Game Log:</label><br>
+                <textarea id="gameLog" name="gameLog" rows="20" cols="50" required></textarea><br>
                 
                 <button type="submit">Submit</button>
             </form>
         </div>
     </div>
+
+    <!-- スクリプト定義 -->
+    <script src="../../dist/bundle.js"></script>
+
 </body>
 </html>
