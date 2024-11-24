@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Number & Log Input</title>
+</head>
+<body>
+    <h1>Game Number & Log Input</h1>
+    
+    <div style="display: flex;">
+
+        <!-- ゲーム番号入力欄 -->
+        <div style="flex: 1;">
+            <h2>Game Number List:</h2>
+            <ul>
+                <li>Game 1</li>
+                <li>Game 2</li>
+                <li>Game 3</li>
+                <!-- Add more game numbers here -->
+            </ul>
+        </div>
+
+        <!-- ゲーム番号とログの入力欄 -->
+        <div style="flex: 1;">
+            <form>
+                <label for="gameNumber">Game Number:</label><br>
+                <input type="text" id="gameNumber" name="gameNumber" required><br><br>
+                
+                <label for="supplyInput">Supply Input:</label><br>
+                <textarea id="supplyInput" name="supplyInput" rows="5" cols="50" required></textarea><br><br>
+                
+                <label for="logInput">Log Input:</label><br>
+                <textarea id="logInput" name="logInput" rows="20" cols="50" required></textarea><br>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
