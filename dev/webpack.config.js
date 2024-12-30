@@ -1,7 +1,12 @@
 const path = require('path');
+const glob = require('glob');
 
 module.exports = {
-  entry: './src/ts/gameNumberAndLogInputEventListener.ts',
+  entry: glob.sync('src/ts/**/*.ts').reduce((entries, entry) => {
+    const entryName = path.relative('src/ts', entry).replace(/\\/g, '/').replace('.ts', '');
+    entries[entryName] = path.resolve(__dirname, entry);
+    return entries;
+  }, {}),
   module: {
     rules: [
       {
@@ -15,7 +20,7 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
 };

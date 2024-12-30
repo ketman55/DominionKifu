@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+#leftSidebar, #mainContent, #rightSidebar {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#leftSidebar {
+    background-color: #f4f4f4;
+    width: 20%;
+}
+
+#mainContent {
+    background-color: #fff;
+    width: 60%;
+}
+
+#rightSidebar {
+    background-color: #f4f4f4;
+    width: 20%;
+}

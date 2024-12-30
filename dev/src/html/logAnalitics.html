@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Analytics</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <h1>Log Analytics</h1>
+
+    <div id="container">
+        
+         <!-- 左のメニューバー -->
+        <div id="leftSidebar">
+            <h2>Sidebar</h2>
+            <ul>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>
+        </div>
+
+        <!-- 中央の表示欄 -->
+        <div id="mainContent">
+            <h2>Main Content</h2>
+            <p>This is where the main content will go.</p>
+            
+            <div id="deckSection">
+                <h3>山札表示欄</h3>
+                <p>ここに山札の情報を表示します。</p>
+            </div>
+
+            <div id="mySection">
+                <h3>自分の表示欄</h3>
+                <p>ここに自分の情報を表示します。</p>
+            </div>
+
+            <div id="enemySection">
+                <h3>相手の表示欄</h3>
+                <p>ここに相手の情報を表示します。</p>
+            </div>
+        </div>
+
+        <!-- 右側の表示欄 -->
+        <div id="rightSidebar">
+            <h2>Right Sidebar</h2>
+            <p>This is where the right sidebar content will go.</p>
+
+            <div id="gameNumber">
+                <h3>ゲーム番号表示欄</h3>
+                <p id="gameNumberDisplay">ここにゲーム番号を表示します。</p>
+        
+            </div>
+
+            <div id="supply">
+                <h3>サプライ表示欄</h3>
+                <p id="gameSupplyDisplay">ここにサプライの情報を表示します。</p>
+        
+            </div>
+
+            <div id="logSection">
+                <h3>ログ表示欄</h3>
+                <p id="gameLogDisplay">ここにログの情報を表示します。</p>
+        
+            </div>
+
+        </div>
+    </div>
+     <!-- スクリプト定義 -->
+     <script src="../../dist/logAnaliticsInit.bundle.js"></script>
+</body>
+</html>
