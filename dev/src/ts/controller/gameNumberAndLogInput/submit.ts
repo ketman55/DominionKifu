@@ -1,4 +1,4 @@
-import { postGameData } from './postGameData';
+import { postGameData } from '../../logic/postGameData';
 
 document.getElementById('gameForm')?.addEventListener('submit', function(event) {
     event.preventDefault(); // フォームのデフォルトの送信を防ぐ
