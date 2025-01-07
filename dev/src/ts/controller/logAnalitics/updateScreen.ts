@@ -101,10 +101,10 @@ export function updateScreen(gameLogMaster: GameLog) {
         }
         
         // テーブルの再描画
-        logSection.forEach(log => {
+        logSection.forEach((log, index) => {
             const row = gameLogTableBody.insertRow();
             const cell = row.insertCell(0);
-            cell.textContent = log.logSection;
+            cell.textContent = index + " : " + log.logSection;
             row.addEventListener('mouseover', () => {
                 row.style.backgroundColor = 'lightgray';
             });
@@ -112,8 +112,16 @@ export function updateScreen(gameLogMaster: GameLog) {
                 row.style.backgroundColor = '';
             });
             row.addEventListener('click', () => {
-                alert(log.logSection);
+                // クリックされた行のポインタをセットして再描画
+                gameLogMaster.setPointer(index);
+                updateScreen(gameLogMaster);
             });
+
+            // ポインタの行にフォーカスを移動
+            if (index === pointer) {
+                row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                row.classList.add('highlight'); // フォーカスを示すためのクラスを追加
+            }
         });
     }
 

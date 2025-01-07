@@ -44,3 +44,7 @@ body {
     width: 100%; /* テーブルの幅を設定 */
     box-sizing: border-box;
 }
+
+.highlight {
+    background-color: yellow; /* フォーカスを示すための背景色 */
+}
