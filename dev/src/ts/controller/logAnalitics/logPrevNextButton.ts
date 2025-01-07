@@ -2,10 +2,8 @@ import { GameLog } from '../../model/GameLog';
 import { updateScreen } from './updateScreen';
 
 // prevButtonを押下した際のイベント
-document.getElementById('prevButton')?.addEventListener('click', prevButtonEvent);
-function prevButtonEvent() {
+export function prevButtonEvent(gameLogMaster: GameLog) {
     // ポインタをひとつ戻す
-    const gameLogMaster = new GameLog();
     gameLogMaster.decrementPointer();
 
     // 画面表示を更新
@@ -14,10 +12,8 @@ function prevButtonEvent() {
 }
 
 // nextButtonを押下した際のイベント
-document.getElementById('nextButton')?.addEventListener('click', nextButtonEvent);
-function nextButtonEvent() {
+export function nextButtonEvent(gameLogMaster: GameLog) {
 	// ポインタをひとつ進める
-    const gameLogMaster = new GameLog();
     gameLogMaster.incrementPointer();
 
     // 画面表示を更新

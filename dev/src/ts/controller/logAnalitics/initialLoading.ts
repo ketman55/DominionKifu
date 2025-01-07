@@ -2,7 +2,7 @@ import { GameLog } from '../../model/GameLog';
 import { updateScreen } from './updateScreen';
 
 // 初期処理
-function init() {
+export function init(gameLogMaster: GameLog) {
     /*
      ローカルストレージからデータを取得
     */
@@ -27,7 +27,6 @@ function init() {
      画面中央の表示
     */
     // ログデータとサプライデータを注入
-    const gameLogMaster = new GameLog();
     gameLogMaster.make(gameNumber, gameLog, gameSupply);
     
     // 初期表示用のデータを取得
@@ -61,6 +60,3 @@ function init() {
     }
 
 }
-
-// ページロード時にlogAnaliticsInitを呼び出す
-window.addEventListener('load', init);

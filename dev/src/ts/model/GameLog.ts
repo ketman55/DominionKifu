@@ -11,25 +11,25 @@ interface logSection {
 export class GameLog {
     
     private gameNumber: string;
-    private lowLog: string;
-    private supply: string;
+    private gameLog: string;
+    private gameSupply: string;
     private logSectionArray: logSection[] = []; // ログの断面を格納する配列
     private pointer; // ログの表示位置を示すポインタ
 
     constructor() {
         this.gameNumber = '';
-        this.lowLog = '';
-        this.supply = '';
+        this.gameLog = '';
+        this.gameSupply = '';
         this.logSectionArray = [];
         this.pointer = 0;
     }
 
-    // ログを作成するメソッド
-    make(gameNumber: string, lowLog: string, supply: string) {        
+    // ログを新規作成するメソッド
+    make(gameNumber: string, gameLog: string, gameSupply: string) {        
         // クラスの初期化
         this.gameNumber = gameNumber;
-        this.lowLog = lowLog;
-        this.supply = supply;
+        this.gameLog = gameLog;
+        this.gameSupply = gameSupply;
         this.logSectionArray = [];
         this.pointer = 0;
 
@@ -44,7 +44,7 @@ export class GameLog {
 
     // サプライを取得するメソッド
     getSupply(): string {
-        return this.supply;
+        return this.gameSupply;
     }
     
     // ログの断面を取得するメソッド
@@ -69,12 +69,12 @@ export class GameLog {
 
     // ログの表示位置を示すポインタをインクリメントするメソッド
     incrementPointer(): void {
-        if(!this.isEnd) this.pointer++;
+        if(!this.isEnd()) this.pointer++;
     }
 
     // ログの表示位置を示すポインタをデクリメントするメソッド
     decrementPointer(): void {
-        if(!this.isTop) this.pointer--;
+        if(!this.isTop()) this.pointer--;
     }
 
     // ログの表示位置を示すポインタをリセットするメソッド
@@ -96,7 +96,7 @@ export class GameLog {
     private analizeLog(): void {
 
         let tmpPointer = 0;
-        let logArray = this.lowLog.split('\n');
+        let logArray = this.gameLog.split('\n');
 
         // logArrayの各要素を解析してlogSectionArrayに格納する
         logArray.forEach((log) => {
@@ -107,7 +107,7 @@ export class GameLog {
                 const firstPlayer = new Player();
                 const secondPlayer = new Player();
 
-                kingdom.loadGameSupply(this.supply);
+                kingdom.loadGameSupply(this.gameSupply);
 
                 let logSection: logSection = { kingdom: kingdom, firstPlayer: firstPlayer , secondPlayer: secondPlayer, logSection: log };
                 this.logSectionArray.push(logSection);
