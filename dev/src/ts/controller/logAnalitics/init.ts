@@ -1,5 +1,5 @@
-import { gameLogMaster } from './globalState';
 import { GameLog } from '../../model/GameLog';
+import { updateScreen } from './updateScreen';
 
 // 初期処理
 function init() {
@@ -27,64 +27,20 @@ function init() {
      画面中央の表示
     */
     // ログデータとサプライデータを注入
+    const gameLogMaster = new GameLog();
     gameLogMaster.make(gameNumber, gameLog, gameSupply);
     
     // 初期表示用のデータを取得
-    const initialGameLog = gameLogMaster.getLogSectionArray()[0];
-
-    // 王国カードの初期表示
-    let kingdom = initialGameLog.kingdom;
-    const leftTableBody = document.getElementById('LeftSupplyTable')?.getElementsByTagName('tbody')[0];
-    if (leftTableBody) {
-        kingdom.getLeftSupply().forEach(card => {
-            const row = leftTableBody.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            cell1.textContent = card.name;
-            cell2.textContent = card.count.toString();
-        });
-    }
-
-    const rightTableBody = document.getElementById('RightSupplyTable')?.getElementsByTagName('tbody')[0];
-    if (rightTableBody) {
-        kingdom.getRightSupply().forEach(card => {
-            const row = rightTableBody.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            cell1.textContent = card.name;
-            cell2.textContent = card.count.toString();
-        });
-    }
-
-    // FirstPlayerの初期表示
-    let firstPlayer = initialGameLog.firstPlayer;
-    const firstPlayerDeckTableBody = document.getElementById('FirstPlayerDeckTable')?.getElementsByTagName('tbody')[0];
-    if (firstPlayerDeckTableBody) {
-        firstPlayer.getDeck().forEach(card => {
-            const row = firstPlayerDeckTableBody.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            cell1.textContent = card.name;
-            cell2.textContent = card.count.toString();
-        });
-    }
-
-    // SecondPlayerの初期表示
-    let secondPlayer = initialGameLog.secondPlayer;
-    const secondPlayerDeckTableBody = document.getElementById('SecondPlayerDeckTable')?.getElementsByTagName('tbody')[0];
-    if (secondPlayerDeckTableBody) {
-        secondPlayer.getDeck().forEach(card => {
-            const row = secondPlayerDeckTableBody.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            cell1.textContent = card.name;
-            cell2.textContent = card.count.toString();
-        });
-    }
-
+    updateScreen(gameLogMaster);
+    
     /*
      画面右側の表示
     */
+    const gameLogDisplay = document.getElementById('gameLogDisplay');
+    if (gameLogDisplay) {
+        gameLogDisplay.textContent = gameLogMaster.getPointer().toString();
+    }
+
     let logSection = gameLogMaster.getLogSectionArray();
     const gameLogTableBody = document.getElementById('gameLogTable')?.getElementsByTagName('tbody')[0];
     if (gameLogTableBody) {

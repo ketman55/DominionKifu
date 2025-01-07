@@ -1,26 +1,13 @@
-import { gameLogMaster } from './globalState';
+import { GameLog } from "../../model/GameLog";
 
-export function updateScreen() {
-
-    /*
-     画面右側の表示
-    */
-    const gameNumberDisplay = document.getElementById('gameNumberDisplay');
-    if (gameNumberDisplay) {
-        gameNumberDisplay.textContent = gameLogMaster.getGameNumber();
-    }
-
-    const gameSupplyDisplay = document.getElementById('gameSupplyDisplay');
-    if (gameSupplyDisplay) {
-        gameSupplyDisplay.textContent = gameLogMaster.getSupply();
-    }
+export function updateScreen(gameLogMaster: GameLog) {
 
     /*
      画面中央の表示
     */
 
     // 初期表示用のデータを取得
-    let pointer = gameLogMaster.getPointer();
+    const pointer = gameLogMaster.getPointer();
     const targetGameLog = gameLogMaster.getLogSectionArray()[pointer];
 
     // 王国カードの初期表示

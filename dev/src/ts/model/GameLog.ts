@@ -95,12 +95,13 @@ export class GameLog {
     // ログを解析してlogSectionArrayに格納するメソッド
     private analizeLog(): void {
 
+        let tmpPointer = 0;
         let logArray = this.lowLog.split('\n');
 
         // logArrayの各要素を解析してlogSectionArrayに格納する
         logArray.forEach((log) => {
             
-            if (this.pointer === 0) {
+            if (tmpPointer === 0) {
                 // pointerが0の時は初期値を設定して格納する
                 const kingdom = new Kingdom();
                 const firstPlayer = new Player();
@@ -110,22 +111,25 @@ export class GameLog {
 
                 let logSection: logSection = { kingdom: kingdom, firstPlayer: firstPlayer , secondPlayer: secondPlayer, logSection: log };
                 this.logSectionArray.push(logSection);
-                this.pointer++;
-                return;
+                tmpPointer++;
             } else  {
                 // ひとつ前のlogSectionに今回のログの内容を反映させて登録する
-                let lastPointer = this.pointer - 1;
+                let lastPointer = tmpPointer - 1;
 
-                const kingdom = this.logSectionArray[lastPointer].kingdom;
-                const firstPlayer = this.logSectionArray[lastPointer].firstPlayer;
-                const secondPlayer = this.logSectionArray[lastPointer].secondPlayer;
+                const tmpKingdom = this.logSectionArray[lastPointer].kingdom;
+                const tmpFirstPlayer = this.logSectionArray[lastPointer].firstPlayer;
+                const tmpSecondPlayer = this.logSectionArray[lastPointer].secondPlayer;
+
+                const kingdom = new Kingdom();
+                const firstPlayer = new Player();
+                const secondPlayer = new Player();
 
                 // 今回のログの内容を反映させる
 
                 // 今回のログを登録する
                 let logSection: logSection = { kingdom: kingdom, firstPlayer: firstPlayer , secondPlayer: secondPlayer, logSection: log };
                 this.logSectionArray.push(logSection);
-                this.pointer++;
+                tmpPointer++;
             }
             
         });
