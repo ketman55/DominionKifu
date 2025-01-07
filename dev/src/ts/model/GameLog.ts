@@ -131,7 +131,6 @@ export class GameLog {
                 this.logSectionArray.push(logSection);
                 tmpPointer++;
             }
-            
         });
     }
 }
