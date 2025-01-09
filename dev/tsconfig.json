@@ -108,7 +108,7 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "outDir": "./dist",
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "typeRoots": ["./node_modules/@types", "./src/server/types"]
   },
-  "include": ["./src/webpack", "./src/types"],
+  "include": ["./src/webpack", "./src/types", "src/server/types/lokijs.d.ts"],
 }
