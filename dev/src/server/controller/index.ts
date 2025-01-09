@@ -2,9 +2,13 @@ import express, { Request, Response } from 'express';
 import { startDb } from '../database/makeLokiDb';
 import { searchGameLog, insertGameLog, searchAllGameLog } from '../repository/gameLogRepository';
 import { GameData } from '../../webpack/interface/GameData';
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
+
+// CORSを有効にする
+app.use(cors());
 
 // JSONボディのパースを有効にする
 app.use(express.json());
@@ -44,7 +48,7 @@ app.post('/api/gamedata', (req: Request, res: Response) => {
 });
 
 // ゲームデータを全件取得するエンドポイント
-app.get('/api/gamedata/all', (req: Request, res: Response) => {
+app.get('/api/all/gamedata', (req: Request, res: Response) => {
   const gameDataArray = searchAllGameLog();
   res.json(gameDataArray);
 });

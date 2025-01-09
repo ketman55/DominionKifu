@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/lokijs": "^1.5.14",
     "@types/node": "^22.10.5",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "lokijs": "^1.5.12"
   }
