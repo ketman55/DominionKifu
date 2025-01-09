@@ -47,4 +47,12 @@ export class Kingdom {
             this.rightSupply.push({ name: cardName, count });
         }
     }
+
+    // ディープコピーを返すメソッド
+    clone(): Kingdom {
+        const kingdom = new Kingdom();
+        kingdom.leftSupply = this.leftSupply.map(card => ({ ...card }));
+        kingdom.rightSupply = this.rightSupply.map(card => ({ ...card }));
+        return kingdom;
+    }
 }

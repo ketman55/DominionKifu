@@ -56,14 +56,67 @@ export function updateScreen(gameLogMaster: GameLog) {
         }
         
         // テーブルの再描画
-        firstPlayer.getDeck().forEach(card => {
+        firstPlayer.getDeck().forEach((card, index) => {
             const row = firstPlayerDeckTableBody.insertRow();
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
-            cell1.textContent = card.name;
+            cell1.textContent = index.toString();
             cell2.textContent = card.count.toString();
         });
     }
+
+    const firstPlayerHandTableBody = document.getElementById('FirstPlayerHandTable')?.getElementsByTagName('tbody')[0];
+    if (firstPlayerHandTableBody) {
+        // テーブルのリセット
+        while (firstPlayerHandTableBody.firstChild) {
+            firstPlayerHandTableBody.removeChild(firstPlayerHandTableBody.firstChild);
+        }
+        
+        // テーブルの再描画
+        firstPlayer.getHand().forEach((card, index) => {
+            const row = firstPlayerHandTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = index.toString();
+            cell2.textContent = card.count.toString();
+        });
+    }
+
+    const firstPlayerDiscardTableBody = document.getElementById('FirstPlayerDiscardTable')?.getElementsByTagName('tbody')[0];
+    if (firstPlayerDiscardTableBody) {
+        // テーブルのリセット
+        while (firstPlayerDiscardTableBody.firstChild) {
+            firstPlayerDiscardTableBody.removeChild(firstPlayerDiscardTableBody.firstChild);
+        }
+        
+        // テーブルの再描画
+        firstPlayer.getDiscardArea().forEach((card, index) => {
+            const row = firstPlayerDiscardTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = index.toString();
+            cell2.textContent = card.count.toString();
+        });
+    }
+
+    const firstPlayerPlayTableBody = document.getElementById('FirstPlayerPlayTable')?.getElementsByTagName('tbody')[0];
+    if (firstPlayerPlayTableBody) {
+        // テーブルのリセット
+        while (firstPlayerPlayTableBody.firstChild) {
+            firstPlayerPlayTableBody.removeChild(firstPlayerPlayTableBody.firstChild);
+        }
+        
+        // テーブルの再描画
+        firstPlayer.getPlayArea().forEach((card, index) => {
+            const row = firstPlayerPlayTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = index.toString();
+            cell2.textContent = card.count.toString();
+        });
+    }
+
+
 
     // SecondPlayerの初期表示
     let secondPlayer = targetGameLog.secondPlayer;
@@ -75,14 +128,66 @@ export function updateScreen(gameLogMaster: GameLog) {
         }
 
         // テーブルの再描画
-        secondPlayer.getDeck().forEach(card => {
+        secondPlayer.getDeck().forEach((card, index) => {
             const row = secondPlayerDeckTableBody.insertRow();
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
-            cell1.textContent = card.name;
+            cell1.textContent = index.toString();
             cell2.textContent = card.count.toString();
         });
     }
+
+    const secondPlayerHandTableBody = document.getElementById('SecondPlayerHandTable')?.getElementsByTagName('tbody')[0];
+    if (secondPlayerHandTableBody) {
+        // テーブルのリセット
+        while (secondPlayerHandTableBody.firstChild) {
+            secondPlayerHandTableBody.removeChild(secondPlayerHandTableBody.firstChild);
+        }
+
+        // テーブルの再描画
+        secondPlayer.getHand().forEach((card, index) => {
+            const row = secondPlayerHandTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = index.toString();
+            cell2.textContent = card.count.toString();
+        });
+    }
+
+    const secondPlayerDiscardTableBody = document.getElementById('SecondPlayerDiscardTable')?.getElementsByTagName('tbody')[0];
+    if (secondPlayerDiscardTableBody) {
+        // テーブルのリセット
+        while (secondPlayerDiscardTableBody.firstChild) {
+            secondPlayerDiscardTableBody.removeChild(secondPlayerDiscardTableBody.firstChild);
+        }
+
+        // テーブルの再描画
+        secondPlayer.getDiscardArea().forEach((card, index) => {
+            const row = secondPlayerDiscardTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = index.toString();
+            cell2.textContent = card.count.toString();
+        });
+    }
+
+    const secondPlayerPlayTableBody = document.getElementById('SecondPlayerPlayTable')?.getElementsByTagName('tbody')[0];
+    if (secondPlayerPlayTableBody) {
+        // テーブルのリセット
+        while (secondPlayerPlayTableBody.firstChild) {
+            secondPlayerPlayTableBody.removeChild(secondPlayerPlayTableBody.firstChild);
+        }
+
+        // テーブルの再描画
+        secondPlayer.getPlayArea().forEach((card, index) => {
+            const row = secondPlayerPlayTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = index.toString();
+            cell2.textContent = card.count.toString();
+        });
+    }
+    
 
     /*
      画面右側の表示

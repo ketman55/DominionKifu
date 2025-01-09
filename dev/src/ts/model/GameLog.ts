@@ -1,3 +1,4 @@
+import { analyzeLog } from "../logic/logAnalyzer";
 import { Kingdom } from "./Kingdom";
 import { Player } from "./Player";
 
@@ -107,26 +108,22 @@ export class GameLog {
                 const firstPlayer = new Player();
                 const secondPlayer = new Player();
 
-                kingdom.loadGameSupply(this.gameSupply);
+                kingdom.loadGameSupply(this.gameSupply);　// サプライを設定する
 
                 let logSection: logSection = { kingdom: kingdom, firstPlayer: firstPlayer , secondPlayer: secondPlayer, logSection: log };
                 this.logSectionArray.push(logSection);
                 tmpPointer++;
             } else  {
-                // ひとつ前のlogSectionに今回のログの内容を反映させて登録する
+                // ひとつ前のlogSectionの内容をディープコピー
                 let lastPointer = tmpPointer - 1;
+                const kingdom = this.logSectionArray[lastPointer].kingdom.clone();
+                const firstPlayer = this.logSectionArray[lastPointer].firstPlayer.clone();
+                const secondPlayer = this.logSectionArray[lastPointer].secondPlayer.clone();
 
-                const tmpKingdom = this.logSectionArray[lastPointer].kingdom;
-                const tmpFirstPlayer = this.logSectionArray[lastPointer].firstPlayer;
-                const tmpSecondPlayer = this.logSectionArray[lastPointer].secondPlayer;
+                // 今回のログの内容でクラスを更新する
+                analyzeLog(kingdom, firstPlayer, secondPlayer, log);
 
-                const kingdom = new Kingdom();
-                const firstPlayer = new Player();
-                const secondPlayer = new Player();
-
-                // 今回のログの内容を反映させる
-
-                // 今回のログを登録する
+                // 結果を登録する
                 let logSection: logSection = { kingdom: kingdom, firstPlayer: firstPlayer , secondPlayer: secondPlayer, logSection: log };
                 this.logSectionArray.push(logSection);
                 tmpPointer++;

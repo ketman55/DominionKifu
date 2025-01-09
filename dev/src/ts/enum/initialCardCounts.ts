@@ -12,6 +12,10 @@ enum lowData {
 
 export const initialCardCounts: { [key: string]: number } = {
 
+    // ログ固有の用語
+    card: 0,
+    cards: 0,
+
     // 基本セット
     Artisan: lowData.Standard,
     Chapel: lowData.Standard,
