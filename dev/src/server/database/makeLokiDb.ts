@@ -1,6 +1,6 @@
 import Loki from 'lokijs';
-import { GameData } from '../../interface/GameData';
-import { Comment } from '../../model/Comment';
+import { GameData } from '../../webpack/interface/GameData';
+import { Comment } from '../../webpack/model/Comment';
 
 let db: Loki;
 

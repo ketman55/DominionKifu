@@ -2,8 +2,8 @@ const path = require('path');
 const glob = require('glob');
 
 module.exports = {
-  entry: glob.sync('src/{client, model}/**/*.ts').reduce((entries, entry) => {
-    const entryName = path.relative('src/ts', entry).replace(/\\/g, '/').replace('.ts', '');
+  entry: glob.sync('src/webpack/**/*.ts').reduce((entries, entry) => {
+    const entryName = path.relative('src/webpack', entry).replace(/\\/g, '/').replace('.ts', '');
     entries[entryName] = path.resolve(__dirname, entry);
     return entries;
   }, {}),

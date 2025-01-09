@@ -1,4 +1,4 @@
-import { GameData } from "../../interface/GameData";
+import { GameData } from "../../webpack/interface/GameData";
 import { getDb } from "../database/makeLokiDb";
 
 export function searchGameLog(gameNumber: string): GameData {

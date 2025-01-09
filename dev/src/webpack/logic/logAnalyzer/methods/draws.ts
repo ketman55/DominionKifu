@@ -1,4 +1,4 @@
-import { initialCardCounts } from "../../enum/initialCardCounts";
+import { initialCardCounts } from "../../../enum/initialCardCounts";
 import { Player } from "../../../model/Player";
 
 export function draws(player: Player, logArray: string[]): void {

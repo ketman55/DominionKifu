@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { startDb } from '../database/makeLokiDb';
 import { searchGameLog, insertGameLog, searchAllGameLog } from '../repository/gameLogRepository';
-import { GameData } from '../../interface/GameData';
+import { GameData } from '../../webpack/interface/GameData';
 
 const app = express();
 const port = 3000;

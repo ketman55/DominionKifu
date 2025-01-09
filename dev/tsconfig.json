@@ -110,5 +110,5 @@
     "outDir": "./dist",
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["./src/ts", "src/model/GameLog.ts", "src/model/Kingdom.ts", "src/model/Player.ts"]
+  "include": ["./src/webpack", "./src/types"],
 }

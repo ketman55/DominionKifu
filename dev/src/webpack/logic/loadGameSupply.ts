@@ -8,8 +8,8 @@
  * @returns void
  */
 
-import { Kingdom } from "../../model/Kingdom";
-import { initialCardCounts } from "../enum/initialCardCounts";
+import { Kingdom } from "../../webpack/model/Kingdom";
+import { initialCardCounts } from "../../webpack/enum/initialCardCounts";
 
 export function loadGameSupply(gameSupply: string, kingdomCards: Kingdom): void {
     // カンマ区切りの文字列を配列に変換、空白を削除

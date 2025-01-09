@@ -1,4 +1,4 @@
-import { GameLog } from '../../../model/GameLog';
+import { GameLog } from '../../../webpack/model/GameLog';
 import { updateScreen } from './updateScreen';
 
 // prevButtonを押下した際のイベント

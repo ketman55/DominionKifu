@@ -1,6 +1,6 @@
 import { Kingdom } from "../../model/Kingdom";
 import { Player } from "../../model/Player";
-import { draws } from "./logAnalyer/draws";
+import { draws } from "./methods/draws";
 
 
 export function analyzeLog(kingdom: Kingdom, firstPlayer: Player, secondPlayer: Player, logSection: string): void {

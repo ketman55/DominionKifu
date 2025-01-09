@@ -1,4 +1,4 @@
-import { analyzeLog } from "../ts/logic/logAnalyzer";
+import { analyzeLog } from "../logic/logAnalyzer/logAnalyzer";
 import { Kingdom } from "./Kingdom";
 import { Player } from "./Player";
 

@@ -1,4 +1,4 @@
-import { GameLog } from "../../../model/GameLog";
+import { GameLog } from "../../model/GameLog";
 import { init } from "./initialLoading";
 import { prevButtonEvent, nextButtonEvent } from "./logPrevNextButton";
 

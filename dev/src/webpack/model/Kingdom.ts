@@ -1,4 +1,4 @@
-import { loadGameSupply } from "../ts/logic/loadGameSupply";
+import { loadGameSupply } from "../logic/loadGameSupply";
 import { Card } from "../interface/Card";
 
 export class Kingdom {
