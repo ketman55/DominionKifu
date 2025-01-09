@@ -8,7 +8,7 @@
  * @returns void
  */
 
-import { Kingdom } from "../model/Kingdom";
+import { Kingdom } from "../../model/Kingdom";
 import { initialCardCounts } from "../enum/initialCardCounts";
 
 export function loadGameSupply(gameSupply: string, kingdomCards: Kingdom): void {

@@ -107,7 +107,8 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["./src/ts"]
+  "include": ["./src/ts", "src/model/GameLog.ts", "src/model/Kingdom.ts", "src/model/Player.ts"]
 }

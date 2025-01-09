@@ -1,5 +1,5 @@
-import { Kingdom } from "../model/Kingdom";
-import { Player } from "../model/Player";
+import { Kingdom } from "../../model/Kingdom";
+import { Player } from "../../model/Player";
 import { draws } from "./logAnalyer/draws";
 
 
