@@ -1,4 +1,4 @@
-import { GameData } from "../interface/GameData";
+import { GameData } from "../interface/GameDataInterface";
 import { Comment } from "../model/Comment";
 
 export async function postGameData(gameNumber: string, gameSupply: string, gameLog: string): Promise<boolean> {

@@ -1,20 +1,30 @@
+import { CommentInterface } from "../interface/CommentInterface";
+
 export class Comment {
 
     // どのゲームのログかを示す
-    private pointer: number;
-    private gameNumber: string;
+    private content: CommentInterface = {
+        pointer: 0,
+        gameNumber: '',
+        comment: '',
+        userName: '',
+        date: ''
+    };
 
-    // コメントの内容
-    private comment: string;
-    private userName: string;
-    private date: string;
+    constructor() {}
 
-    constructor() {
-        this.pointer = 0;
-        this.gameNumber = '';
-        this.comment = '';
-        this.userName = '';
-        this.date = '';
+    // コメントの作成
+    make(gameNumber: string, comment: string, userName: string, date: string) {
+        this.content.pointer = 0;
+        this.content.gameNumber = gameNumber;
+        this.content.comment = comment;
+        this.content.userName = userName;
+        this.content.date = date;
+    }
+
+    // コメントの取得
+    getComment(): CommentInterface {
+        return this.content;
     }
 
 }

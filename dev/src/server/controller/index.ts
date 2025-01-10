@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import { startDb } from '../database/makeLokiDb';
-import { searchGameLog, insertGameLog, searchAllGameLog } from '../repository/gameLogRepository';
-import { GameData } from '../../webpack/interface/GameData';
 import cors from 'cors';
+import { gameDataController } from './gameDataController';
+import { commentController } from './commentController';
 
 const app = express();
 const port = 3000;
@@ -18,40 +18,12 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, world!');
 });
 
-// ゲームデータ取得エンドポイント
-app.get('/api/gamedata/:gameNumber', (req: Request, res: Response) => {
-  // リクエストパラメータからデータを取得
-  const gameNumber = req.params.gameNumber as string; 
+// gameDataのエンドポイント
+gameDataController(app);
 
-  // データベースからデータを取得  
-  if (gameNumber) {
-    const result = searchGameLog(gameNumber);
-    if (result) {
-        res.json(result);
-    } else {
-        res.status(404).send('Game data not found');
-    }
-  } else {
-    res.status(404).send('Game data collection not found');
-  }
-});
+// Commentのエンドポイント
+commentController(app);
 
-// ゲームデータ登録エンドポイント
-app.post('/api/gamedata', (req: Request, res: Response) => {
-  // リクエストボディからデータを取得
-  const gameData = req.body as GameData;
-
-  // データベースにデータを登録
-  insertGameLog(gameData);
-
-  res.send('Game data is saved.');
-});
-
-// ゲームデータを全件取得するエンドポイント
-app.get('/api/all/gamedata', (req: Request, res: Response) => {
-  const gameDataArray = searchAllGameLog();
-  res.json(gameDataArray);
-});
 
 // サーバの起動
 app.listen(port, () => {
