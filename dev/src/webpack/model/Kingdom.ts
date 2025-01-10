@@ -1,10 +1,10 @@
 import { loadGameSupply } from "../logic/loadGameSupply";
-import { Card } from "../interface/Card";
+import { CardInterface } from "../interface/CardInterface";
 
 export class Kingdom {
     
-    private leftSupply: Card[] = []; // 勝利点や財宝などのカード
-    private rightSupply: Card[] = []; // 王国カード
+    private leftSupply: CardInterface[] = []; // 勝利点や財宝などのカード
+    private rightSupply: CardInterface[] = []; // 王国カード
     
     // 初期値設定。2人戦の前提で設定する
     constructor() {
@@ -20,12 +20,12 @@ export class Kingdom {
     }
 
     // 勝利点や財宝のリストを取得するメソッド
-    getLeftSupply(): Card[] {
+    getLeftSupply(): CardInterface[] {
         return this.leftSupply;
     }
 
     // 王国カードのリストを取得するメソッド
-    getRightSupply(): Card[] {
+    getRightSupply(): CardInterface[] {
         return this.rightSupply;
     }
 

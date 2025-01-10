@@ -24,7 +24,6 @@ gameDataController(app);
 // Commentのエンドポイント
 commentController(app);
 
-
 // サーバの起動
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

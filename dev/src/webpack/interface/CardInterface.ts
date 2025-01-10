@@ -1,4 +1,4 @@
-export interface Card {
+export interface CardInterface {
     name: string;
     count: number;
 }
