@@ -1,20 +1,11 @@
-import { analyzeLog } from "../logic/logAnalyzer/logAnalyzer";
-import { Kingdom } from "./Kingdom";
-import { Player } from "./Player";
-
-interface logSection {
-    kingdom: Kingdom;
-    firstPlayer: Player;
-    secondPlayer: Player;
-    logSection: string; // ログの断面（1行分）
-}
+import { LogSectionInterface } from "../interface/LogSectionInterface";
 
 export class GameData {
     
     private gameNumber: string;
     private gameLog: string;
     private gameSupply: string;
-    private logSectionArray: logSection[] = []; // ログの断面を格納する配列
+    private logSectionArray: LogSectionInterface[] = []; // ログの断面を格納する配列
     private pointer; // ログの表示位置を示すポインタ
 
     constructor() {
@@ -33,9 +24,6 @@ export class GameData {
         this.gameSupply = gameSupply;
         this.logSectionArray = [];
         this.pointer = 0;
-
-        // ログを改行コードで分割して配列に格納する
-        this.analizeLog();
     }
 
     // ゲーム番号を取得するメソッド
@@ -43,18 +31,23 @@ export class GameData {
         return this.gameNumber;
     }
 
+    // ログを取得するメソッド
+    getGameLog(): string {
+        return this.gameLog;
+    }
+
     // サプライを取得するメソッド
-    getSupply(): string {
+    getGameSupply(): string {
         return this.gameSupply;
     }
     
     // ログの断面を取得するメソッド
-    getLogSectionArray(): logSection[] {
+    getLogSectionArray(): LogSectionInterface[] {
         return this.logSectionArray;
     }
 
     // ポインタの位置のログの断面を取得するメソッド
-    getLogSection(): logSection {
+    getLogSection(): LogSectionInterface {
         return this.logSectionArray[this.pointer];
     }
 
@@ -91,43 +84,5 @@ export class GameData {
     // ログの表示位置を示すポインタが先頭かどうかを判定するメソッド
     isTop(): boolean {
         return this.pointer === 0;
-    }
-
-    // ログを解析してlogSectionArrayに格納するメソッド
-    private analizeLog(): void {
-
-        let tmpPointer = 0;
-        let logArray = this.gameLog.split('\n');
-
-        // logArrayの各要素を解析してlogSectionArrayに格納する
-        logArray.forEach((log) => {
-            
-            if (tmpPointer === 0) {
-                // pointerが0の時は初期値を設定して格納する
-                const kingdom = new Kingdom();
-                const firstPlayer = new Player();
-                const secondPlayer = new Player();
-
-                kingdom.loadGameSupply(this.gameSupply);　// サプライを設定する
-
-                let logSection: logSection = { kingdom: kingdom, firstPlayer: firstPlayer , secondPlayer: secondPlayer, logSection: log };
-                this.logSectionArray.push(logSection);
-                tmpPointer++;
-            } else  {
-                // ひとつ前のlogSectionの内容をディープコピー
-                let lastPointer = tmpPointer - 1;
-                const kingdom = this.logSectionArray[lastPointer].kingdom.clone();
-                const firstPlayer = this.logSectionArray[lastPointer].firstPlayer.clone();
-                const secondPlayer = this.logSectionArray[lastPointer].secondPlayer.clone();
-
-                // 今回のログの内容でクラスを更新する
-                analyzeLog(kingdom, firstPlayer, secondPlayer, log);
-
-                // 結果を登録する
-                let logSection: logSection = { kingdom: kingdom, firstPlayer: firstPlayer , secondPlayer: secondPlayer, logSection: log };
-                this.logSectionArray.push(logSection);
-                tmpPointer++;
-            }
-        });
     }
 }

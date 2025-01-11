@@ -1,21 +1,21 @@
-import { GameLog } from '../../model/GameData';
+import { GameData } from '../../model/GameData';
 import { updateScreen } from './updateScreen';
 
 // prevButtonを押下した際のイベント
-export function prevButtonEvent(gameLogMaster: GameLog) {
+export function prevButtonEvent(gameDataMaster: GameData) {
     // ポインタをひとつ戻す
-    gameLogMaster.decrementPointer();
+    gameDataMaster.decrementPointer();
 
     // 画面表示を更新
-    updateScreen(gameLogMaster);
+    updateScreen(gameDataMaster);
 
 }
 
 // nextButtonを押下した際のイベント
-export function nextButtonEvent(gameLogMaster: GameLog) {
+export function nextButtonEvent(gameDataMaster: GameData) {
 	// ポインタをひとつ進める
-    gameLogMaster.incrementPointer();
+    gameDataMaster.incrementPointer();
 
     // 画面表示を更新
-    updateScreen(gameLogMaster);
+    updateScreen(gameDataMaster);
 }

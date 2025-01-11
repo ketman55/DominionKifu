@@ -1,4 +1,3 @@
-import { loadGameSupply } from "../logic/loadGameSupply";
 import { CardInterface } from "../interface/CardInterface";
 
 export class Kingdom {
@@ -27,11 +26,6 @@ export class Kingdom {
     // 王国カードのリストを取得するメソッド
     getRightSupply(): CardInterface[] {
         return this.rightSupply;
-    }
-
-    // 王国カードに新しいカードを追加するメソッド
-    loadGameSupply(gameSupply: string): void {
-        loadGameSupply(gameSupply, this);
     }
 
     // 王国カードに新しいカードを追加するメソッド

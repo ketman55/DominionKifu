@@ -1,9 +1,48 @@
+import { LogSectionInterface } from "../../interface/LogSectionInterface";
+import { GameData } from "../../model/GameData";
 import { Kingdom } from "../../model/Kingdom";
 import { Player } from "../../model/Player";
+import { loadGameSupply } from "../loadGameSupply";
 import { draws } from "./methods/draws";
 
+export function analyzeLog(gameData: GameData): void {
+    let tmpPointer = 0;
+    let logArray = gameData.getGameLog().split('\n');
+    let logSectionArray = gameData.getLogSectionArray()
 
-export function analyzeLog(kingdom: Kingdom, firstPlayer: Player, secondPlayer: Player, logSection: string): void {
+    // logArrayの各要素を解析してlogSectionArrayに格納する
+    logArray.forEach((log) => {
+
+        if (tmpPointer === 0) {
+            // pointerが0の時は初期値を設定して格納する
+            const kingdom = new Kingdom();
+            const firstPlayer = new Player();
+            const secondPlayer = new Player();
+
+            loadGameSupply(gameData.getGameSupply(), kingdom);　// サプライを設定する
+
+            let logSection: LogSectionInterface = { kingdom: kingdom, firstPlayer: firstPlayer, secondPlayer: secondPlayer, logSection: log };
+            logSectionArray.push(logSection);
+            tmpPointer++;
+        } else {
+            // ひとつ前のlogSectionの内容をディープコピー
+            let lastPointer = tmpPointer - 1;
+            const kingdom = logSectionArray[lastPointer].kingdom.clone();
+            const firstPlayer = logSectionArray[lastPointer].firstPlayer.clone();
+            const secondPlayer = logSectionArray[lastPointer].secondPlayer.clone();
+
+            // 今回のログの内容でクラスを更新する
+            analyze(kingdom, firstPlayer, secondPlayer, log);
+
+            // 結果を登録する
+            let logSection: LogSectionInterface = { kingdom: kingdom, firstPlayer: firstPlayer, secondPlayer: secondPlayer, logSection: log };
+            gameData.getLogSectionArray().push(logSection);
+            tmpPointer++;
+        }
+    });
+}
+
+export function analyze(kingdom: Kingdom, firstPlayer: Player, secondPlayer: Player, logSection: string): void {
 
     // ピリオドは除去する
     logSection = logSection.replace('.', '');

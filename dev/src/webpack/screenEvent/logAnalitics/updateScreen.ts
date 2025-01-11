@@ -1,14 +1,14 @@
-import { GameLog } from "../../model/GameData";
+import { GameData } from "../../model/GameData";
 
-export function updateScreen(gameLogMaster: GameLog) {
+export function updateScreen(gameDataMaster: GameData) {
 
     /*
      画面中央の表示
     */
 
     // 初期表示用のデータを取得
-    const pointer = gameLogMaster.getPointer();
-    const targetGameLog = gameLogMaster.getLogSectionArray()[pointer];
+    const pointer = gameDataMaster.getPointer();
+    const targetGameLog = gameDataMaster.getLogSectionArray()[pointer];
 
     // 王国カードの初期表示
     let kingdom = targetGameLog.kingdom;
@@ -197,7 +197,7 @@ export function updateScreen(gameLogMaster: GameLog) {
         gameLogDisplay.textContent = pointer.toString();
     }
 
-    let logSection = gameLogMaster.getLogSectionArray();
+    let logSection = gameDataMaster.getLogSectionArray();
     const gameLogTableBody = document.getElementById('gameLogTable')?.getElementsByTagName('tbody')[0];
     if (gameLogTableBody) {
         // テーブルのリセット
@@ -218,8 +218,8 @@ export function updateScreen(gameLogMaster: GameLog) {
             });
             row.addEventListener('click', () => {
                 // クリックされた行のポインタをセットして再描画
-                gameLogMaster.setPointer(index);
-                updateScreen(gameLogMaster);
+                gameDataMaster.setPointer(index);
+                updateScreen(gameDataMaster);
             });
 
             // ポインタの行にフォーカスを移動
