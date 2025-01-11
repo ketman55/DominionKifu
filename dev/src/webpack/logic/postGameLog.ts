@@ -1,6 +1,6 @@
 import { GameLogInterface } from "../interface/GameLogInterface";
 
-export async function postGameData(gameNumber: string, gameSupply: string, gameLog: string): Promise<boolean> {
+export async function postGameLog(gameNumber: string, gameSupply: string, gameLog: string): Promise<boolean> {
     try {
       const request: GameLogInterface = {gameNumber, gameSupply, gameLog};
 

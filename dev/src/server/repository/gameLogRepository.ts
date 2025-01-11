@@ -15,6 +15,13 @@ export function searchAllGameLog(): GameLogInterface[] {
     return result;
 }
 
+export function searchAllGameNumber(): string[] {
+    const db = getDb();
+    const gameLog = db.getCollection<GameLogInterface>('gameLog');
+    const result = gameLog.find().map(gameLog => gameLog.gameNumber); // すべてのgameNumberを取得
+    return result;
+}
+
 export function insertGameLog(gameLog: GameLogInterface): void {
     const db = getDb();
     const gameLogCollection = db.getCollection<GameLogInterface>('gameLog');

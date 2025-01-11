@@ -16,18 +16,20 @@
     <div style="display: flex;">
 
         <!-- ゲーム番号入力欄 -->
-        <div style="flex: 1;">
-            <h2>Game Number List:</h2>
-            <ul>
-                <li>Game 1</li>
-                <li>Game 2</li>
-                <li>Game 3</li>
-                <!-- Add more game numbers here -->
-            </ul>
+        <div style="padding:20px; flex: 1;">
+            <h2>Game List</h2>
+            <div id="gameLogList">
+                <table id="gameTable">
+                    <tbody>
+                        <!-- データ行がここに追加されます -->
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- ゲーム番号とログの入力欄 -->
-        <div style="flex: 1;">
+        <div style="padding:20px; flex: 1;">
+            <h2>Add GameLog</h2>
             <label for="gameNumber">Game Number:</label><br>
             <input type="text" id="gameNumber" name="gameNumber" required><br><br>
 
@@ -35,13 +37,14 @@
             <textarea id="gameSupply" name="gameSupply" rows="5" cols="50" required></textarea><br><br>
 
             <label for="gameLog">Game Log:</label><br>
-            <textarea id="gameLog" name="gameLog" rows="20" cols="50" required></textarea><br>
+            <textarea id="gameLog" name="gameLog" rows="20" cols="50" required></textarea><br><br>
 
             <button id="gameForm">Submit</button>
         </div>
     </div>
 
     <!-- スクリプト定義 -->
+    <script src="../../dist/screenEvent/gameDataInput/initialLoading.bundle.js"></script>
     <script src="../../dist/screenEvent/gameDataInput/submit.bundle.js"></script>
 
 </body>

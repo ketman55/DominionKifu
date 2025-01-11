@@ -1,4 +1,4 @@
-import { postGameData } from '../../logic/postGameData';
+import { postGameLog } from '../../logic/postGameLog';
 
 document.getElementById('gameForm')?.addEventListener('click', function() {
 
@@ -8,7 +8,7 @@ document.getElementById('gameForm')?.addEventListener('click', function() {
     const gameLog = (document.getElementById('gameLog') as HTMLTextAreaElement).value;
 
     // データを処理する
-    postGameData(gameNumber, gameSupply, gameLog).then(success => {
+    postGameLog(gameNumber, gameSupply, gameLog).then(success => {
         if (success) {
             // データ送信に成功した場合の処理
 

@@ -1,4 +1,4 @@
-import { searchGameLog, insertGameLog, searchAllGameLog } from '../repository/gameLogRepository';
+import { searchGameLog, insertGameLog, searchAllGameLog, searchAllGameNumber } from '../repository/gameLogRepository';
 import { GameLogInterface } from '../../webpack/interface/GameLogInterface';
 import express, { Request, Response } from 'express';
 
@@ -36,5 +36,11 @@ export function gameLogController(app: express.Application) {
     app.get('/api/all/gamelog', (req: Request, res: Response) => {
         const gameLogArray = searchAllGameLog();
         res.json(gameLogArray);
+    });
+
+    // ゲームナンバーを全件取得するエンドポイント
+    app.get('/api/all/gamenumber', (req: Request, res: Response) => {
+        const gameNumberArray = searchAllGameNumber();
+        res.json(gameNumberArray);
     });
 }
