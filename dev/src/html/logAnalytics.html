@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Analytics</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
     <div class="menu">
         <li><a href="gameNumberAndLogInput.html">Home</a></li>
@@ -14,14 +16,21 @@
     <div id="container">
         <!-- 中央の表示欄 -->
         <div id="mainContent">
-            
+            <div id="gameNumber">
+                <h3 id="gameNumberDisplay">ここにゲーム番号を表示します。</h3>
+            </div>
+
+            <div id="supply">
+                <p id="gameSupplyDisplay">ここにサプライの情報を表示します。</p>
+            </div>
+
             <div id="deckSection">
                 <h3>Kingdom</h3>
                 <div style="display: flex; justify-content: space-between;">
                     <table id="LeftSupplyTable" style="width: 50%;">
                         <thead style="text-align: left;">
-                                <th>Card Name</th>
-                                <th>Count</th>
+                            <th>Card Name</th>
+                            <th>Count</th>
                         </thead>
                         <tbody>
                             <!-- データ行がここに追加されます -->
@@ -46,7 +55,9 @@
                 <div style="display: flex; justify-content: space-between;">
                     <table id="FirstPlayerDeckTable" style="width: 25%;">
                         <thead style="text-align: left;">
-                            <tr><th>Deck</th></tr>
+                            <tr>
+                                <th>Deck</th>
+                            </tr>
                             <tr>
                                 <th>Card Name</th>
                                 <th>Count</th>
@@ -56,10 +67,12 @@
                             <!-- データ行がここに追加されます -->
                         </tbody>
                     </table>
-                    
+
                     <table id="FirstPlayerHandTable" style="width: 25%;">
                         <thead style="text-align: left;">
-                            <tr><th>Hand</th></tr>
+                            <tr>
+                                <th>Hand</th>
+                            </tr>
                             <tr>
                                 <th>Card Name</th>
                                 <th>Count</th>
@@ -72,7 +85,9 @@
 
                     <table id="FirstPlayerDiscardAreaTable" style="width: 25%;">
                         <thead style="text-align: left;">
-                            <tr><th>PlayArea</th></tr>
+                            <tr>
+                                <th>PlayArea</th>
+                            </tr>
                             <tr>
                                 <th>Card Name</th>
                                 <th>Count</th>
@@ -85,7 +100,9 @@
 
                     <table id="FirstPlayerPlayAreaTable" style="width: 25%;">
                         <thead style="text-align: left;">
-                            <tr><th>DiscardArea</th></tr>
+                            <tr>
+                                <th>DiscardArea</th>
+                            </tr>
                             <tr>
                                 <th>Card Name</th>
                                 <th>Count</th>
@@ -94,7 +111,7 @@
                         <tbody>
                             <!-- データ行がここに追加されます -->
                         </tbody>
-                    </table>                    
+                    </table>
                 </div>
             </div>
 
@@ -104,22 +121,26 @@
                     <table id="SecondPlayerDeckTable" style="width: 25%;">
                         <thead style="text-align: left;">
                             <tr>
-                                <tr><th>Deck</th></tr>
-                                <th>Card Name</th>
-                                <th>Count</th>
+                            <tr>
+                                <th>Deck</th>
+                            </tr>
+                            <th>Card Name</th>
+                            <th>Count</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- データ行がここに追加されます -->
                         </tbody>
                     </table>
-                    
+
                     <table id="SecondPlayerHandTable" style="width: 25%;">
                         <thead style="text-align: left;">
                             <tr>
-                                <tr><th>Hand</th></tr>
-                                <th>Card Name</th>
-                                <th>Count</th>
+                            <tr>
+                                <th>Hand</th>
+                            </tr>
+                            <th>Card Name</th>
+                            <th>Count</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,9 +151,11 @@
                     <table id="SecondPlayerDiscardAreaTable" style="width: 25%;">
                         <thead style="text-align: left;">
                             <tr>
-                                <tr><th>PlayArea</th></tr>
-                                <th>Card Name</th>
-                                <th>Count</th>
+                            <tr>
+                                <th>PlayArea</th>
+                            </tr>
+                            <th>Card Name</th>
+                            <th>Count</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,9 +166,11 @@
                     <table id="SecondPlayerPlayAreaTable" style="width: 25%;">
                         <thead style="text-align: left;">
                             <tr>
-                                <tr><th>DiscardArea</th></tr>
-                                <th>Card Name</th>
-                                <th>Count</th>
+                            <tr>
+                                <th>DiscardArea</th>
+                            </tr>
+                            <th>Card Name</th>
+                            <th>Count</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -158,21 +183,8 @@
 
         <!-- 右側の表示欄 -->
         <div id="rightSidebar">
-
-            <div id="gameNumber">
-                <h3>GameNumber</h3>
-                <p id="gameNumberDisplay">ここにゲーム番号を表示します。</p>
-        
-            </div>
-
-            <div id="supply">
-                <h3>Supply</h3>
-                <p id="gameSupplyDisplay">ここにサプライの情報を表示します。</p>
-        
-            </div>
-
+            <h3>Log</h3>
             <div id="logSection">
-                <h3>GameLog</h3>
                 <p id="gameLogDisplay">ここにゲームログを表示します。</p>
                 <table id="gameLogTable">
                     <tbody>
@@ -182,16 +194,35 @@
             </div>
 
             <div id="navigationButtons"></div>
-                <div style="display: flex; justify-content: space-between;">
-                    <button id="prevButton" style="flex: 0 0 48%;"><<<</button>
-                    <div style="flex: 0 0 4%;"></div>
-                    <button id="nextButton" style="flex: 0 0 48%;">>>></button>
-                </div>
+            <div style="display: flex; justify-content: space-between;">
+                <button id="prevButton" style="flex: 0 0 48%;"> ←←← </button>
+                <div style="flex: 0 0 4%;"></div>
+                <button id="nextButton" style="flex: 0 0 48%;"> →→→ </button>
             </div>
 
+            <h3>Comment</h3>
+
+            <div id="commentSection">
+                <table id="commentTable">
+                    <tbody>
+                        <!-- データ行がここに追加されます -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="commentInputSection">
+                <textarea type="text"  style="width:100%; height: 100%;" id="commentInput"></textarea>
+            </div>
+
+            <div id="commentSubmit"></div>
+                <button id="commentButton" style="width:100%;"> Add Comment </button>
+            </div>
         </div>
+
     </div>
-     <!-- スクリプト定義 -->
-     <script src="../../dist/screenEvent/logAnalitics/controller.bundle.js"></script>
+    </div>
+    <!-- スクリプト定義 -->
+    <script src="../../dist/screenEvent/logAnalitics/controller.bundle.js"></script>
 </body>
+
 </html>

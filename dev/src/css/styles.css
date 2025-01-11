@@ -37,17 +37,27 @@ body, html {
 }
 
 /* rightSidebar */
-#gameNumber {
-    height: 10%;
-}
-#supply {
-    height: 10%;
-}
 #logSection {
-    height: 50%
+    height: 40%
 }
 #navigationButtons {
     height: 10%
+}
+#commentSection {
+    height: 10%
+}
+#commentInputSection {
+    height: 10%
+}
+#commentSubmit {
+    height: 5%
+}
+
+/* gameLogTable */
+#commentTable {
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 /* テーブルのボディ部分にスクロールバーを適用するスタイル */
