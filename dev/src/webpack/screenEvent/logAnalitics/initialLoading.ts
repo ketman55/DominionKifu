@@ -1,4 +1,4 @@
-import { GameLog } from '../../model/GameLog';
+import { GameLog } from '../../model/GameData';
 import { updateScreen } from './updateScreen';
 
 // 初期処理

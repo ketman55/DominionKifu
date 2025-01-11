@@ -1,16 +1,16 @@
-import { searchGameData, insertGameData, searchAllGameData } from '../repository/gameDataRepository';
-import { GameDataInterface } from '../../webpack/interface/GameDataInterface';
+import { searchGameLog, insertGameLog, searchAllGameLog } from '../repository/gameLogRepository';
+import { GameLogInterface } from '../../webpack/interface/GameLogInterface';
 import express, { Request, Response } from 'express';
 
-export function gameDataController(app: express.Application) {
+export function gameLogController(app: express.Application) {
     // ゲームデータ取得エンドポイント
-    app.get('/api/gamedata/:gameNumber', (req: Request, res: Response) => {
+    app.get('/api/gamelog/:gameNumber', (req: Request, res: Response) => {
         // リクエストパラメータからデータを取得
         const gameNumber = req.params.gameNumber as string;
 
         // データベースからデータを取得  
         if (gameNumber) {
-            const result = searchGameData(gameNumber);
+            const result = searchGameLog(gameNumber);
             if (result) {
                 res.json(result);
             } else {
@@ -22,19 +22,19 @@ export function gameDataController(app: express.Application) {
     });
 
     // ゲームデータ登録エンドポイント
-    app.post('/api/gamedata', (req: Request, res: Response) => {
+    app.post('/api/gamelog', (req: Request, res: Response) => {
         // リクエストボディからデータを取得
-        const gameData = req.body as GameDataInterface;
+        const gameLog = req.body as GameLogInterface;
 
         // データベースにデータを登録
-        insertGameData(gameData);
+        insertGameLog(gameLog);
 
-        res.send('Game data is saved.');
+        res.send('Game log is saved.');
     });
 
     // ゲームデータを全件取得するエンドポイント
-    app.get('/api/all/gamedata', (req: Request, res: Response) => {
-        const gameDataArray = searchAllGameData();
-        res.json(gameDataArray);
+    app.get('/api/all/gamelog', (req: Request, res: Response) => {
+        const gameLogArray = searchAllGameLog();
+        res.json(gameLogArray);
     });
 }

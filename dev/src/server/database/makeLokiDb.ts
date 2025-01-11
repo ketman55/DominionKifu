@@ -1,5 +1,5 @@
 import Loki from 'lokijs';
-import { GameDataInterface } from '../../webpack/interface/GameDataInterface';
+import { GameLogInterface } from '../../webpack/interface/GameLogInterface';
 import { CommentInterface } from '../../webpack/interface/CommentInterface';
 import { Comment } from '../../webpack/model/Comment';
 
@@ -23,15 +23,15 @@ export function getDb(): Loki {
 // データベースの初期化
 function databaseInitialize() {
 
-    // GameDataコレクションの初期化
-    let gameData = db.getCollection<GameDataInterface>('gameData');
-    if (gameData === null) {
-        gameData = db.addCollection('gameData', {
+    // GameLogコレクションの初期化
+    let gameLog = db.getCollection<GameLogInterface>('gameLog');
+    if (gameLog === null) {
+        gameLog = db.addCollection('gameLog', {
             unique: ['gameNumber'] // 主キー
         });
 
         // 初期データの挿入
-        gameData.insert({ 
+        gameLog.insert({ 
             gameNumber: '000000000', 
             gameSupply: 'sample',
             gameLog: 'sample'

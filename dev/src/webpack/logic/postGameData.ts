@@ -1,17 +1,15 @@
-import { GameData } from "../interface/GameDataInterface";
-import { Comment } from "../model/Comment";
+import { GameLogInterface } from "../interface/GameLogInterface";
 
 export async function postGameData(gameNumber: string, gameSupply: string, gameLog: string): Promise<boolean> {
     try {
-      const comment = new Comment();
-      const gameData: GameData = {gameNumber, gameSupply, gameLog, comment};
+      const request: GameLogInterface = {gameNumber, gameSupply, gameLog};
 
-      const response = await fetch('http://localhost:3000/api/gamedata', {
+      const response = await fetch('http://localhost:3000/api/gamelog', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(gameData)
+        body: JSON.stringify(request)
       });
   
       if (response.ok) {

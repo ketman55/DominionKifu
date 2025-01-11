@@ -1,4 +1,4 @@
-import { GameLog } from "../../../webpack/model/GameLog";
+import { GameLog } from "../../model/GameData";
 
 export function updateScreen(gameLogMaster: GameLog) {
 

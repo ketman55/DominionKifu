@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { startDb } from '../database/makeLokiDb';
 import cors from 'cors';
-import { gameDataController } from './gameDataController';
+import { gameLogController } from './gameLogController';
 import { commentController } from './commentController';
 
 const app = express();
@@ -18,8 +18,8 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, world!');
 });
 
-// gameDataのエンドポイント
-gameDataController(app);
+// gameLogのエンドポイント
+gameLogController(app);
 
 // Commentのエンドポイント
 commentController(app);

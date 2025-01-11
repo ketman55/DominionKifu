@@ -9,7 +9,7 @@ interface logSection {
     logSection: string; // ログの断面（1行分）
 }
 
-export class GameLog {
+export class GameData {
     
     private gameNumber: string;
     private gameLog: string;
