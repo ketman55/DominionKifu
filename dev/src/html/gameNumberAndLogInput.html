@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Number & Log Input</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
-    <h1>Game Number & Log Input</h1>
-    
+    <div class="menu">
+        <li><a href="gameNumberAndLogInput.html">Home</a></li>
+    </div>
+
     <div style="display: flex;">
 
         <!-- ゲーム番号入力欄 -->
@@ -23,19 +27,17 @@
         </div>
 
         <!-- ゲーム番号とログの入力欄 -->
-        <div id="gameForm" style="flex: 1;">
-            <form>
-                <label for="gameNumber">Game Number:</label><br>
-                <input type="text" id="gameNumber" name="gameNumber" required><br><br>
-                
-                <label for="gameSupply">Game Supply:</label><br>
-                <textarea id="gameSupply" name="gameSupply" rows="5" cols="50" required></textarea><br><br>
-                
-                <label for="gameLog">Game Log:</label><br>
-                <textarea id="gameLog" name="gameLog" rows="20" cols="50" required></textarea><br>
-                
-                <button type="submit">Submit</button>
-            </form>
+        <div style="flex: 1;">
+            <label for="gameNumber">Game Number:</label><br>
+            <input type="text" id="gameNumber" name="gameNumber" required><br><br>
+
+            <label for="gameSupply">Game Supply:</label><br>
+            <textarea id="gameSupply" name="gameSupply" rows="5" cols="50" required></textarea><br><br>
+
+            <label for="gameLog">Game Log:</label><br>
+            <textarea id="gameLog" name="gameLog" rows="20" cols="50" required></textarea><br>
+
+            <button id="gameForm">Submit</button>
         </div>
     </div>
 
@@ -43,4 +45,5 @@
     <script src="../../dist/screenEvent/gameDataInput/submit.bundle.js"></script>
 
 </body>
+
 </html>

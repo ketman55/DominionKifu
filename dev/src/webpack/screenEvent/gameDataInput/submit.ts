@@ -1,7 +1,6 @@
 import { postGameData } from '../../logic/postGameData';
 
-document.getElementById('gameForm')?.addEventListener('submit', function(event) {
-    event.preventDefault(); // フォームのデフォルトの送信を防ぐ
+document.getElementById('gameForm')?.addEventListener('click', function() {
 
     // 入力値を取得
     const gameNumber = (document.getElementById('gameNumber') as HTMLInputElement).value;
@@ -18,8 +17,8 @@ document.getElementById('gameForm')?.addEventListener('submit', function(event) 
             localStorage.setItem('gameSupply', gameSupply);
             localStorage.setItem('gameLog', gameLog);
 
-            // 次のページに遷移
-            window.location.href = 'logAnalitics.html';
+            // ログ解析画面に遷移
+            window.location.href = 'logAnalytics.html';
         } else {
             console.error('データ送信に失敗しました');
         }
