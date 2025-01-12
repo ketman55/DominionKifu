@@ -1,5 +1,5 @@
 import { CommentInterface } from "../../interface/CommentInterface";
-import { postComment } from "../../logic/postComment";
+import { postComment } from "../../logic/callApi/postComment";
 import { GameData } from "../../model/GameData";
 
 export async function addComment(gameData: GameData): Promise<void> {

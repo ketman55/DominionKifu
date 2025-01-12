@@ -1,4 +1,4 @@
-import { postGameLog } from '../../logic/postGameLog';
+import { postGameLog } from '../../logic/callApi/postGameLog';
 
 document.getElementById('gameForm')?.addEventListener('click', function() {
 

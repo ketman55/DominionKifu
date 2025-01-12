@@ -2,7 +2,7 @@ import { get } from 'http';
 import { analyzeLog } from '../../logic/logAnalyzer/logAnalyzer';
 import { GameData } from '../../model/GameData';
 import { updateScreen } from './updateScreen';
-import { getComment } from '../../logic/getComment';
+import { getComment } from '../../logic/callApi/getComment';
 
 // 初期処理
 export async function init(gameDataMaster: GameData): Promise<void> {

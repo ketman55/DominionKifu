@@ -1,4 +1,4 @@
-import { getGameLog } from '../../logic/getGameLog';
+import { getGameLog } from '../../logic/callApi/getGameLog';
 import { saveGameLog } from '../../logic/saveGameLog';
 
 export function clickGameNumber(gameNumber:string): void {

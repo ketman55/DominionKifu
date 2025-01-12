@@ -1,4 +1,4 @@
-import { getGameNumberList } from "../../logic/getGameNumberList";
+import { getGameNumberList } from "../../logic/callApi/getGameNumberList";
 import { clickGameNumber } from "./clickGameNumber";
 
 window.addEventListener('load',
