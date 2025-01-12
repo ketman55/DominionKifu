@@ -1,48 +1,39 @@
 import { LogSectionInterface } from "../../interface/LogSectionInterface";
-import { GameData } from "../../model/GameData";
 import { Supply } from "../../model/Supply";
 import { Player } from "../../model/Player";
-import { loadGameSupply } from "../loadGameSupply";
 import { draws } from "./methods/draws";
 
-export function logAnalyzer(gameData: GameData): void {
-    let tmpPointer = 0;
-    let logArray = gameData.getGameLog().split('\n');
-    let logSectionArray = gameData.getLogSectionArray()
+export function logAnalyzer(
+    currentLogSec: LogSectionInterface,
+    prevLogSec: LogSectionInterface): LogSectionInterface {
 
-    // logArrayの各要素を解析してlogSectionArrayに格納する
-    logArray.forEach((log) => {
+    // ひとつ前のlogSectionの内容をディープコピー
+    const supply = prevLogSec.supply.clone();
+    const firstPlayer = prevLogSec.firstPlayer.clone();
+    const secondPlayer = prevLogSec.secondPlayer.clone();
 
-        if (tmpPointer === 0) {
-            // pointerが0の時は初期値を設定して格納する
-            const supply = new Supply();
-            const firstPlayer = new Player();
-            const secondPlayer = new Player();
+    // 今回のログの内容でクラスを更新する
+    analyze(supply, firstPlayer, secondPlayer, currentLogSec.logSection);
 
-            loadGameSupply(gameData.getGameSupply(), supply);　// サプライを設定する
+    // 結果を登録する
+    let logSection: LogSectionInterface = {
+        supply: supply,
+        firstPlayer: firstPlayer,
+        secondPlayer: secondPlayer,
+        logSection: currentLogSec.logSection
+    };
 
-            let logSection: LogSectionInterface = { supply: supply, firstPlayer: firstPlayer, secondPlayer: secondPlayer, logSection: log };
-            logSectionArray.push(logSection);
-            tmpPointer++;
-        } else {
-            // ひとつ前のlogSectionの内容をディープコピー
-            let lastPointer = tmpPointer - 1;
-            const supply = logSectionArray[lastPointer].supply.clone();
-            const firstPlayer = logSectionArray[lastPointer].firstPlayer.clone();
-            const secondPlayer = logSectionArray[lastPointer].secondPlayer.clone();
-
-            // 今回のログの内容でクラスを更新する
-            analyze(supply, firstPlayer, secondPlayer, log);
-
-            // 結果を登録する
-            let logSection: LogSectionInterface = { supply: supply, firstPlayer: firstPlayer, secondPlayer: secondPlayer, logSection: log };
-            gameData.getLogSectionArray().push(logSection);
-            tmpPointer++;
-        }
-    });
+    return logSection;
 }
 
-export function analyze(supply: Supply, firstPlayer: Player, secondPlayer: Player, logSection: string): void {
+function analyze(
+    supply: Supply,
+    firstPlayer: Player,
+    secondPlayer: Player,
+    logSection: string): void {
+
+    // プレイヤー名を表すMap変数
+    const playerMap = new Map<string, Player>();
 
     // ピリオドは除去する
     logSection = logSection.replace('.', '');
@@ -74,6 +65,9 @@ function analyzeLogSection(supply: Supply, player: Player, logArray: string[]): 
 
     // ログの内容によって処理を分岐する
     switch (logArray[1]) {
+        case 'starts': // プレイヤーの初期処理
+
+        
         case 'draws':
             // デッキからカードを引く
             draws(player, logArray);

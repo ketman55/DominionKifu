@@ -3,17 +3,17 @@ import { LogSectionInterface } from "../interface/LogSectionInterface";
 import { GameData } from "../model/GameData";
 import { Player } from "../model/Player";
 import { Supply } from "../model/Supply";
-import { loadGameSupply } from "./loadGameSupply";
 import { loadGameLog } from "./loadGameLog";
+import { loadGameSupply } from "./loadGameSupply";
 import { logAnalyzer } from "./logAnalyzer/logAnalyzer";
 
 export function gameDataInitializer(gameData: GameData, gameLogInterface: GameLogInterface): void {
-    
+
     // サプライの読み込み
     const supply = new Supply();
     loadGameSupply(supply, gameLogInterface.gameSupply); // supplyオブジェクトに書き込み
 
-    // ログの読み込み
+    // 各ログの解析
     const logArray = loadGameLog(gameData.getGameLog());
 
     // logSection[0]の初期化
@@ -27,16 +27,16 @@ export function gameDataInitializer(gameData: GameData, gameLogInterface: GameLo
 
     // 残りのログの断面を追加
     for (let i = 1; i < logArray.length; i++) {
-        logSection = {
-            supply: logSection.supply,
-            firstPlayer: logSection.firstPlayer,
-            secondPlayer: logSection.secondPlayer,
+        const prevLogSec = gameData.getLogSectionArray()[i - 1];
+        
+        const currentLogSec: LogSectionInterface = {
+            supply: new Supply(),
+            firstPlayer: new Player(),
+            secondPlayer: new Player(),
             logSection: logArray[i]
         };
-        gameData.getLogSectionArray().push(logSection);
-    }
 
-    // 各ログの解析に進む
-    // logAnalyzerに渡す
-    logAnalyzer(gameData);
+        const resultLogSec = logAnalyzer(currentLogSec, prevLogSec);
+        gameData.getLogSectionArray().push(resultLogSec);
+    }
 }
