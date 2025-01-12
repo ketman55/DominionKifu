@@ -10,18 +10,18 @@ export function updateScreen(gameDataMaster: GameData) {
     const pointer = gameDataMaster.getPointer();
     const targetGameLog = gameDataMaster.getLogSectionArray()[pointer];
 
-    // 王国カードの初期表示
-    let kingdom = targetGameLog.kingdom;
-    const leftTableBody = document.getElementById('LeftSupplyTable')?.getElementsByTagName('tbody')[0];
-    if (leftTableBody) {
+    // サプライカードの初期表示
+    let supply = targetGameLog.supply;
+    const basicAreaTableBody = document.getElementById('BasicAreaTable')?.getElementsByTagName('tbody')[0];
+    if (basicAreaTableBody) {
         // テーブルのリセット
-        while (leftTableBody.firstChild) {
-            leftTableBody.removeChild(leftTableBody.firstChild);
+        while (basicAreaTableBody.firstChild) {
+            basicAreaTableBody.removeChild(basicAreaTableBody.firstChild);
         }
         
         // テーブルの再描画
-        kingdom.getLeftSupply().forEach(card => {
-            const row = leftTableBody.insertRow();
+        supply.getBasicArea().forEach(card => {
+            const row = basicAreaTableBody.insertRow();
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = card.name;
@@ -29,16 +29,16 @@ export function updateScreen(gameDataMaster: GameData) {
         });
     }
 
-    const rightTableBody = document.getElementById('RightSupplyTable')?.getElementsByTagName('tbody')[0];
-    if (rightTableBody) {
+    const kingdomAreaTableBody = document.getElementById('KingdomAreaTable')?.getElementsByTagName('tbody')[0];
+    if (kingdomAreaTableBody) {
         // テーブルのリセット
-        while (rightTableBody.firstChild) {
-            rightTableBody.removeChild(rightTableBody.firstChild);
+        while (kingdomAreaTableBody.firstChild) {
+            kingdomAreaTableBody.removeChild(kingdomAreaTableBody.firstChild);
         }
         
         // テーブルの再描画
-        kingdom.getRightSupply().forEach(card => {
-            const row = rightTableBody.insertRow();
+        supply.getKingdomArea().forEach(card => {
+            const row = kingdomAreaTableBody.insertRow();
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = card.name;

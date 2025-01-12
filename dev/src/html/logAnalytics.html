@@ -25,22 +25,58 @@
             </div>
 
             <div id="deckSection">
-                <h3>Kingdom</h3>
+                <h3>Supply</h3>
                 <div style="display: flex; justify-content: space-between;">
-                    <table id="LeftSupplyTable" style="width: 50%;">
+                    <table id="BasicAreaTable" style="width: 25%;">
                         <thead style="text-align: left;">
-                            <th>Card Name</th>
-                            <th>Count</th>
+                            <tr>
+                                <th>Basic</th>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Count</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <!-- データ行がここに追加されます -->
                         </tbody>
                     </table>
-                    <table id="RightSupplyTable" style="width: 50%;">
+                    <table id="KingdomAreaTable" style="width: 25%;">
                         <thead style="text-align: left;">
                             <tr>
-                                <th>Card Name</th>
+                                <th>Kingdom</th>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
                                 <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- データ行がここに追加されます -->
+                        </tbody>
+                    </table>
+                    <table id="TrashAreaTable" style="width: 25%;">
+                        <thead style="text-align: left;">
+                            <tr>
+                                <th>Trash</th>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- データ行がここに追加されます -->
+                        </tbody>
+                    </table>
+                    <table id="SideAreaTable" style="width: 25%;">
+                        <thead style="text-align: left;">
+                            <tr>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +95,7 @@
                                 <th>Deck</th>
                             </tr>
                             <tr>
-                                <th>Card Name</th>
+                                <th>Name</th>
                                 <th>Count</th>
                             </tr>
                         </thead>
@@ -74,7 +110,7 @@
                                 <th>Hand</th>
                             </tr>
                             <tr>
-                                <th>Card Name</th>
+                                <th>Name</th>
                                 <th>Count</th>
                             </tr>
                         </thead>
@@ -86,10 +122,10 @@
                     <table id="FirstPlayerDiscardAreaTable" style="width: 25%;">
                         <thead style="text-align: left;">
                             <tr>
-                                <th>PlayArea</th>
+                                <th>Play</th>
                             </tr>
                             <tr>
-                                <th>Card Name</th>
+                                <th>Name</th>
                                 <th>Count</th>
                             </tr>
                         </thead>
@@ -101,10 +137,10 @@
                     <table id="FirstPlayerPlayAreaTable" style="width: 25%;">
                         <thead style="text-align: left;">
                             <tr>
-                                <th>DiscardArea</th>
+                                <th>Discard</th>
                             </tr>
                             <tr>
-                                <th>Card Name</th>
+                                <th>Name</th>
                                 <th>Count</th>
                             </tr>
                         </thead>
@@ -124,7 +160,7 @@
                             <tr>
                                 <th>Deck</th>
                             </tr>
-                            <th>Card Name</th>
+                            <th>Name</th>
                             <th>Count</th>
                             </tr>
                         </thead>
@@ -139,7 +175,7 @@
                             <tr>
                                 <th>Hand</th>
                             </tr>
-                            <th>Card Name</th>
+                            <th>Name</th>
                             <th>Count</th>
                             </tr>
                         </thead>
@@ -152,9 +188,9 @@
                         <thead style="text-align: left;">
                             <tr>
                             <tr>
-                                <th>PlayArea</th>
+                                <th>Play</th>
                             </tr>
-                            <th>Card Name</th>
+                            <th>Name</th>
                             <th>Count</th>
                             </tr>
                         </thead>
@@ -167,9 +203,9 @@
                         <thead style="text-align: left;">
                             <tr>
                             <tr>
-                                <th>DiscardArea</th>
+                                <th>Discard</th>
                             </tr>
-                            <th>Card Name</th>
+                            <th>Name</th>
                             <th>Count</th>
                             </tr>
                         </thead>
@@ -211,13 +247,13 @@
             </div>
 
             <div id="commentInputSection">
-                <textarea type="text"  style="width:100%; height: 100%;" id="commentInput"></textarea>
+                <textarea type="text" style="width:100%; height: 100%;" id="commentInput"></textarea>
             </div>
 
             <div id="commentSubmit"></div>
-                <button id="commentButton" style="width:100%;"> Add Comment </button>
-            </div>
+            <button id="commentButton" style="width:100%;"> Add Comment </button>
         </div>
+    </div>
 
     </div>
     </div>

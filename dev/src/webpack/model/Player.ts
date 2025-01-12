@@ -10,12 +10,6 @@ export class Player {
     private playArea: Map<string, Card> = new Map();
     private playerName: string = '';
     
-    // 初期値設定。2人戦の前提で設定する
-    constructor() {
-        this.deck.set('estate', { count: 3 });
-        this.deck.set('copper', { count: 7 });
-    }
-
     // ディープコピーを返すメソッド
     clone(): Player {
         const player = new Player();

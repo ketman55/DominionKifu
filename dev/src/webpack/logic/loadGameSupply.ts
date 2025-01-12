@@ -8,10 +8,10 @@
  * @returns void
  */
 
-import { Kingdom } from "../../webpack/model/Kingdom";
+import { Supply } from "../model/Supply";
 import { initialCardCounts } from "../../webpack/enum/initialCardCounts";
 
-export function loadGameSupply(gameSupply: string, kingdom: Kingdom): void {
+export function loadGameSupply(gameSupply: string, supply: Supply): void {
     // カンマ区切りの文字列を配列に変換、空白を削除
     const gameSupplyList = gameSupply.split(',').map(cardName => cardName.replace(/\s+/g, ''));
 
@@ -19,7 +19,7 @@ export function loadGameSupply(gameSupply: string, kingdom: Kingdom): void {
     gameSupplyList.forEach(cardName => {
         let count = initialCardCounts[cardName];
         if(count !== undefined) {
-            kingdom.addCard(cardName, count);
+            supply.addCard(cardName, count);
         }
     });
 }
