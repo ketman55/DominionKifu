@@ -33,7 +33,7 @@ export function commentController(app: express.Application) {
         res.send('Game data is saved.');
     });
 
-    // ゲームデータを全件取得するエンドポイント
+    // コメントを全件取得するエンドポイント
     app.get('/api/all/comment', (req: Request, res: Response) => {
         const commentArray = searchAllComment();
         res.json(commentArray);

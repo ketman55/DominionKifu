@@ -1,6 +1,7 @@
 import { GameData } from "../../model/GameData";
 import { init } from "./initialLoading";
 import { prevButtonEvent, nextButtonEvent } from "./logPrevNextButton";
+import { addComment } from "./addComment";
 
 const gameDataMaster = new GameData();
 
@@ -20,6 +21,12 @@ document.getElementById('prevButton')?.addEventListener('click',
 document.getElementById('nextButton')?.addEventListener('click',
     function () {
         nextButtonEvent(gameDataMaster);
+    });
+
+// Add Commentを押下した際のイベント
+document.getElementById('commentButton')?.addEventListener('click',
+    function () {
+        addComment(gameDataMaster);
     });
 
 // キーボードを押下した際のイベント
