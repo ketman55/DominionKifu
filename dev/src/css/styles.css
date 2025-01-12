@@ -44,10 +44,10 @@ body, html {
     height: 10%
 }
 #commentSection {
-    height: 10%
+    height: 14%
 }
 #commentInputSection {
-    height: 10%
+    height: 6%
 }
 #commentSubmit {
     height: 5%
@@ -61,19 +61,19 @@ body, html {
 }
 
 /* テーブルのボディ部分にスクロールバーを適用するスタイル */
-#gameLogTable {
+#gameLogTable, #commentTable {
     height: 100%;
     width: 100%;
     border-collapse: collapse;
 }
-#gameLogTable thead, #gameLogTable tbody {
+#gameLogTable thead, #gameLogTable tbody, #commentTable thead, #commentTable tbody {
     display: block;
 }
-#gameLogTable tbody {
+#gameLogTable tbody, #commentTable tbody {
     height: 100%; /* 固定の高さを設定 */
     overflow-y: scroll; /* スクロールバーを表示 */
 }
-#gameLogTable th, #gameLogTable td {
+#gameLogTable th, #gameLogTable td, #commentTable th, #commentTable td {
     width: 100%; /* テーブルの幅を設定 */
     box-sizing: border-box;
 }

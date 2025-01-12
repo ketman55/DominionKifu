@@ -1,3 +1,4 @@
+import { CommentInterface } from "../interface/CommentInterface";
 import { LogSectionInterface } from "../interface/LogSectionInterface";
 
 export class GameData {
@@ -7,6 +8,7 @@ export class GameData {
     private gameSupply: string;
     private logSectionArray: LogSectionInterface[] = []; // ログの断面を格納する配列
     private pointer; // ログの表示位置を示すポインタ
+    private comment: CommentInterface[] = []; // コメントを格納する配列
 
     constructor() {
         this.gameNumber = '';
@@ -14,6 +16,7 @@ export class GameData {
         this.gameSupply = '';
         this.logSectionArray = [];
         this.pointer = 0;
+        this.comment = [];
     }
 
     // ログを新規作成するメソッド
@@ -24,6 +27,7 @@ export class GameData {
         this.gameSupply = gameSupply;
         this.logSectionArray = [];
         this.pointer = 0;
+        this.comment = [];
     }
 
     // ゲーム番号を取得するメソッド
@@ -84,5 +88,20 @@ export class GameData {
     // ログの表示位置を示すポインタが先頭かどうかを判定するメソッド
     isTop(): boolean {
         return this.pointer === 0;
+    }
+
+    // コメントを取得するメソッド
+    getComment(): CommentInterface[] {
+        return this.comment;
+    }
+
+    // コメントを設定するメソッド
+    setComment(comment: CommentInterface[]): void {
+        this.comment = comment;
+    }
+
+    // コメントを追加するメソッド
+    addComment(comment: CommentInterface): void {
+        this.comment.push(comment);
     }
 }

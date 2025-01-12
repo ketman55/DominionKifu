@@ -192,11 +192,13 @@ export function updateScreen(gameDataMaster: GameData) {
     /*
      画面右側の表示
     */
+    // ゲームログのポインタの表示
     const gameLogDisplay = document.getElementById('gameLogDisplay');
     if (gameLogDisplay) {
         gameLogDisplay.textContent = pointer.toString();
     }
 
+    // ゲームログの表示
     let logSection = gameDataMaster.getLogSectionArray();
     const gameLogTableBody = document.getElementById('gameLogTable')?.getElementsByTagName('tbody')[0];
     if (gameLogTableBody) {
@@ -229,7 +231,6 @@ export function updateScreen(gameDataMaster: GameData) {
             }
         });
     }
-
 }
 
 

@@ -1,9 +1,11 @@
+import { get } from 'http';
 import { analyzeLog } from '../../logic/logAnalyzer/logAnalyzer';
 import { GameData } from '../../model/GameData';
 import { updateScreen } from './updateScreen';
+import { getComment } from '../../logic/getComment';
 
 // 初期処理
-export function init(gameDataMaster: GameData): void {
+export async function init(gameDataMaster: GameData): Promise<void> {
     /*
      ローカルストレージからデータを取得
      GameDataの初期化
@@ -14,6 +16,14 @@ export function init(gameDataMaster: GameData): void {
 
     gameDataMaster.make(gameNumber, gameLog, gameSupply);
     analyzeLog(gameDataMaster);
+
+    /*
+     サーバからコメントを取得
+     GameDataにコメントをセット
+    */
+    const comment = getComment(gameNumber);
+    console.log(comment);
+    gameDataMaster.setComment(await comment);
 
     /*
      画面右側の表示
@@ -31,18 +41,20 @@ export function init(gameDataMaster: GameData): void {
     /*
      画面中央の表示
     */
-    
+
     // 初期表示用のデータを取得
     updateScreen(gameDataMaster);
-    
+
     /*
      画面右側の表示
     */
+    // ログの表示位置を示すポインタを表示
     const gameLogDisplay = document.getElementById('gameLogDisplay');
     if (gameLogDisplay) {
         gameLogDisplay.textContent = gameDataMaster.getPointer().toString();
     }
 
+    // ログを表示
     let logSection = gameDataMaster.getLogSectionArray();
     const gameLogTableBody = document.getElementById('gameLogTable')?.getElementsByTagName('tbody')[0];
     if (gameLogTableBody) {
@@ -50,16 +62,35 @@ export function init(gameDataMaster: GameData): void {
             const row = gameLogTableBody.insertRow();
             const cell = row.insertCell(0);
             cell.textContent = log.logSection;
-        row.addEventListener('mouseover', () => {
-            row.style.backgroundColor = 'lightgray';
-        });
-        row.addEventListener('mouseout', () => {
-            row.style.backgroundColor = '';
-        });
-        row.addEventListener('click', () => {
-            alert(log.logSection);
-        });
+            row.addEventListener('mouseover', () => {
+                row.style.backgroundColor = 'lightgray';
+            });
+            row.addEventListener('mouseout', () => {
+                row.style.backgroundColor = '';
+            });
+            row.addEventListener('click', () => {
+                alert(log.logSection);
+            });
         });
     }
 
+    // コメントの表示
+    const commentTableBody = document.getElementById('commentTable')?.getElementsByTagName('tbody')[0];
+    if (commentTableBody) {
+        gameDataMaster.getComment().forEach(comment => {
+            const row = commentTableBody.insertRow();
+            const cell = row.insertCell(0);
+            cell.textContent = comment.pointer + ": " + comment.comment;
+            row.addEventListener('mouseover', () => {
+                row.style.backgroundColor = 'lightgray';
+            });
+            row.addEventListener('mouseout', () => {
+                row.style.backgroundColor = '';
+            });
+            row.addEventListener('click', () => {
+                gameDataMaster.setPointer(comment.pointer);
+                updateScreen(gameDataMaster);
+            });
+        });
+    }
 }

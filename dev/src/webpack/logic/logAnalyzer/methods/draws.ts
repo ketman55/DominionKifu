@@ -5,8 +5,6 @@ export function draws(player: Player, logArray: string[]): void {
     
     let count = 0;
     logArray.forEach((text, index) => {
-
-        console.info(text);
         
         // textが数字だった場合はcountに代入
         if (!isNaN(Number(text))) {
