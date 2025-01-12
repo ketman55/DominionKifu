@@ -1,4 +1,5 @@
 import { getGameNumberList } from "../../logic/getGameNumberList";
+import { clickGameNumber } from "./clickGameNumber";
 
 window.addEventListener('load',
     function () {
@@ -23,7 +24,7 @@ window.addEventListener('load',
                         row.style.backgroundColor = '';
                     });
                     row.addEventListener('click', () => {
-                        alert("yes");
+                        clickGameNumber(gameNumber);
                     });
                 });
             }
