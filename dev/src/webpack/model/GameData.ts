@@ -19,17 +19,6 @@ export class GameData {
         this.comment = [];
     }
 
-    // ログを新規作成するメソッド
-    make(gameNumber: string, gameLog: string, gameSupply: string) {        
-        // クラスの初期化
-        this.gameNumber = gameNumber;
-        this.gameLog = gameLog;
-        this.gameSupply = gameSupply;
-        this.logSectionArray = [];
-        this.pointer = 0;
-        this.comment = [];
-    }
-
     // ゲーム番号を取得するメソッド
     getGameNumber(): string {
         return this.gameNumber;
@@ -43,6 +32,11 @@ export class GameData {
     // サプライを取得するメソッド
     getGameSupply(): string {
         return this.gameSupply;
+    }
+
+    // サプライを設定するメソッド
+    setGameSupply(gameSupply: string): void {
+        this.gameSupply = gameSupply;
     }
     
     // ログの断面を取得するメソッド

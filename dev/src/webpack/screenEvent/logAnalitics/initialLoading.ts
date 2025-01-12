@@ -1,5 +1,3 @@
-import { get } from 'http';
-import { analyzeLog } from '../../logic/logAnalyzer/logAnalyzer';
 import { GameData } from '../../model/GameData';
 import { updateScreen } from './updateScreen';
 import { getComment } from '../../logic/callApi/getComment';
@@ -13,9 +11,6 @@ export async function init(gameDataMaster: GameData): Promise<void> {
     const gameNumber = localStorage.getItem('gameNumber') || '';
     const gameSupply = localStorage.getItem('gameSupply') || '';
     const gameLog = localStorage.getItem('gameLog') || '';
-
-    gameDataMaster.make(gameNumber, gameLog, gameSupply);
-    analyzeLog(gameDataMaster);
 
     /*
      サーバからコメントを取得

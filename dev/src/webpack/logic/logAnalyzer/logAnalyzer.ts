@@ -5,7 +5,7 @@ import { Player } from "../../model/Player";
 import { loadGameSupply } from "../loadGameSupply";
 import { draws } from "./methods/draws";
 
-export function analyzeLog(gameData: GameData): void {
+export function logAnalyzer(gameData: GameData): void {
     let tmpPointer = 0;
     let logArray = gameData.getGameLog().split('\n');
     let logSectionArray = gameData.getLogSectionArray()

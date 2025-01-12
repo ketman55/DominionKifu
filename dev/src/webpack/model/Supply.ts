@@ -16,8 +16,18 @@ export class Supply {
         return this.kingdomArea;
     }
 
+    // 基本カードに新しいカードを追加するメソッド
+    addCardToBasic(cardName: string, count: number): void {
+        const existingCard = this.basicArea.find(card => card.name === cardName);
+        if (existingCard) {
+            console.warn(`Card with name "${cardName}" already exists.`);
+        } else {
+            this.basicArea.push({ name: cardName, count });
+        }
+    }
+
     // 王国カードに新しいカードを追加するメソッド
-    addCard(cardName: string, count: number): void {
+    addCardToKingdom(cardName: string, count: number): void {
         const existingCard = this.kingdomArea.find(card => card.name === cardName);
         if (existingCard) {
             console.warn(`Card with name "${cardName}" already exists.`);
