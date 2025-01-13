@@ -3,12 +3,14 @@ import { Supply } from "../../model/Supply";
 import { Player } from "../../model/Player";
 
 // プレイヤーの行動メソッド
-import { starts } from "./methods/starts";
+import { cleanUp } from "./methods/cleanUp";
+import { starts } from "./methods/startsWith";
 import { draws } from "./methods/draws";
 
 export function logAnalyzer(
     currentLogSec: LogSectionInterface,
-    prevLogSec: LogSectionInterface): LogSectionInterface {
+    prevLogSec: LogSectionInterface,
+    nextLogSec: LogSectionInterface): LogSectionInterface {
 
     // ひとつ前のlogSectionの内容をディープコピー
     const supply = prevLogSec.supply.clone();
@@ -16,7 +18,10 @@ export function logAnalyzer(
     const secondPlayer = prevLogSec.secondPlayer.clone();
 
     // 今回のログの内容でクラスを更新する
-    analyze(firstPlayer, secondPlayer, currentLogSec.logSection);
+    analyze(firstPlayer,
+        secondPlayer,
+        currentLogSec.logSection,
+        nextLogSec.logSection);
 
     // 結果を登録する
     let logSection: LogSectionInterface = {
@@ -31,34 +36,51 @@ export function logAnalyzer(
 function analyze(
     firstPlayer: Player,
     secondPlayer: Player,
-    logSection: string): void {
+    currentLogSection: string,
+    nextLogSection: string): void {
 
     // プレイヤー名を表すMap変数
     const playerMap = new Map<string, Player>();
-    if(!firstPlayer.isPlayerNameEmpty()) {
+    if (!firstPlayer.isPlayerNameEmpty()) {
         playerMap.set(firstPlayer.getPlayerName(), firstPlayer);
     }
-    if(!secondPlayer.isPlayerNameEmpty()) {
+    if (!secondPlayer.isPlayerNameEmpty()) {
         playerMap.set(secondPlayer.getPlayerName(), secondPlayer);
     }
 
     // ピリオドは除去する
-    logSection = logSection.replace('.', '');
-
     // ログをスペースで分割する
     // 例：k draws 3 Coppers and 2 Estates.
-    const logArray = logSection.split(' ');
-    if(logArray.length < 2) {
-        return;
+    const logArray = currentLogSection.replace('.', '').split(' ');
+
+    /*
+     クリーンナップ処理
+     Turn2以降で
+     Turn 2 - xxxx のようなログがある場合はクリーンナップ処理を行う
+    */
+    const nextLogArray = nextLogSection.split(' ');
+    if (2 < nextLogArray.length
+        && nextLogArray[0] === 'Turn'
+        && nextLogArray[1] !== '1') {
+        cleanUp(playerMap, logArray);
     }
+
+    /*
+    通常アクションの処理
+    */
+    if (logArray.length < 2) return;
     const verb = logArray[1];
+    const nextOfVerb = logArray[2];
 
     // ログの内容によって処理を分岐する
     switch (verb) {
-        case 'starts': // プレイヤーの初期処理
-            starts(playerMap, firstPlayer, secondPlayer, logArray);
+        case 'starts':
+            switch(nextOfVerb) {
+                case 'with': // プレイヤーの初期処理
+                    starts(playerMap, firstPlayer, secondPlayer, logArray);
+                    break;
+            }
             break;
-        
         case 'draws': // デッキからカードを引く
             draws(playerMap, logArray);
             break;

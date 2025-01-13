@@ -71,15 +71,104 @@ export class Player {
         }
     }
 
+    // 手札のカードの枚数を減らすメソッド
+    decreaseFromHand(cardName: string, count: number): void {
+        const existingCard = this.hand.get(cardName);
+        if (existingCard) {
+            existingCard.count -= count;
+        }
+        // カードの枚数が0以下になった場合は削除
+        // ただし未知を表す「card」の場合は削除しない
+        if (existingCard 
+            && cardName !== 'card'
+            && existingCard.count <= 0) {
+            this.hand.delete(cardName);
+        }
+    }
+
+    // 手札のカードをすべて捨て札に移動させるメソッド
+    moveAllHandToDiscard(): void {
+        this.hand.forEach((card, cardName) => {
+            this.decreaseFromHand(cardName, card.count);
+            this.addToDiscard(cardName, card.count);
+        });
+    }
+
     // 捨て札のカードを取得するメソッド
     getDiscardArea(): Map<string, Card> {
         return this.discardArea;
     }
 
+    // 捨て札にカードを追加するメソッド
+    addToDiscard(cardName: string, count: number): void {
+        const existingCard = this.discardArea.get(cardName);
+        if (existingCard) {
+            existingCard.count += count;
+        } else {
+            this.discardArea.set(cardName, { count });
+        }
+    }
+
+    // 捨て札のカードの枚数を減らすメソッド
+    decreaseFromDiscard(cardName: string, count: number): void {
+        const existingCard = this.discardArea.get(cardName);
+        if (existingCard) {
+            existingCard.count -= count;
+        }
+        // カードの枚数が0以下になった場合は削除
+        // ただし未知を表す「card」の場合は削除しない
+        if (existingCard 
+            && cardName !== 'card'
+            && existingCard.count <= 0) {
+            this.discardArea.delete(cardName);
+        }
+    }
+
+    // 捨て札のカードをすべてデッキに移動させるメソッド
+    moveAllDiscardToDeck(): void {
+        this.discardArea.forEach((card, cardName) => {
+            this.decreaseFromDiscard(cardName, card.count);
+            this.addToDeck(cardName, card.count);
+        });
+    }
+
     // プレイエリアのカードを取得するメソッド
     getPlayArea(): Map<string, Card> {
         return this.playArea;
-    }    
+    }
+    
+    // プレイエリアにカードを追加するメソッド
+    addToPlayArea(cardName: string, count: number): void {
+        const existingCard = this.playArea.get(cardName);
+        if (existingCard) {
+            existingCard.count += count;
+        } else {
+            this.playArea.set(cardName, { count });
+        }
+    }
+
+    // プレイエリアのカードの枚数を減らすメソッド
+    decreaseFromPlayArea(cardName: string, count: number): void {
+        const existingCard = this.playArea.get(cardName);
+        if (existingCard) {
+            existingCard.count -= count;
+        }
+        // カードの枚数が0以下になった場合は削除
+        // ただし未知を表す「card」の場合は削除しない
+        if (existingCard 
+            && cardName !== 'card'
+            && existingCard.count <= 0) {
+            this.playArea.delete(cardName);
+        }
+    }
+
+    // プレイエリアのカードをすべて捨て札に移動させるメソッド
+    moveAllPlayAreaToDiscard(): void {
+        this.playArea.forEach((card, cardName) => {
+            this.decreaseFromPlayArea(cardName, card.count);
+            this.addToDiscard(cardName, card.count);
+        });
+    }
 
     // プレイヤー名を取得するメソッド
     getPlayerName(): string {

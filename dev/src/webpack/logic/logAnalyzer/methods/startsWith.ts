@@ -8,7 +8,7 @@ export function starts(
     logArray: string[]
 ): void {
 
-    // 想定文：k starts with 7 Coppers.
+    // 想定文①：k starts with 7 Coppers.
     const playerName = logArray[0];
     const cardNum: number = parseInt(logArray[3], 10);
 
@@ -18,7 +18,6 @@ export function starts(
     } catch (e) {
         console.log(e); // ライブラリが受け付けない入力の場合はそのままの値を使う
     }
-    
     
     if (firstPlayer.isPlayerNameEmpty()) {
         // プレイヤー名が未登録の場合はプレイヤー名を設定する
@@ -31,9 +30,6 @@ export function starts(
         && secondPlayer.isPlayerNameEmpty()) {
         secondPlayer.setPlayerName(playerName);
         playerMap.set(secondPlayer.getPlayerName(), secondPlayer);
-    } else {
-        // 既にプレイヤー名が登録されている場合は処理終了
-        return;
     }
 
     // 配られたカードを設定する

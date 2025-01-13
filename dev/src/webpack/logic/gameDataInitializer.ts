@@ -31,7 +31,7 @@ export function gameDataInitializer(
     // 残りのログの断面を追加
     for (let i = 1; i < logArray.length; i++) {
         const prevLogSec = gameData.getLogSectionArray()[i - 1];
-        
+                
         const currentLogSec: LogSectionInterface = {
             supply: new Supply(),
             firstPlayer: new Player(),
@@ -39,7 +39,16 @@ export function gameDataInitializer(
             logSection: logArray[i]
         };
 
-        const resultLogSec = logAnalyzer(currentLogSec, prevLogSec);
+        let next = i;
+        if(i + 1 < logArray.length) next = i + 1;
+        const nextLogSec: LogSectionInterface = {
+            supply: new Supply(),
+            firstPlayer: new Player(),
+            secondPlayer: new Player(),
+            logSection: logArray[next]
+        };
+
+        const resultLogSec = logAnalyzer(currentLogSec, prevLogSec, nextLogSec);
         gameData.getLogSectionArray().push(resultLogSec);
     }
 }
