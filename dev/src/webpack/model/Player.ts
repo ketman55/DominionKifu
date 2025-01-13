@@ -9,6 +9,11 @@ export class Player {
     private discardArea: Map<string, Card> = new Map();
     private playArea: Map<string, Card> = new Map();
     private playerName: string = '';
+
+    constructor() {
+        // デッキに未知を表す「card」を追加
+        this.deck.set('card', { count: 0 });
+    }
     
     // ディープコピーを返すメソッド
     clone(): Player {
@@ -43,7 +48,10 @@ export class Player {
             existingCard.count -= count;
         }
         // カードの枚数が0以下になった場合は削除
-        if (existingCard && existingCard.count <= 0) {
+        // ただし未知を表す「card」の場合は削除しない
+        if (existingCard 
+            && cardName !== 'card'
+            && existingCard.count <= 0) {
             this.deck.delete(cardName);
         }
     }

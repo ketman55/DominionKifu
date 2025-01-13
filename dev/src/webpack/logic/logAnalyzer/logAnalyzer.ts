@@ -57,8 +57,7 @@ function analyze(
             starts(playerMap, firstPlayer, secondPlayer, logArray);
             break;
         
-        case 'draws':
-            // デッキからカードを引く
+        case 'draws': // デッキからカードを引く
             draws(playerMap, logArray);
             break;
 

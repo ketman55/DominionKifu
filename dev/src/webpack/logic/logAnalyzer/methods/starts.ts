@@ -16,7 +16,7 @@ export function starts(
     try {
         cardName = pluralize.singular(cardName);　// 複数形を単数形に変換
     } catch (e) {
-        console.log(e);
+        console.log(e); // ライブラリが受け付けない入力の場合はそのままの値を使う
     }
     
     // プレイヤー名が未登録の場合はプレイヤー名を設定する

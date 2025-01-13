@@ -26,7 +26,7 @@ export function draws(
                 cardName = pluralize.singular(text);　// 複数形を単数形に変換
             } catch (e) {
                 console.log(e);
-                cardName = text;
+                cardName = text; // ライブラリが受け付けない入力の場合はそのままの値を使う
             }
 
             // cardNameがinitialCardCountsに含まれる場合は更新
