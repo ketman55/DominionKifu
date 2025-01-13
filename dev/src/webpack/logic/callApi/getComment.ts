@@ -1,4 +1,4 @@
-import { CommentInterface } from "../interface/CommentInterface";
+import { CommentInterface } from "../../interface/CommentInterface";
 
 export async function getComment(gameNumber:string): Promise<CommentInterface[]> {
     const comment: CommentInterface[] = [];

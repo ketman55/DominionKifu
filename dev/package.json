@@ -4,6 +4,7 @@
     "@types/express": "^5.0.0",
     "@types/lokijs": "^1.5.14",
     "@types/node": "^22.10.5",
+    "@types/pluralize": "^0.0.33",
     "glob": "^11.0.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
@@ -20,6 +21,7 @@
     "axios": "^1.7.7",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "lokijs": "^1.5.12"
+    "lokijs": "^1.5.12",
+    "pluralize": "^8.0.0"
   }
 }

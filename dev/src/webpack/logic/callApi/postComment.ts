@@ -1,4 +1,4 @@
-import { CommentInterface } from "../interface/CommentInterface";
+import { CommentInterface } from "../../interface/CommentInterface";
 
 export async function postComment(comment: CommentInterface) {
     try {

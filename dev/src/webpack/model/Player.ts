@@ -26,13 +26,35 @@ export class Player {
         return this.deck;
     }
 
+    // デッキにカードを追加するメソッド
+    addToDeck(cardName: string, count: number): void {
+        const existingCard = this.deck.get(cardName);
+        if (existingCard) {
+            existingCard.count += count;
+        } else {
+            this.deck.set(cardName, { count });
+        }
+    }
+
+    // デッキのカードの枚数を減らすメソッド
+    decreaseFromDeck(cardName: string, count: number): void {
+        const existingCard = this.deck.get(cardName);
+        if (existingCard) {
+            existingCard.count -= count;
+        }
+        // カードの枚数が0以下になった場合は削除
+        if (existingCard && existingCard.count <= 0) {
+            this.deck.delete(cardName);
+        }
+    }
+
     // 手札のカードを取得するメソッド
     getHand(): Map<string, Card> {
         return this.hand;
     }
 
     // 手札にカードを追加するメソッド  
-    addHand(cardName: string, count: number): void {
+    addToHand(cardName: string, count: number): void {
         const existingCard = this.hand.get(cardName);
         if (existingCard) {
             existingCard.count += count;

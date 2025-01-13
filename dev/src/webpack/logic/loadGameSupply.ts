@@ -13,7 +13,8 @@ import { initialCardCounts } from "../../webpack/enum/initialCardCounts";
 
 export function loadGameSupply(supply: Supply, gameSupply: string): void {
     // カンマ区切りの文字列を配列に変換、空白を削除
-    const gameSupplyList = gameSupply.split(',').map(cardName => cardName.replace(/\s+/g, ''));
+    const gameSupplyList
+        = gameSupply.split(',').map(cardName => cardName.replace(/\s+/g, ''));
 
     // 基本カードの初期設定
     // 植民地、ポーションは未実装
@@ -23,11 +24,12 @@ export function loadGameSupply(supply: Supply, gameSupply: string): void {
     supply.addCardToBasic('Estate', 8);
     supply.addCardToBasic('Duchy', 8);
     supply.addCardToBasic('Province', 8);
+    supply.addCardToBasic('Curse', 10);
 
     // 王国カードの初期設定
     gameSupplyList.forEach(cardName => {
         let count = initialCardCounts[cardName];
-        if(count !== undefined) {
+        if (count !== undefined) {
             supply.addCardToKingdom(cardName, count);
         }
     });

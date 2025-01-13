@@ -1,6 +1,9 @@
 import { LogSectionInterface } from "../../interface/LogSectionInterface";
 import { Supply } from "../../model/Supply";
 import { Player } from "../../model/Player";
+
+// プレイヤーの行動メソッド
+import { starts } from "./methods/starts";
 import { draws } from "./methods/draws";
 
 export function logAnalyzer(
@@ -22,7 +25,6 @@ export function logAnalyzer(
         secondPlayer: secondPlayer,
         logSection: currentLogSec.logSection
     };
-
     return logSection;
 }
 
@@ -34,43 +36,30 @@ function analyze(
 
     // プレイヤー名を表すMap変数
     const playerMap = new Map<string, Player>();
+    if(!firstPlayer.isPlayerNameEmpty()) {
+        playerMap.set(firstPlayer.getPlayerName(), firstPlayer);
+    }
+    if(!secondPlayer.isPlayerNameEmpty()) {
+        playerMap.set(secondPlayer.getPlayerName(), secondPlayer);
+    }
 
     // ピリオドは除去する
     logSection = logSection.replace('.', '');
 
     // ログをスペースで分割する
+    // 例：k draws 3 Coppers and 2 Estates.
     const logArray = logSection.split(' ');
-
-    // プレイヤー名が未登録の場合はプレイヤー名を設定する
-    if (logArray[1] === 'starts'
-        && firstPlayer.isPlayerNameEmpty()) {
-        firstPlayer.setPlayerName(logArray[0]);
-
-    } else if (logArray[1] === 'starts'
-        && !firstPlayer.isPlayerNameMatch(logArray[0])
-        && secondPlayer.isPlayerNameEmpty()) {
-        secondPlayer.setPlayerName(logArray[0]);
-    }
-
-    // プレイヤー名に該当する方へログの内容を適用する
-    if (firstPlayer.isPlayerNameMatch(logArray[0])) {
-        analyzeLogSection(supply, firstPlayer, logArray);
-
-    } else if (secondPlayer.isPlayerNameMatch(logArray[0])) {
-        analyzeLogSection(supply, secondPlayer, logArray);
-    }
-}
-
-function analyzeLogSection(supply: Supply, player: Player, logArray: string[]): void {
+    const verb = logArray[1];
 
     // ログの内容によって処理を分岐する
-    switch (logArray[1]) {
+    switch (verb) {
         case 'starts': // プレイヤーの初期処理
-
+            starts(playerMap, firstPlayer, secondPlayer, logArray);
+            break;
         
         case 'draws':
             // デッキからカードを引く
-            draws(player, logArray);
+            draws(playerMap, logArray);
             break;
 
         case 'buys':

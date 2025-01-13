@@ -1,9 +1,10 @@
 import { GameData } from '../../model/GameData';
 import { updateScreen } from './updateScreen';
 import { getComment } from '../../logic/callApi/getComment';
+import { gameDataInitializer } from '../../logic/gameDataInitializer';
 
 // 初期処理
-export async function init(gameDataMaster: GameData): Promise<void> {
+export async function initialLoading(gameDataMaster: GameData): Promise<void> {
     /*
      ローカルストレージからデータを取得
      GameDataの初期化
@@ -12,16 +13,27 @@ export async function init(gameDataMaster: GameData): Promise<void> {
     const gameSupply = localStorage.getItem('gameSupply') || '';
     const gameLog = localStorage.getItem('gameLog') || '';
 
+    const gameLogInterface = {
+        gameNumber: gameNumber,
+        gameSupply: gameSupply,
+        gameLog: gameLog
+    };
+
+    gameDataMaster.setGameNumber(gameNumber);
+    gameDataMaster.setGameSupply(gameSupply);
+    gameDataMaster.setGameLog(gameLog);
+    gameDataInitializer(gameDataMaster, gameLogInterface);
+
     /*
      サーバからコメントを取得
      GameDataにコメントをセット
     */
     const comment = getComment(gameNumber);
-    console.log(comment);
     gameDataMaster.setComment(await comment);
+    console.log("init:get comment from server success");
 
     /*
-     画面右側の表示
+     画面中央（上部）の表示
     */
     const gameNumberDisplay = document.getElementById('gameNumberDisplay');
     if (gameNumberDisplay) {
@@ -36,8 +48,6 @@ export async function init(gameDataMaster: GameData): Promise<void> {
     /*
      画面中央の表示
     */
-
-    // 初期表示用のデータを取得
     updateScreen(gameDataMaster);
 
     /*

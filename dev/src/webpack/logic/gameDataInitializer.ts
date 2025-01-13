@@ -7,11 +7,14 @@ import { loadGameLog } from "./loadGameLog";
 import { loadGameSupply } from "./loadGameSupply";
 import { logAnalyzer } from "./logAnalyzer/logAnalyzer";
 
-export function gameDataInitializer(gameData: GameData, gameLogInterface: GameLogInterface): void {
+export function gameDataInitializer(
+    gameData: GameData, 
+    gameLogInterface: GameLogInterface): void {
 
     // サプライの読み込み
     const supply = new Supply();
     loadGameSupply(supply, gameLogInterface.gameSupply); // supplyオブジェクトに書き込み
+    console.log("supply: ", supply);
 
     // 各ログの解析
     const logArray = loadGameLog(gameData.getGameLog());
@@ -23,7 +26,7 @@ export function gameDataInitializer(gameData: GameData, gameLogInterface: GameLo
         secondPlayer: new Player(),
         logSection: logArray[0] // ログの断面（1行分）
     };
-    gameData.getLogSectionArray().push();
+    gameData.getLogSectionArray().push(logSection);
 
     // 残りのログの断面を追加
     for (let i = 1; i < logArray.length; i++) {

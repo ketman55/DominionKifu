@@ -24,9 +24,19 @@ export class GameData {
         return this.gameNumber;
     }
 
+    // ゲーム番号を設定するメソッド
+    setGameNumber(gameNumber: string): void {
+        this.gameNumber = gameNumber;
+    }
+
     // ログを取得するメソッド
     getGameLog(): string {
         return this.gameLog;
+    }
+
+    // ログを設定するメソッド
+    setGameLog(gameLog: string): void {
+        this.gameLog = gameLog;
     }
 
     // サプライを取得するメソッド

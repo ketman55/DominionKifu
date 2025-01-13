@@ -1,5 +1,5 @@
 import { GameData } from "../../model/GameData";
-import { init } from "./initialLoading";
+import { initialLoading } from "./initialLoading";
 import { prevButtonEvent, nextButtonEvent } from "./logPrevNextButton";
 import { addComment } from "./addComment";
 
@@ -8,7 +8,7 @@ const gameDataMaster = new GameData();
 // ページロード時にlogAnaliticsInitを呼び出す
 window.addEventListener('load',
     function () {
-        init(gameDataMaster);
+        initialLoading(gameDataMaster);
     });
 
 // prevButtonを押下した際のイベント

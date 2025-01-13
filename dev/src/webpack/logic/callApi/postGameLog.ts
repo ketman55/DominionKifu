@@ -1,4 +1,4 @@
-import { GameLogInterface } from "../interface/GameLogInterface";
+import { GameLogInterface } from "../../interface/GameLogInterface";
 
 export async function postGameLog(gameNumber: string, gameSupply: string, gameLog: string): Promise<boolean> {
     try {
