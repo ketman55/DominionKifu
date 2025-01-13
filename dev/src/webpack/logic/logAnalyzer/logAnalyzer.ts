@@ -1,10 +1,10 @@
 import { LogSectionInterface } from "../../interface/LogSectionInterface";
-import { Supply } from "../../model/Supply";
 import { Player } from "../../model/Player";
 
 // プレイヤーの行動メソッド
 import { cleanUp } from "./methods/cleanUp";
 import { starts } from "./methods/startsWith";
+import { shuffles } from "./methods/shuffles";
 import { draws } from "./methods/draws";
 
 export function logAnalyzer(
@@ -81,8 +81,13 @@ function analyze(
                     break;
             }
             break;
+
         case 'draws': // デッキからカードを引く
             draws(playerMap, logArray);
+            break;
+
+        case 'shuffles': // 山札をシャッフルする
+            shuffles(playerMap, logArray);
             break;
 
         case 'buys':

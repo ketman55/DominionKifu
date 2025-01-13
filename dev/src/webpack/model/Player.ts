@@ -89,8 +89,9 @@ export class Player {
     // 手札のカードをすべて捨て札に移動させるメソッド
     moveAllHandToDiscard(): void {
         this.hand.forEach((card, cardName) => {
-            this.decreaseFromHand(cardName, card.count);
-            this.addToDiscard(cardName, card.count);
+            const count = card.count;
+            this.decreaseFromHand(cardName, count);
+            this.addToDiscard(cardName, count);
         });
     }
 
@@ -127,8 +128,9 @@ export class Player {
     // 捨て札のカードをすべてデッキに移動させるメソッド
     moveAllDiscardToDeck(): void {
         this.discardArea.forEach((card, cardName) => {
-            this.decreaseFromDiscard(cardName, card.count);
-            this.addToDeck(cardName, card.count);
+            const count = card.count;
+            this.decreaseFromDiscard(cardName, count);
+            this.addToDeck(cardName, count);
         });
     }
 

@@ -1,5 +1,4 @@
-import pluralize from 'pluralize';
-import { Player} from "../../../model/Player"
+import { Player } from "../../../model/Player"
 
 export function cleanUp(
     playerMap: Map<string, Player>,
@@ -9,12 +8,12 @@ export function cleanUp(
     const playerName = logArray[0];
     let player = playerMap.get(playerName);
 
-        if (player) {
-            // プレイヤーの手札を捨て札に移動
-            player.moveAllHandToDiscard();
+    if (player) {
+        // プレイヤーの手札を捨て札に移動
+        player.moveAllHandToDiscard();
 
-            // PlayAreaを捨て札に移動
-            player.moveAllPlayAreaToDiscard();
-            
-        }
+        // PlayAreaを捨て札に移動
+        player.moveAllPlayAreaToDiscard();
+
+    }
 }
