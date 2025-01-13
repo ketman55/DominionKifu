@@ -3,7 +3,10 @@
  */
 enum lowData {
     Victory = 8,
-    Standard = 10
+    Standard = 10,
+    Gold = 30,
+    Silver = 40,
+    Copper = 46
 }
 
 /**
@@ -15,6 +18,15 @@ export const initialCardCounts: { [key: string]: number } = {
     // ログ固有の用語
     card: 0,
     cards: 0,
+
+    // 王国カード
+    Province: lowData.Victory,
+    Duchy: lowData.Victory,
+    Estate: lowData.Victory,
+    Gold: lowData.Gold,
+    Silver: lowData.Silver,
+    Copper: lowData.Copper,
+    Curse: lowData.Standard,
 
     // 基本セット
     Artisan: lowData.Standard,

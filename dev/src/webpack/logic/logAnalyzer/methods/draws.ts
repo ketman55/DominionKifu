@@ -18,9 +18,12 @@ export function draws(
     let cardName = '';
     logArray.forEach((text, index) => {
 
-        // textが数字だった場合はcountに代入
         if (!isNaN(Number(text))) {
+            // textが数字だった場合はcountに代入
             count = Number(text);
+        } else if(text === 'a' || text === 'an') {
+            // aかanだった場合はcountに1を代入
+            count = 1;
         } else {
             try {
                 cardName = pluralize.singular(text);　// 複数形を単数形に変換
@@ -29,8 +32,12 @@ export function draws(
                 cardName = text; // ライブラリが受け付けない入力の場合はそのままの値を使う
             }
 
+            console.log(cardName);
+
             // cardNameがinitialCardCountsに含まれる場合は更新
             if (cardName in initialCardCounts) {
+                console.log('draws: ' + cardName + ' ' + count);
+                
                 // 手札は増やす
                 player.addToHand(cardName, count);
 
