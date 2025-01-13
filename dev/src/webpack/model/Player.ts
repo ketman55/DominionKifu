@@ -3,7 +3,7 @@ interface Card {
 }
 
 export class Player {
-    
+
     private deck: Map<string, Card> = new Map();
     private hand: Map<string, Card> = new Map();
     private discardArea: Map<string, Card> = new Map();
@@ -14,7 +14,7 @@ export class Player {
         // デッキに未知を表す「card」を追加
         this.deck.set('card', { count: 0 });
     }
-    
+
     // ディープコピーを返すメソッド
     clone(): Player {
         const player = new Player();
@@ -34,10 +34,39 @@ export class Player {
     // デッキにカードを追加するメソッド
     addToDeck(cardName: string, count: number): void {
         const existingCard = this.deck.get(cardName);
+        const card = this.deck.get('card');
+        let remainingCount = count;
+
+        // cardNameがcardの場合はcardを更新
+        if (cardName === 'card') {
+            if (card) {
+                card.count += count;
+            } else {
+                this.deck.set(cardName, { count });
+            }
+            return;
+        }
+
+        // cardNameがcard以外の場合
+        // cardが存在しマイナスの場合はcardに追加
+        if (card) {
+            if (card.count < 0
+                && count < Math.abs(card.count)) {
+                // 例：cardが-2でcountが1の場合cardが-1になる
+                remainingCount = 0;
+                card.count += count;
+            } else if (card.count < 0
+                && count >= Math.abs(card.count)) {
+                // 例：cardが-2でcountが3の場合cardが0になり、残りが1になる
+                remainingCount = count - Math.abs(card.count);
+                card.count = 0;
+            }
+        }
+        // 残った枚数をcard以外に追加
         if (existingCard) {
-            existingCard.count += count;
+            existingCard.count += remainingCount;
         } else {
-            this.deck.set(cardName, { count });
+            this.deck.set(cardName, { count: remainingCount });
         }
     }
 
@@ -49,7 +78,7 @@ export class Player {
         }
         // カードの枚数が0以下になった場合は削除
         // ただし未知を表す「card」の場合は削除しない
-        if (existingCard 
+        if (existingCard
             && cardName !== 'card'
             && existingCard.count <= 0) {
             this.deck.delete(cardName);
@@ -74,15 +103,32 @@ export class Player {
     // 手札のカードの枚数を減らすメソッド
     decreaseFromHand(cardName: string, count: number): void {
         const existingCard = this.hand.get(cardName);
+        const card = this.hand.get('card');
+
         if (existingCard) {
             existingCard.count -= count;
-        }
-        // カードの枚数が0以下になった場合は削除
-        // ただし未知を表す「card」の場合は削除しない
-        if (existingCard 
-            && cardName !== 'card'
-            && existingCard.count <= 0) {
-            this.hand.delete(cardName);
+
+            // カードの枚数が0以下になった場合
+            if (existingCard.count <= 0) {
+                const remainingCount = Math.abs(existingCard.count);
+                existingCard.count = 0; // 手札のカードの枚数を0に設定
+
+                // 残りをcardから引く
+                if (card) {
+                    card.count -= remainingCount;
+                }
+
+                // カードを削除
+                this.hand.delete(cardName);
+            }
+        } else if (card) {
+            // カードが存在しない場合
+            // かつcardが存在する場合
+            // 残りをcardから引く
+            card.count -= count;
+            if (card.count == 0) {
+                this.hand.delete('card');
+            }
         }
     }
 
@@ -90,8 +136,8 @@ export class Player {
     moveAllHandToDiscard(): void {
         this.hand.forEach((card, cardName) => {
             const count = card.count;
-            this.decreaseFromHand(cardName, count);
             this.addToDiscard(cardName, count);
+            this.hand.delete(cardName);
         });
     }
 
@@ -107,6 +153,7 @@ export class Player {
             existingCard.count += count;
         } else {
             this.discardArea.set(cardName, { count });
+            console.log(this.playerName, cardName, count);
         }
     }
 
@@ -117,9 +164,7 @@ export class Player {
             existingCard.count -= count;
         }
         // カードの枚数が0以下になった場合は削除
-        // ただし未知を表す「card」の場合は削除しない
-        if (existingCard 
-            && cardName !== 'card'
+        if (existingCard
             && existingCard.count <= 0) {
             this.discardArea.delete(cardName);
         }
@@ -129,8 +174,8 @@ export class Player {
     moveAllDiscardToDeck(): void {
         this.discardArea.forEach((card, cardName) => {
             const count = card.count;
-            this.decreaseFromDiscard(cardName, count);
             this.addToDeck(cardName, count);
+            this.discardArea.delete(cardName);
         });
     }
 
@@ -138,7 +183,7 @@ export class Player {
     getPlayArea(): Map<string, Card> {
         return this.playArea;
     }
-    
+
     // プレイエリアにカードを追加するメソッド
     addToPlayArea(cardName: string, count: number): void {
         const existingCard = this.playArea.get(cardName);
@@ -152,23 +197,43 @@ export class Player {
     // プレイエリアのカードの枚数を減らすメソッド
     decreaseFromPlayArea(cardName: string, count: number): void {
         const existingCard = this.playArea.get(cardName);
+        const card = this.playArea.get('card');
+
+        console.log(this.playerName, this.discardArea);
+
         if (existingCard) {
             existingCard.count -= count;
-        }
-        // カードの枚数が0以下になった場合は削除
-        // ただし未知を表す「card」の場合は削除しない
-        if (existingCard 
-            && cardName !== 'card'
-            && existingCard.count <= 0) {
-            this.playArea.delete(cardName);
+
+            // カードの枚数が0以下になった場合
+            if (existingCard.count <= 0) {
+                const remainingCount = Math.abs(existingCard.count);
+                existingCard.count = 0; // 手札のカードの枚数を0に設定
+
+                // 残りをcardから引く
+                if (card) {
+                    card.count -= remainingCount;
+                }
+
+                // カードを削除
+                this.playArea.delete(cardName);
+            }
+        } else if (card) {
+            // カードが存在しない場合
+            // かつcardが存在する場合
+            // 残りをcardから引く
+            card.count -= count;
+            if (card.count == 0) {
+                this.playArea.delete('card');
+            }
         }
     }
 
     // プレイエリアのカードをすべて捨て札に移動させるメソッド
     moveAllPlayAreaToDiscard(): void {
         this.playArea.forEach((card, cardName) => {
-            this.decreaseFromPlayArea(cardName, card.count);
-            this.addToDiscard(cardName, card.count);
+            const count = card.count;
+            this.addToDiscard(cardName, count);
+            this.playArea.delete(cardName);
         });
     }
 

@@ -7,6 +7,7 @@ import { starts } from "./methods/startsWith";
 import { shuffles } from "./methods/shuffles";
 import { draws } from "./methods/draws";
 import { Supply } from "../../model/Supply";
+import { plays } from "./methods/plays";
 
 interface logSec {
     prevLogSec: LogSectionInterface;
@@ -125,6 +126,10 @@ function analyze(
 
         case 'shuffles': // 山札をシャッフルする
             shuffles(playerMap, logArray, next2LogArray);
+            break;
+
+        case 'plays': // カードを場に出して使用する
+            plays(playerMap, logArray);
             break;
 
         case 'buys':

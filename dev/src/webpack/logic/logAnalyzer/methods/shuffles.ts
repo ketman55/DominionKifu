@@ -18,14 +18,13 @@ export function shuffles(
             // Turn 2 - Lord Rattington
             cleanUp(playerMap, logArray);
             player.moveAllDiscardToDeck();
-            
+
         } else {
             // 例：手札とプレイエリアは含めずにリシャッフルする
             // k shuffles their deck.
             // k draws 2 Coppers, 2 Estates, and a Trader.
             // k plays a Copper, 2 Silvers, and a Gold. (+$8)
             player.moveAllDiscardToDeck();
-
         }
     }
 }

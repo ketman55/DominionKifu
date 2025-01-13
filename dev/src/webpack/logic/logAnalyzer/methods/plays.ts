@@ -1,8 +1,8 @@
 import pluralize from 'pluralize';
-import { initialCardCounts } from "../../../enum/initialCardCounts";
 import { Player } from "../../../model/Player";
+import { initialCardCounts } from '../../../enum/initialCardCounts';
 
-export function draws(
+export function plays(
     playerMap: Map<string, Player>,
     logArray: string[]): void {
 
@@ -13,7 +13,7 @@ export function draws(
         return;
     }
 
-    // 例：k draws 3 Coppers and 2 Estates.
+    // 例：k plays 2 Coppers and a Silver. (+$4)
     let count = 0;
     let cardName = '';
     logArray.forEach((text, index) => {
@@ -21,7 +21,7 @@ export function draws(
         if (!isNaN(Number(text))) {
             // textが数字だった場合はcountに代入
             count = Number(text);
-        } else if(text === 'a' || text === 'an') {
+        } else if (text === 'a' || text === 'an') {
             // aかanだった場合はcountに1を代入
             count = 1;
         } else {
@@ -33,12 +33,14 @@ export function draws(
             }
 
             // cardNameがinitialCardCountsに含まれる場合は更新
-            if (cardName in initialCardCounts) {                
-                // 手札は増やす
-                player.addToHand(cardName, count);
+            if (cardName in initialCardCounts) {
 
-                // デッキは減らす
-                player.decreaseFromDeck(cardName, count);
+                // PlayAreaは増やす
+                player.addToPlayArea(cardName, count);
+
+                // 手札は減らす
+                player.decreaseFromHand(cardName, count);
+
             }
         }
     });
