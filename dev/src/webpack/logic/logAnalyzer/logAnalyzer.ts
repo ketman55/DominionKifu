@@ -16,7 +16,7 @@ export function logAnalyzer(
     const secondPlayer = prevLogSec.secondPlayer.clone();
 
     // 今回のログの内容でクラスを更新する
-    analyze(supply, firstPlayer, secondPlayer, currentLogSec.logSection);
+    analyze(firstPlayer, secondPlayer, currentLogSec.logSection);
 
     // 結果を登録する
     let logSection: LogSectionInterface = {
@@ -29,7 +29,6 @@ export function logAnalyzer(
 }
 
 function analyze(
-    supply: Supply,
     firstPlayer: Player,
     secondPlayer: Player,
     logSection: string): void {
@@ -49,6 +48,9 @@ function analyze(
     // ログをスペースで分割する
     // 例：k draws 3 Coppers and 2 Estates.
     const logArray = logSection.split(' ');
+    if(logArray.length < 2) {
+        return;
+    }
     const verb = logArray[1];
 
     // ログの内容によって処理を分岐する

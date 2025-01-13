@@ -19,16 +19,21 @@ export function starts(
         console.log(e); // ライブラリが受け付けない入力の場合はそのままの値を使う
     }
     
-    // プレイヤー名が未登録の場合はプレイヤー名を設定する
+    
     if (firstPlayer.isPlayerNameEmpty()) {
+        // プレイヤー名が未登録の場合はプレイヤー名を設定する
         firstPlayer.setPlayerName(playerName);
         playerMap.set(firstPlayer.getPlayerName(), firstPlayer);
 
     } else if (
+        // プレイヤー名が未登録の場合はプレイヤー名を設定する
         !playerMap.has(playerName) 
         && secondPlayer.isPlayerNameEmpty()) {
         secondPlayer.setPlayerName(playerName);
         playerMap.set(secondPlayer.getPlayerName(), secondPlayer);
+    } else {
+        // 既にプレイヤー名が登録されている場合は処理終了
+        return;
     }
 
     // 配られたカードを設定する

@@ -1,3 +1,4 @@
+import { cardCountToString } from "../../logic/cardCountToString";
 import { GameData } from "../../model/GameData";
 
 export function updateScreen(gameDataMaster: GameData) {
@@ -25,7 +26,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = card.name;
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -42,7 +43,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = card.name;
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -61,7 +62,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = index.toString();
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -78,7 +79,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = index.toString();
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -95,7 +96,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = index.toString();
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -112,7 +113,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = index.toString();
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -133,7 +134,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = index.toString();
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -150,7 +151,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = index.toString();
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -167,7 +168,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = index.toString();
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
 
@@ -184,7 +185,7 @@ export function updateScreen(gameDataMaster: GameData) {
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             cell1.textContent = index.toString();
-            cell2.textContent = card.count.toString();
+            cell2.textContent = cardCountToString(card.count);
         });
     }
     
