@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Analytics</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/logAnalytics.css">
 </head>
 
 <body>
@@ -13,208 +14,92 @@
         <li><a href="gameNumberAndLogInput.html">Home</a></li>
     </div>
 
-    <div id="container">
-        <!-- 中央の表示欄 -->
-        <div id="mainContent">
-            <div id="gameNumber">
-                <h3 id="gameNumberDisplay">ここにゲーム番号を表示します。</h3>
-            </div>
+    <!-- 中央の表示欄 -->
+    <div id="HeaderContent">
+        <div id="gameNumber">
+            <h3 id="gameNumberDisplay">ここにゲーム番号を表示します。</h3>
+        </div>
 
-            <div id="supply">
-                <p id="gameSupplyDisplay">ここにサプライの情報を表示します。</p>
-            </div>
+        <div id="supply">
+            <p id="gameSupplyDisplay">ここにサプライの情報を表示します。</p>
+        </div>
+    </div>
 
-            <div id="deckSection">
-                <h3>Supply</h3>
-                <div style="display: flex; justify-content: space-between;">
-                    <table id="BasicAreaTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                                <th>Basic</th>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-                    <table id="KingdomAreaTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                                <th>Kingdom</th>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-                    <table id="TrashAreaTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                                <th>Trash</th>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-                    <table id="SideAreaTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div style="display: flex; justify-content: space-between;">
+        <div id="SupplySection">
+            <h3>Supply</h3>
+            <table id="BasicAreaTable">
+                <thead style="text-align: left;">
+                    <tr>
+                        <th>Basic</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- データ行がここに追加されます -->
+                </tbody>
+            </table>
+            <table id="KingdomAreaTable">
+                <thead style="text-align: left;">
+                    <tr>
+                        <th>Kingdom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- データ行がここに追加されます -->
+                </tbody>
+            </table>
+        </div>
+        <div id="SideSection">
+            <h3>Side</h3>
+            <table id="TrashAreaTable">
+                <thead style="text-align: left;">
+                    <tr>
+                        <th>
+                            Trash
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- データ行がここに追加されます -->
+                </tbody>
+            </table>
+        </div>
 
-            <div id="FirstPlayerSection">
-                <h3>Player1</h3>
-                <div style="display: flex; justify-content: space-between;">
-                    <table id="FirstPlayerDeckTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                                <th>Deck</th>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
 
-                    <table id="FirstPlayerHandTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                                <th>Hand</th>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
+        <div id="FirstPlayerSection">
+            <h3>Player1</h3>
+            <table id="FirstPlayerDeckTable">
+                <thead style="text-align: left;">
+                    <tr>
+                        <th>Name</th>
+                        <th>Total</th>
+                        <th>Plays</th>
+                        <th>InDeck</th>
+                        <th>Plays/t</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- データ行がここに追加されます -->
+                </tbody>
+            </table>
+        </div>
 
-                    <table id="FirstPlayerPlayTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                                <th>Play</th>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-
-                    <table id="FirstPlayerDiscardTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                                <th>Discard</th>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="SecondPlayerSection">
-                <h3>Player2</h3>
-                <div style="display: flex; justify-content: space-between;">
-                    <table id="SecondPlayerDeckTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                            <tr>
-                                <th>Deck</th>
-                            </tr>
-                            <th>Name</th>
-                            <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-
-                    <table id="SecondPlayerHandTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                            <tr>
-                                <th>Hand</th>
-                            </tr>
-                            <th>Name</th>
-                            <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-
-                    <table id="SecondPlayerPlayTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                            <tr>
-                                <th>Play</th>
-                            </tr>
-                            <th>Name</th>
-                            <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-
-                    <table id="SecondPlayerDiscardTable" style="width: 25%;">
-                        <thead style="text-align: left;">
-                            <tr>
-                            <tr>
-                                <th>Discard</th>
-                            </tr>
-                            <th>Name</th>
-                            <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- データ行がここに追加されます -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div id="SecondPlayerSection">
+            <h3>Player2</h3>
+            <table id="SecondPlayerDeckTable" style="width: 25%;">
+                <thead style="text-align: left;">
+                    <tr>
+                        <th>Name</th>
+                        <th>Total</th>
+                        <th>Plays</th>
+                        <th>InDeck</th>
+                        <th>Plays/t</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- データ行がここに追加されます -->
+                </tbody>
+            </table>
         </div>
 
         <!-- 右側の表示欄 -->
@@ -250,12 +135,10 @@
                 <textarea type="text" style="width:100%; height: 100%;" id="commentInput"></textarea>
             </div>
 
-            <div id="commentSubmit"></div>
-            <button id="commentButton" style="width:100%;"> Add Comment </button>
+            <div id="commentSubmit">
+                <button id="commentButton" style="width:100%;"> Add Comment </button>
+            </div>
         </div>
-    </div>
-
-    </div>
     </div>
     <!-- スクリプト定義 -->
     <script src="../../dist/screenEvent/logAnalitics/controller.bundle.js"></script>
