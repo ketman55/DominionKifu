@@ -9,6 +9,7 @@ import { draws } from "./methods/draws";
 import { Supply } from "../../model/Supply";
 import { plays } from "./methods/plays";
 import { buys } from "./methods/buys";
+import { trashes } from "./methods/trashes";
 
 interface logSec {
     prevLogSec: LogSectionInterface;
@@ -48,7 +49,9 @@ export function logAnalyzer(
     const secondPlayer = logSec.prevLogSec.secondPlayer.clone();
 
     // 今回のログの内容でクラスを更新する
-    analyze(firstPlayer,
+    analyze(
+        supply,
+        firstPlayer,
         secondPlayer,
         logSec);
 
@@ -63,6 +66,7 @@ export function logAnalyzer(
 }
 
 function analyze(
+    supply: Supply,
     firstPlayer: Player,
     secondPlayer: Player,
     logSec: logSec): void {
@@ -134,7 +138,11 @@ function analyze(
             break;
 
         case 'buys':
-            buys(playerMap, logArray, logSec.currentLogSec.supply);
+            buys(playerMap, logArray, supply);
+            break;
+        
+        case 'trashes':
+            trashes(playerMap, logArray, supply);
             break;
     }
 }

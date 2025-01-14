@@ -66,6 +66,21 @@ export class Supply {
         }
     }
 
+    // 廃棄札を取得するメソッド
+    getTrashArea(): CardInterface[] {
+        return this.trashArea;
+    }
+
+    // 廃棄札に新しいカードを追加するメソッド
+    addToTrash(cardName: string, count: number): void {
+        const existingCard = this.trashArea.find(card => card.name === cardName);
+        if (existingCard) {
+            existingCard.count += count;
+        } else {
+            this.trashArea.push({ name: cardName, count });
+        }
+    }
+
     // ディープコピーを返すメソッド
     clone(): Supply {
         const supply = new Supply();

@@ -47,6 +47,23 @@ export function updateScreen(gameDataMaster: GameData) {
         });
     }
 
+    const trashAreaTableBody = document.getElementById('TrashAreaTable')?.getElementsByTagName('tbody')[0];
+    if (trashAreaTableBody) {
+        // テーブルのリセット
+        while (trashAreaTableBody.firstChild) {
+            trashAreaTableBody.removeChild(trashAreaTableBody.firstChild);
+        }
+        
+        // テーブルの再描画
+        supply.getTrashArea().forEach(card => {
+            const row = trashAreaTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = card.name;
+            cell2.textContent = cardCountToString(card.count);
+        });
+    }
+
     // FirstPlayerの初期表示
     let firstPlayer = targetGameLog.firstPlayer;
     const firstPlayerDeckTableBody = document.getElementById('FirstPlayerDeckTable')?.getElementsByTagName('tbody')[0];
