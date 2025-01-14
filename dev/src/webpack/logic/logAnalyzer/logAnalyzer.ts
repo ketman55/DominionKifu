@@ -8,6 +8,7 @@ import { shuffles } from "./methods/shuffles";
 import { draws } from "./methods/draws";
 import { Supply } from "../../model/Supply";
 import { plays } from "./methods/plays";
+import { buys } from "./methods/buys";
 
 interface logSec {
     prevLogSec: LogSectionInterface;
@@ -133,6 +134,7 @@ function analyze(
             break;
 
         case 'buys':
+            buys(playerMap, logArray, logSec.currentLogSec.supply);
             break;
     }
 }

@@ -36,6 +36,36 @@ export class Supply {
         }
     }
 
+    // 基本カードか王国カードのどちらかのカードの枚数を増やすメソッド
+    increaseCardCount(cardName: string, count: number): void {
+        const existingCard = this.basicArea.find(card => card.name === cardName);
+        if (existingCard) {
+            existingCard.count += count;
+        } else {
+            const existingCard = this.kingdomArea.find(card => card.name === cardName);
+            if (existingCard) {
+                existingCard.count += count;
+            } else {
+                console.warn(`Card with name "${cardName}" does not exist.`);
+            }
+        }
+    }
+
+    // 基本カードか王国カードのどちらかのカードの枚数を減らすメソッド
+    decreaseCardCount(cardName: string, count: number): void {
+        const existingCard = this.basicArea.find(card => card.name === cardName);
+        if (existingCard) {
+            existingCard.count -= count;
+        } else {
+            const existingCard = this.kingdomArea.find(card => card.name === cardName);
+            if (existingCard) {
+                existingCard.count -= count;
+            } else {
+                console.warn(`Card with name "${cardName}" does not exist.`);
+            }
+        }
+    }
+
     // ディープコピーを返すメソッド
     clone(): Supply {
         const supply = new Supply();
