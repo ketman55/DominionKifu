@@ -10,6 +10,7 @@ import { Supply } from "../../model/Supply";
 import { plays } from "./methods/plays";
 import { buys } from "./methods/buys";
 import { trashes } from "./methods/trashes";
+import { gains } from "./methods/gains";
 
 interface logSec {
     prevLogSec: LogSectionInterface;
@@ -87,7 +88,8 @@ function analyze(
         .replace(/,/g, '') // すべてのカンマを置換
         .split(' ');
 
-    // 先を見て判定する必要のある処理用の変数
+    // 前や先を見て判定する必要のある処理用の変数
+    const prevLogArray = logSec.prevLogSec.logSection.split(' ');
     const nextLogArray = logSec.nextLogSec.logSection.split(' ');
     const next2LogArray = logSec.next2LogSec.logSection.split(' ');
 
@@ -139,6 +141,10 @@ function analyze(
 
         case 'buys':
             buys(playerMap, logArray, supply);
+            break;
+
+        case 'gains':
+            gains(supply, playerMap, logArray, prevLogArray);
             break;
         
         case 'trashes':
