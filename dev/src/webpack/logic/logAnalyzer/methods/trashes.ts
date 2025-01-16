@@ -40,7 +40,7 @@ export function trashes(
                 supply.addToTrash(cardName, count);
 
                 // プレイヤーの手札を減らす
-                player.decreaseFromHand(cardName, count);
+                player.decreaseFromNowInDeck(cardName, count);
             }
         }
     });

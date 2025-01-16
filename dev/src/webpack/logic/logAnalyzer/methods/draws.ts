@@ -34,11 +34,8 @@ export function draws(
 
             // cardNameがinitialCardCountsに含まれる場合は更新
             if (cardName in initialCardCounts) {                
-                // 手札は増やす
-                player.addToHand(cardName, count);
-
-                // デッキは減らす
-                player.decreaseFromDeck(cardName, count);
+                player.addToTotalDraws(cardName, count);
+                player.addToTurnDraws(cardName, count);
             }
         }
     });

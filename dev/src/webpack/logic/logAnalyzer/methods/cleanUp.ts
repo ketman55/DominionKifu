@@ -9,11 +9,7 @@ export function cleanUp(
     let player = playerMap.get(playerName);
 
     if (player) {
-        // プレイヤーの手札を捨て札に移動
-        player.moveAllHandToDiscard();
-
-        // PlayAreaを捨て札に移動
-        player.moveAllPlayAreaToDiscard();
-
+        player.resetTurnPlays();
+        player.resetTurnDraws();
     }
 }

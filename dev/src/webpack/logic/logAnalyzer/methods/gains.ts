@@ -40,14 +40,9 @@ export function gains(
                 // 山札は減らす
                 supply.decreaseCardCount(cardName, count);
 
-                if (prevLogArray[1] === 'plays'
-                    && prevLogArray[3] === 'Artisan') {
-                    // gainsをplays an Artisanの後に行った場合は、手札に加える
-                    player.addToHand(cardName, count);
-                } else {
-                    // プレイヤーの捨て札を増やす
-                    player.addToDiscard(cardName, count);
-                }
+                // プレイヤーを増やす
+                player.addToTotalGains(cardName, count);
+                player.addToNowInDeck(cardName, count);
             }
         }
     });

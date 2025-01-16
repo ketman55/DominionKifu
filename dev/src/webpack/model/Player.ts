@@ -3,9 +3,11 @@ export class Player {
 
     private totalGains: Map<string, number> = new Map(); // ゲーム中に獲得した合計枚数
     private totalPlays: Map<string, number> = new Map(); // ゲーム中にプレイした合計枚数
+    private totalDraws: Map<string, number> = new Map(); // ゲーム中に引いた合計枚数
 
     private nowInDeck: Map<string, number> = new Map(); // 現在のデッキ
     private turnPlays: Map<string, number> = new Map(); // ターン中にプレイした合計枚数
+    private turnDraws: Map<string, number> = new Map(); // ターン中に引いた合計枚数
     
     private playerName: string = '';
 
@@ -16,6 +18,8 @@ export class Player {
         player.nowInDeck = new Map(Array.from(this.nowInDeck.entries()).map(([key, card]) => [key, card]));
         player.totalPlays = new Map(Array.from(this.totalPlays.entries()).map(([key, card]) => [key, card]));
         player.turnPlays = new Map(Array.from(this.turnPlays.entries()).map(([key, card]) => [key, card]));
+        player.totalDraws = new Map(Array.from(this.totalDraws.entries()).map(([key, card]) => [key, card]));
+        player.turnDraws = new Map(Array.from(this.turnDraws.entries()).map(([key, card]) => [key, card]));
         player.playerName = this.playerName;
         return player;
     }
@@ -58,6 +62,14 @@ export class Player {
         }
     }
 
+    // 現在のデッキからカードを減らすメソッド
+    decreaseFromNowInDeck(cardName: string, count: number): void {
+        const existingCard = this.nowInDeck.get(cardName);
+        if (existingCard) {
+            this.nowInDeck.set(cardName, existingCard - count);
+        }
+    }
+
     // 現在のデッキからカードを削除するメソッド
     removeFromNowInDeck(cardName: string): void {
         this.nowInDeck.delete(cardName);
@@ -90,6 +102,46 @@ export class Player {
             this.turnPlays.set(cardName, existingCard + count);
         } else {
             this.turnPlays.set(cardName, count);
+        }
+    }
+
+    // ターン中にプレイした合計枚数をリセットするメソッド
+    resetTurnPlays(): void {
+        this.turnPlays = new Map();
+    }
+
+    // ターン中に引いた合計枚数を取得するメソッド
+    getTurnDraws(): Map<string, number> {
+        return this.turnDraws;
+    }
+
+    // ターン中に引いた合計枚数を追加するメソッド
+    addToTurnDraws(cardName: string, count: number): void {
+        const existingCard = this.turnDraws.get(cardName);
+        if (existingCard) {
+            this.turnDraws.set(cardName, existingCard + count);
+        } else {
+            this.turnDraws.set(cardName, count);
+        }
+    }
+
+    // ターン中に引いた合計枚数をリセットするメソッド
+    resetTurnDraws(): void {
+        this.turnDraws = new Map();
+    }
+
+    // ゲーム中に引いた合計枚数を取得するメソッド
+    getTotalDraws(): Map<string, number> {
+        return this.totalDraws;
+    }
+
+    // ゲーム中に引いた合計枚数を追加するメソッド
+    addToTotalDraws(cardName: string, count: number): void {
+        const existingCard = this.totalDraws.get(cardName);
+        if (existingCard) {
+            this.totalDraws.set(cardName, existingCard + count);
+        } else {
+            this.totalDraws.set(cardName, count);
         }
     }
 

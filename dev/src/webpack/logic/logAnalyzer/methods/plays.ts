@@ -34,13 +34,8 @@ export function plays(
 
             // cardNameがinitialCardCountsに含まれる場合は更新
             if (cardName in initialCardCounts) {
-
-                // PlayAreaは増やす
-                player.addToPlayArea(cardName, count);
-
-                // 手札は減らす
-                player.decreaseFromHand(cardName, count);
-
+                player.addToTotalPlays(cardName, count);
+                player.addToTurnPlays(cardName, count);
             }
         }
     });

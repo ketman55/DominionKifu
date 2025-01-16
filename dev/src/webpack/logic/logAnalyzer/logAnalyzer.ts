@@ -3,7 +3,7 @@ import { Player } from "../../model/Player";
 
 // プレイヤーの行動メソッド
 import { cleanUp } from "./methods/cleanUp";
-import { starts } from "./methods/startsWith";
+import { startsWith } from "./methods/startsWith";
 import { shuffles } from "./methods/shuffles";
 import { draws } from "./methods/draws";
 import { Supply } from "../../model/Supply";
@@ -90,25 +90,13 @@ function analyze(
 
     // 前や先を見て判定する必要のある処理用の変数
     const prevLogArray = logSec.prevLogSec.logSection.split(' ');
-    const nextLogArray = logSec.nextLogSec.logSection.split(' ');
-    const next2LogArray = logSec.next2LogSec.logSection.split(' ');
 
     /*
      クリーンナップ処理
-     ・Turn1の場合は先行のみ
-     ・Turn2以降でTurn 2 - xxxx のようなログがある場合
     */
-    if (2 < nextLogArray.length
-        && nextLogArray[0] === 'Turn'
-        && nextLogArray[1] === '1'
-        && logArray[0] === firstPlayer.getPlayerName()) {
-        cleanUp(playerMap, logArray);
-
-    } else if (2 < nextLogArray.length
-        && nextLogArray[0] === 'Turn'
-        && nextLogArray[1] !== '1') {
-        cleanUp(playerMap, logArray);
-    }
+    if (logArray[0] === 'Turn') {
+        cleanUp(playerMap, prevLogArray);
+    } 
 
     /*
     通常アクションの処理
@@ -122,7 +110,7 @@ function analyze(
         case 'starts':
             switch (nextOfVerb) {
                 case 'with': // starts with＝初期処理
-                    starts(playerMap, firstPlayer, secondPlayer, logArray);
+                    startsWith(playerMap, firstPlayer, secondPlayer, logArray);
                     break;
             }
             break;
@@ -132,7 +120,7 @@ function analyze(
             break;
 
         case 'shuffles': // 山札をシャッフルする
-            shuffles(playerMap, logArray, next2LogArray);
+            shuffles(playerMap, logArray);
             break;
 
         case 'plays': // カードを場に出して使用する
@@ -146,7 +134,7 @@ function analyze(
         case 'gains':
             gains(supply, playerMap, logArray, prevLogArray);
             break;
-        
+
         case 'trashes':
             trashes(playerMap, logArray, supply);
             break;

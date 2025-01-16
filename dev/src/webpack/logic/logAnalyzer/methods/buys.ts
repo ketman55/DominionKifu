@@ -39,8 +39,9 @@ export function buys(
                 // 山札は減らす
                 supply.decreaseCardCount(cardName, count);
 
-                // プレイヤーの捨て札を増やす
-                player.addToDiscard(cardName, count);
+                // プレイヤーを増やす
+                player.addToTotalGains(cardName, count);
+                player.addToNowInDeck(cardName, count);
             }
         }
     });

@@ -1,7 +1,7 @@
 import pluralize from 'pluralize';
 import { Player } from "../../../model/Player"
 
-export function starts(
+export function startsWith(
     playerMap: Map<string, Player>,
     firstPlayer : Player,
     secondPlayer : Player,
@@ -35,6 +35,7 @@ export function starts(
     // 配られたカードを設定する
     const player = playerMap.get(playerName);
     if (player) {
-        player.addToDeck(cardName, cardNum);
+        player.addToTotalGains(cardName, cardNum);
+        player.addToNowInDeck(cardName, cardNum);
     }
 }
