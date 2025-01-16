@@ -1,7 +1,19 @@
 #HeaderContent {
     padding: 10px;
     width: 100%;
-    height: 8%;
+    height: 15%;
+}
+
+.Head {
+    text-align: center;
+}
+
+#MainContent {
+    padding: 10px;
+    width: 100%;
+    height: 83%;
+    display: flex; 
+    justify-content: space-between;
 }
 
 #SupplySection {
@@ -16,17 +28,17 @@
 
 #FirstPlayerSection {
     padding: 10px;
-    width: 20%;
+    width: 25%;
 }
 
 #SecondPlayerSection {
     padding: 10px;
-    width: 20%;
+    width: 25%;
 }
 
 #rightSidebar {
-    background-color: #f4f4f4;
     width: 20%;
+    background-color: #f4f4f4;
 }
 
 /* rightSidebar */
@@ -43,7 +55,9 @@
     height: 6%
 }
 #commentSubmit {
-    height: 5%
+    padding: 10px;
+    height: 6%;
+    background-color: #f4f4f4;
 }
 
 /* gameLogTable */

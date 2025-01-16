@@ -14,6 +14,14 @@ export function updateScreen(gameDataMaster: GameData) {
     }
     const targetGameLog = gameDataMaster.getLogSectionArray()[pointer];
 
+
+    // ログの表示
+    const log = targetGameLog.logSection;
+    const logDisplay = document.getElementById('logAtPoint');
+    if (logDisplay) {
+        logDisplay.textContent = log;
+    }
+
     // サプライカードの表示
     const prevSupply = prevGameLog.supply;
     const supply = targetGameLog.supply;
@@ -178,10 +186,10 @@ export function updateScreen(gameDataMaster: GameData) {
             cell5.textContent = turnPlays.toString();
 
             // 増減したカードの背景色を変更
-            const prevTotalGains = prevFirstPlayer.getTotalGains().get(index) || 0;
-            const prevNowInDeck = prevFirstPlayer.getNowInDeck().get(index) || 0;
-            const prevTotalPlays = prevFirstPlayer.getTotalPlays().get(index) || 0;
-            const prevTurnPlays = prevFirstPlayer.getTurnPlays().get(index) || 0;
+            const prevTotalGains = prevSecondPlayer.getTotalGains().get(index) || 0;
+            const prevNowInDeck = prevSecondPlayer.getNowInDeck().get(index) || 0;
+            const prevTotalPlays = prevSecondPlayer.getTotalPlays().get(index) || 0;
+            const prevTurnPlays = prevSecondPlayer.getTurnPlays().get(index) || 0;
 
             if (totalGains !== prevTotalGains) {
                 cell2.style.backgroundColor = getBackgroundColor(totalGains, prevTotalGains);
