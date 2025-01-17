@@ -1,5 +1,15 @@
 {
-  "devDependencies": {
+  "scripts": {
+    "build": "webpack",
+    "start": "ts-node src/server/controller/index.ts",
+    "makedb": "ts-node src/server/database/makeLokiDb.ts"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "lokijs": "^1.5.12",
+    "pluralize": "^8.0.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/lokijs": "^1.5.14",
@@ -11,17 +21,5 @@
     "typescript": "^5.7.3",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
-  },
-  "scripts": {
-    "build": "webpack",
-    "start": "ts-node src/server/controller/index.ts",
-    "makedb": "ts-node src/server/database/makeLokiDb.ts"
-  },
-  "dependencies": {
-    "axios": "^1.7.7",
-    "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "lokijs": "^1.5.12",
-    "pluralize": "^8.0.0"
   }
 }
