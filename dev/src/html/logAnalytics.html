@@ -25,7 +25,7 @@
         </div>
 
         <div class="Head">
-            <h3 id="logAtPoint">ここにログの情報を表示します。</h3>
+            <h2 id="logAtPoint">ここにログの情報を表示します。</h2>
         </div>
     </div>
 
@@ -35,7 +35,7 @@
             <table id="BasicAreaTable">
                 <thead style="text-align: left;">
                     <tr>
-                        <th><h4>Basic</h4></th>
+                        <th colspan="2"><h4>Basic</h4></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,7 @@
             <table id="KingdomAreaTable">
                 <thead style="text-align: left;">
                     <tr>
-                        <th><h4>Kingdom</h4></th>
+                        <th colspan="2"><h4>Kingdom</h4></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +58,7 @@
             <table id="TrashAreaTable">
                 <thead style="text-align: left;">
                     <tr>
-                        <th>
+                        <th colspan="2">
                             <h4>Trash</h4>
                         </th>
                     </tr>
@@ -71,52 +71,58 @@
 
 
         <div id="FirstPlayerSection">
-            <h3>Player1</h3>
+            <h3 id="FirstPlayerName">Player1</h3>
             <table id="FirstPlayerDeckTable">
                 <thead style="text-align: left;">
                     <tr>
                         <th></th>
-                        <th>Gains</th>
-                        <th></th>
-                        <th>Plays</th>
-                        <th></th>
+                        <th colspan="3">Current</th>
+                        <th colspan="3">Total</th>
                     </tr>
                     <tr>
-                        <th>Name </th>
-                        <th>Total </th>
-                        <th>InDeck </th>
-                        <th>Total </th>
-                        <th>/Turn </th>
+                        <th>Name</th>
+                        <th>Deck</th>
+                        <th>Draw</th>
+                        <th>Play</th>
+                        <th>Gain</th>
+                        <th>Draw</th>
+                        <th>Play</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- データ行がここに追加されます -->
                 </tbody>
+                <tfoot>
+                    <!-- データ行がここに追加されます -->
+                </tfoot>
             </table>
         </div>
 
         <div id="SecondPlayerSection">
-            <h3>Player2</h3>
+            <h3 id="SecondPlayerName">Player2</h3>
             <table id="SecondPlayerDeckTable" style="width: 25%;">
                 <thead style="text-align: left;">
                     <tr>
                         <th></th>
-                        <th>Gains</th>
-                        <th></th>
-                        <th>Plays</th>
-                        <th></th>
+                        <th colspan="3">Current</th>
+                        <th colspan="3">Total</th>
                     </tr>
                     <tr>
-                        <th>Name </th>
-                        <th>Total </th>
-                        <th>InDeck </th>
-                        <th>Total </th>
-                        <th>/Turn </th>
+                        <th>Name</th>
+                        <th>Deck</th>
+                        <th>Draw</th>
+                        <th>Play</th>
+                        <th>Gain</th>
+                        <th>Draw</th>
+                        <th>Play</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- データ行がここに追加されます -->
                 </tbody>
+                <tfoot>
+                    <!-- データ行がここに追加されます -->
+                </tfoot>
             </table>
         </div>
 

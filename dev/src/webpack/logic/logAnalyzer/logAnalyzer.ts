@@ -96,6 +96,7 @@ function analyze(
     */
     if (logArray[0] === 'Turn') {
         cleanUp(playerMap, prevLogArray);
+        return;
     } 
 
     /*

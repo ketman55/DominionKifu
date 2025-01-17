@@ -13,6 +13,29 @@ body, html {
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
+/* テーブル全体のスタイル */
+table {
+    width: 100%;
+    border-collapse: collapse; /* 罫線を重ねて表示しない */
+}
+
+/* テーブルのセルに罫線を引く */
+table, th, td, tfoot {
+    border: 1px solid black; /* 罫線の色と太さを指定 */
+}
+
+/* テーブルのヘッダーのスタイル */
+th, tfoot {
+    background-color: #f2f2f2; /* ヘッダーの背景色 */
+    padding: 3px; /* セル内の余白 */
+    text-align: left; /* テキストの左揃え */
+}
+
+/* テーブルのセルのスタイル */
+td {
+    padding: 3px; /* セル内の余白 */
+    text-align: left; /* テキストの左揃え */
+}
 
 
 
