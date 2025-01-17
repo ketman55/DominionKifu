@@ -14,6 +14,15 @@ export function updateScreen(gameDataMaster: GameData) {
     }
     const targetGameLog = gameDataMaster.getLogSectionArray()[pointer];
 
+    // プレイヤー名の表示
+    const firstPlayerName = document.getElementById('FirstPlayerName');
+    if (firstPlayerName) {
+        firstPlayerName.textContent = "Player1 " + targetGameLog.firstPlayer.getPlayerName();
+    }
+    const secondPlayerName = document.getElementById('SecondPlayerName');
+    if (secondPlayerName) {
+        secondPlayerName.textContent = "Player2 " + targetGameLog.secondPlayer.getPlayerName();
+    }
 
     // ログの表示
     const log = targetGameLog.logSection;
@@ -140,7 +149,7 @@ export function updateScreen(gameDataMaster: GameData) {
             cell6.textContent = totalDraws.toString();
             cell7.textContent = totalPlays.toString();
 
-            
+
             firstPlayerSum[0] += nowInDeck;
             firstPlayerSum[1] += turnDraws;
             firstPlayerSum[2] += turnPlays;
