@@ -63,7 +63,7 @@ export async function initialLoading(gameDataMaster: GameData): Promise<void> {
     let logSection = gameDataMaster.getLogSectionArray();
     const gameLogTableBody = document.getElementById('gameLogTable')?.getElementsByTagName('tbody')[0];
     if (gameLogTableBody) {
-        logSection.forEach(log => {
+        logSection.forEach((log,index) => {
             const row = gameLogTableBody.insertRow();
             const cell = row.insertCell(0);
             cell.textContent = log.logSection;
@@ -74,7 +74,9 @@ export async function initialLoading(gameDataMaster: GameData): Promise<void> {
                 row.style.backgroundColor = '';
             });
             row.addEventListener('click', () => {
-                alert(log.logSection);
+                // クリックされた行のポインタをセットして再描画
+                gameDataMaster.setPointer(index);
+                updateScreen(gameDataMaster);
             });
         });
     }

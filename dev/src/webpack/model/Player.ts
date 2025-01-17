@@ -11,6 +11,15 @@ export class Player {
     
     private playerName: string = '';
 
+    constructor() {
+        this.totalGains.set('card', 0);
+        this.totalPlays.set('card', 0);
+        this.totalDraws.set('card', 0);
+        this.nowInDeck.set('card', 0);
+        this.turnPlays.set('card', 0);
+        this.turnDraws.set('card', 0);
+     }
+
     // ディープコピーを返すメソッド
     clone(): Player {
         const player = new Player();
