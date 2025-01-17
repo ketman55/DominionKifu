@@ -3,9 +3,13 @@ import { startDb } from '../database/makeLokiDb';
 import cors from 'cors';
 import { gameLogController } from './gameLogController';
 import { commentController } from './commentController';
+import path from 'path';
 
 const app = express();
 const port = 3000;
+
+// 静的ファイルを提供するディレクトリを設定
+app.use(express.static(path.join(__dirname, '../../html')));
 
 // CORSを有効にする
 app.use(cors());
@@ -15,7 +19,7 @@ app.use(express.json());
 
 // ルートエンドポイント
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, world!');
+  res.sendFile(path.join(__dirname, '../../html/gameNumberAndLogInput.html'));
 });
 
 // gameLogのエンドポイント

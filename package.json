@@ -1,8 +1,7 @@
 {
   "scripts": {
     "build": "webpack",
-    "start": "ts-node src/server/controller/index.ts",
-    "makedb": "ts-node src/server/database/makeLokiDb.ts"
+    "start": "ts-node src/server/controller/index.ts"
   },
   "dependencies": {
     "axios": "^1.7.7",
