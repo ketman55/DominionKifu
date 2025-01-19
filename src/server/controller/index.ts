@@ -9,7 +9,7 @@ const app = express();
 const port = 3000;
 
 // 静的ファイルを提供するディレクトリを設定
-app.use(express.static(path.join(__dirname, '../../html')));
+app.use(express.static(path.join(__dirname, '../../../public')));
 
 // CORSを有効にする
 app.use(cors());
@@ -19,7 +19,7 @@ app.use(express.json());
 
 // ルートエンドポイント
 app.get('/', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '../../html/gameNumberAndLogInput.html'));
+  res.sendFile(path.join(__dirname, '../../../public/gameNumberAndLogInput.html'));
 });
 
 // gameLogのエンドポイント
