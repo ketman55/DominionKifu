@@ -15,10 +15,10 @@ window.addEventListener('load',
                 gameNumberList.forEach(gameNumber => {
                     const row = gameLogTableBody.insertRow();
                     const cell = row.insertCell(0);
-                    cell.textContent = "test" + gameNumber;
+                    cell.textContent = gameNumber;
                     console.log(gameNumber);
                     row.addEventListener('mouseover', () => {
-                        row.style.backgroundColor = 'lightgray';
+                        row.style.backgroundColor = 'yellow';
                     });
                     row.addEventListener('mouseout', () => {
                         row.style.backgroundColor = '';
