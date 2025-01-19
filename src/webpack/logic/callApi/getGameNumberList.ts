@@ -1,8 +1,8 @@
-import { GameLogInterface } from "../../interface/GameLogInterface";
+import { API_BASE_URL } from "../../enum/clientEnv";
 
 export async function getGameNumberList(): Promise<string[]> {
     try {
-      const response = await fetch('http://localhost:3000/api/all/gamenumber', {
+      const response = await fetch(API_BASE_URL + '/api/all/gamenumber', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

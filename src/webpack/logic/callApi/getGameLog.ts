@@ -1,10 +1,11 @@
+import { API_BASE_URL } from "../../enum/clientEnv";
 import { GameLogInterface } from "../../interface/GameLogInterface";
 
 export async function getGameLog(gameNumber:string): Promise<GameLogInterface> {
     const gameLog: GameLogInterface = {gameNumber: '', gameSupply: '', gameLog: ''};
 
     try {
-      const response = await fetch('http://localhost:3000/api/gamelog/'+gameNumber, {
+      const response = await fetch(API_BASE_URL + '/api/gamelog/'+gameNumber, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

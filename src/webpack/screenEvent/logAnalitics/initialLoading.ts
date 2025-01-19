@@ -30,7 +30,7 @@ export async function initialLoading(gameDataMaster: GameData): Promise<void> {
     */
     const comment = getComment(gameNumber);
     gameDataMaster.setComment(await comment);
-    console.log("init:get comment from server success");
+    console.log("init:get comment from server success"+gameNumber);
 
     /*
      画面中央（上部）の表示

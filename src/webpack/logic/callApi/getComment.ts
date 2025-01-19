@@ -1,10 +1,11 @@
 import { CommentInterface } from "../../interface/CommentInterface";
+import { API_BASE_URL } from "../../enum/clientEnv";
 
 export async function getComment(gameNumber:string): Promise<CommentInterface[]> {
     const comment: CommentInterface[] = [];
 
     try {
-      const response = await fetch('http://localhost:3000/api/comment/' + gameNumber, {
+      const response = await fetch(API_BASE_URL + '/api/comment/' + gameNumber, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -15,12 +16,12 @@ export async function getComment(gameNumber:string): Promise<CommentInterface[]>
         // レスポンスをGameLogInterfaceに変換して返す
         return await response.json();
       } else {
-        console.error('Error:', response.statusText);
+        console.log('Error:', response.statusText);
         return comment;
       }
       
     } catch (error) {
-      console.error('Error:', error);
+      console.log('Error:', error);
       return comment;
     }
   }

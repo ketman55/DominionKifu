@@ -1,8 +1,9 @@
+import { API_BASE_URL } from "../../enum/clientEnv";
 import { CommentInterface } from "../../interface/CommentInterface";
 
 export async function postComment(comment: CommentInterface) {
     try {
-        const response = await fetch('http://localhost:3000/api/comment', {
+        const response = await fetch(API_BASE_URL + '/api/comment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
