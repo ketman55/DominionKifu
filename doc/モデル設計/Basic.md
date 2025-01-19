@@ -3,103 +3,33 @@
 ```mermaid
 
 erDiagram
-game ||--|{player: "1:1..4"
-game ||--||kingdom: "1:1"
-game ||--||playLog: "1:1"
+GameData ||--|{GameLog: "1:1..*"
+GameData ||--|{Comment: "1:1..*"
 
-player ||--||status: "1:1"
-player ||--||basicPlayArea: "1:1"
+GameLog ||--|{ Player: "1:2"
+GameLog ||--|| Supply: "1:1"
 
-playLog ||--o{play: "1:n"
+Player ||--|| NowInDeck: "1:1"
+Player ||--|| TurnPlays: "1:1"
+Player ||--|| TurnDraws: "1:1"
+Player ||--|| TotalGains: "1:1"
+Player ||--|| TotalPlays: "1:1"
+Player ||--|| TotalDraws: "1:1"
 
-basicPlayArea ||--||deck: "1:1"
-basicPlayArea ||--||hand: "1:1"
-basicPlayArea ||--||discard:"1:1"
-basicPlayArea ||--||inPlay: "1:1"
+TotalGains ||--|{Card: "1:1..*"
+TotalPlays ||--|{Card: "1:1..*"
+TotalDraws ||--|{Card: "1:1..*"
+NowInDeck ||--|{Card: "1:1..*"
+TurnPlays ||--|{Card: "1:1..*"
+TurnDraws ||--|{Card: "1:1..*"
 
-kingdom ||--||basicKingdomArea: "1:1"
+Supply ||--|| BasicArea: "1:1"
+Supply ||--|| KingdomArea: "1:1"
+Supply ||--|| TrashArea: "1:1"
 
-basicKingdomArea ||--||buyableArea: "1:1"
-basicKingdomArea ||--||trashArea: "1:1"
-
-buyableArea ||--o{card: "1:n"
-trashArea ||--o{card: "1:n"
-
-deck ||--o{card: "1:n"
-hand ||--o{card: "1:n"
-discard ||--o{card: "1:n"
-inPlay ||--o{card: "1:n"
-
-game {
-  string gameId
-  list players
-  kingdom kingdom
-  playLog playLog
-}
-
-player {
-  string name
-  status status
-  basicPlayArea basicPlayArea
-}
-
-kingdom {
-  basicKingdomArea basicKingdomArea
-}
-
-status {
- int buys
- int actions
- int coins
-}
-
-basicPlayArea {
-  deck deck
-  hand hand
-  discard discard
-  inPlay inPlay
-}
-
-playLog {
-  list plays
-}
-
-play {
-  string playDetail
-}
-
-basicKingdomArea {
-  buyableArea buyableArea
-  trashArea trashArea
-}
-
-buyableArea {
-  list cards
-}
-
-trashArea {
-  list cards
-}
-
-deck {
-  list cards
-}
-
-hand {
-  list cards
-}
-
-discard {
-  list cards
-}
-
-inPlay {
-  list cards
-}
-
-card {
-  string name
-}
+BasicArea ||--|{Card: "1:1..*"
+KingdomArea ||--|{Card: "1:1..*"
+TrashArea ||--|{Card: "1:1..*"
 
 ```
 

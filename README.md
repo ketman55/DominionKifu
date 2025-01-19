@@ -1,2 +1,16 @@
 # DominionKifu
-This repository provides a service for a game record feature using logs from Dominion Online.
+
+## サービスURL
+
+WIP
+
+## 概要
+
+[Dominion Online](https://dominion.games/)のゲームログを1行ずつ追跡して状況を把握できるサービスです。
+
+指定したログ行におけるサプライの残り枚数、プレイヤーの保有カード・枚数や各カードをプレーした回数などを確認することが出来ます。
+
+* 自分と相手のカードの総プレー数、ドローした総枚数、獲得手数にはいくつの差があったのか？どこで差が付いたのか？
+* ここで買った金貨は結局何回使うことが出来たのか？
+
+こういったことを考察することが出来ます。
