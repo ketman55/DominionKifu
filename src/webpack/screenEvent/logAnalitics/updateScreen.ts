@@ -181,7 +181,8 @@ export function updateScreen(gameDataMaster: GameData) {
                 cell4.textContent = prevTurnPlays + "→" + turnPlays.toString();
             }
 
-
+            /*
+            WIP：合計系は色を変えない方が観易いかもしれないので一旦コメントアウト
             if (totalGains !== prevTotalGains) {
                 cell5.style.backgroundColor = getBackgroundColor(totalGains, prevTotalGains);
                 cell5.textContent = prevTotalGains + "→" + totalGains;
@@ -193,7 +194,7 @@ export function updateScreen(gameDataMaster: GameData) {
             if (totalPlays !== prevTotalPlays) {
                 cell7.style.backgroundColor = getBackgroundColor(totalPlays, prevTotalPlays);
                 cell7.textContent = prevTotalPlays + "→" + totalPlays.toString();
-            }
+            }*/
         });
     }
     const firstPlayerDeckTableFoot = document.getElementById('FirstPlayerDeckTable')?.getElementsByTagName('tfoot')[0];
@@ -293,7 +294,8 @@ export function updateScreen(gameDataMaster: GameData) {
                 cell4.textContent = prevTurnPlays + "→" + turnPlays.toString();
             }
 
-
+            /*
+            WIP：合計系は色を変えない方が観易いかもしれないので一旦コメントアウト
             if (totalGains !== prevTotalGains) {
                 cell5.style.backgroundColor = getBackgroundColor(totalGains, prevTotalGains);
                 cell5.textContent = prevTotalGains + "→" + totalGains;
@@ -306,6 +308,7 @@ export function updateScreen(gameDataMaster: GameData) {
                 cell7.style.backgroundColor = getBackgroundColor(totalPlays, prevTotalPlays);
                 cell7.textContent = prevTotalPlays + "→" + totalPlays.toString();
             }
+            */
         });
     }
 
