@@ -1,6 +1,11 @@
 import { getGameNumberList } from "../../logic/callApi/getGameNumberList";
 import { clickGameNumber } from "./clickGameNumber";
 
+/**
+ * この画面が読み込まれたときに実行される処理
+ * サーバ側に保存されているゲームナンバーのリストを取得して
+ * 画面に一覧表示する
+ */
 window.addEventListener('load',
     function () {
         // ゲームナンバーのリストを取得

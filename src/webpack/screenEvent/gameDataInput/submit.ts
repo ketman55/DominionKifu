@@ -1,5 +1,8 @@
 import { postGameLog } from '../../logic/callApi/postGameLog';
 
+/**
+ * ゲームデータ入力画面の送信ボタンクリック時の処理
+ */
 document.getElementById('gameForm')?.addEventListener('click', function() {
 
     // 入力値を取得
@@ -7,7 +10,7 @@ document.getElementById('gameForm')?.addEventListener('click', function() {
     const gameSupply = (document.getElementById('gameSupply') as HTMLTextAreaElement).value;
     const gameLog = (document.getElementById('gameLog') as HTMLTextAreaElement).value;
 
-    // データを処理する
+    // データをサーバへ送信して登録する
     postGameLog(gameNumber, gameSupply, gameLog).then(success => {
         if (success) {
             // データ送信に成功した場合の処理
