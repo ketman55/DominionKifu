@@ -1,5 +1,5 @@
 #HeaderContent {
-    padding: 10px;
+    padding: 5px;
     width: 100%;
     height: 15%;
 }
@@ -9,7 +9,7 @@
 }
 
 #MainContent {
-    padding: 10px;
+    padding: 5px;
     width: 100%;
     height: 83%;
     display: flex; 
@@ -17,23 +17,23 @@
 }
 
 #SupplySection {
-    padding: 10px;
+    padding: 5px;
     width: 15%;
 }
 
 #SideSection {
-    padding: 10px;
+    padding: 5px;
     width: 15%;
 }
 
 #FirstPlayerSection {
-    padding: 10px;
-    width: 20%;
+    padding: 5px;
+    width: 25%;
 }
 
 #SecondPlayerSection {
-    padding: 10px;
-    width: 20%;
+    padding: 5px;
+    width: 25%;
 }
 
 #rightSidebar {
@@ -55,7 +55,7 @@
     height: 6%
 }
 #commentSubmit {
-    padding: 10px;
+    padding: 5px;
     height: 6%;
     background-color: #f4f4f4;
 }

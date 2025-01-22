@@ -1,0 +1,47 @@
+#HeaderContent {
+    padding: 5px;
+    width: 100%;
+    height: 15%;
+}
+
+.Head {
+    text-align: center;
+}
+
+#MainContent {
+    padding: 5px;
+    width: 100%;
+    height: 83%;
+    display: flex; 
+    justify-content: space-between;
+}
+
+#GameList {
+    padding: 20px;
+    width: 30%;
+}
+
+#GameForm {
+    padding: 20px;
+    width: 30%;
+}
+
+#Description {
+    padding: 20px;
+    width: 40%;
+}
+
+/* テーブルのボディ部分にスクロールバーを適用するスタイル */
+#gameTable {
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+}
+#gameTable tbody, #gameTable tbody {
+    height: 100%; /* 固定の高さを設定 */
+    overflow-y: scroll; /* スクロールバーを表示 */
+}
+#gameTable th, #gameTable td {
+    width: 100%; /* テーブルの幅を設定 */
+    box-sizing: border-box;
+}

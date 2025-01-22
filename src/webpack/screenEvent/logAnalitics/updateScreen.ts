@@ -51,8 +51,8 @@ export function updateScreen(gameDataMaster: GameData) {
 
             // 増減したカードの背景色を変更
             const prevCount = prevSupply.getBasicArea().find(c => c.name === card.name)?.count || 0;
+            cell2.style.backgroundColor = getBackgroundColor(card.count, prevCount);
             if (card.count !== prevCount) {
-                cell2.style.backgroundColor = getBackgroundColor(card.count, prevCount);
                 cell2.textContent = prevCount + "→" + card.count;
             }
         });
@@ -76,8 +76,8 @@ export function updateScreen(gameDataMaster: GameData) {
 
             // 増減したカードの背景色を変更
             const prevCount = prevSupply.getKingdomArea().find(c => c.name === card.name)?.count || 0;
+            cell2.style.backgroundColor = getBackgroundColor(card.count, prevCount);
             if (card.count !== prevCount) {
-                cell2.style.backgroundColor = getBackgroundColor(card.count, prevCount);
                 cell2.textContent = prevCount + "→" + card.count;
             }
         });
@@ -102,8 +102,8 @@ export function updateScreen(gameDataMaster: GameData) {
 
             // 増減したカードの背景色を変更
             const prevCount = prevSupply.getTrashArea().find(c => c.name === card.name)?.count || 0;
+            cell2.style.backgroundColor = getBackgroundColor(card.count, prevCount);
             if (card.count !== prevCount) {
-                cell2.style.backgroundColor = getBackgroundColor(card.count, prevCount);
                 cell2.textContent = prevCount + "→" + card.count;
             }
         });

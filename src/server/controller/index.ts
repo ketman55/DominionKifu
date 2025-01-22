@@ -19,7 +19,7 @@ app.use(express.json());
 
 // ルートエンドポイント
 app.get('/', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '../../../public/gameNumberAndLogInput.html'));
+  res.sendFile(path.join(__dirname, '../../../public/gameDataInput.html'));
 });
 
 // gameLogのエンドポイント
