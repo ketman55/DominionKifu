@@ -6,16 +6,22 @@ export class GameData {
     private gameNumber: string;
     private gameLog: string;
     private gameSupply: string;
+
+    private totalTurns: number; // ゲーム終了にかかったターン数
+    
+    private pointer: number; // ログの表示位置を示すポインタ
     private logSectionArray: LogSectionInterface[] = []; // ログの断面を格納する配列
-    private pointer; // ログの表示位置を示すポインタ
     private comment: CommentInterface[] = []; // コメントを格納する配列
 
     constructor() {
         this.gameNumber = '';
         this.gameLog = '';
         this.gameSupply = '';
-        this.logSectionArray = [];
+
+        this.totalTurns = 0;
+
         this.pointer = 0;
+        this.logSectionArray = [];
         this.comment = [];
     }
 
@@ -47,6 +53,16 @@ export class GameData {
     // サプライを設定するメソッド
     setGameSupply(gameSupply: string): void {
         this.gameSupply = gameSupply;
+    }
+
+    // ゲーム終了にかかったターン数を取得するメソッド
+    getTotalTurns(): number {
+        return this.totalTurns;
+    }
+
+    // ゲーム終了にかかったターン数を設定するメソッド
+    setTotalTurns(totalTurns: number): void {
+        this.totalTurns = totalTurns;
     }
     
     // ログの断面を取得するメソッド

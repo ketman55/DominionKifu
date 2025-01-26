@@ -1,15 +1,22 @@
 import { Player } from "../../../model/Player"
 
 export function cleanUp(
-    playerMap: Map<string, Player>,
-    logArray: string[]
+    firstPlayer: Player,
+    secondPlayer: Player
 ): void {
 
-    const playerName = logArray[0];
-    let player = playerMap.get(playerName);
+    const firstPlayerTurn = firstPlayer.getTurn();
+    const secondPlayerTurn = secondPlayer.getTurn();
 
-    if (player) {
-        player.resetTurnPlays();
-        player.resetTurnDraws();
+    if(firstPlayerTurn === secondPlayerTurn) {
+        // firstPlayerのターンが始まる状態
+        secondPlayer.resetTurnPlays();
+        secondPlayer.resetTurnDraws();
+        firstPlayer.incrementTurn();
+    } else if (firstPlayerTurn > secondPlayerTurn) {
+        // secondPlayerのターンが始まる状態
+        firstPlayer.resetTurnPlays();
+        firstPlayer.resetTurnDraws();
+        secondPlayer.incrementTurn();
     }
 }

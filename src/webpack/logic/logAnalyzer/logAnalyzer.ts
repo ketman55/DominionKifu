@@ -21,33 +21,39 @@ interface logSec {
 
 export function logAnalyzer(
     pointer: number,
-    LogSec: LogSectionInterface[]): LogSectionInterface {
+    l: LogSectionInterface[]): LogSectionInterface {
 
-    // ログのセクションを取得（初期化）
-    const l: LogSectionInterface = {
-        supply: new Supply(),
-        firstPlayer: new Player(),
-        secondPlayer: new Player(),
-        logSection: ""
-    }
-
+    // ログのセクションを初期化
     let logSec: logSec = {
-        prevLogSec: l,
-        currentLogSec: l,
-        nextLogSec: l,
-        next2LogSec: l
+        prevLogSec: {} as LogSectionInterface,
+        currentLogSec: {} as LogSectionInterface,
+        nextLogSec: {} as LogSectionInterface,
+        next2LogSec: {} as LogSectionInterface,
     };
 
     // ログのセクションを取得
-    if (pointer - 1 >= 0) logSec.prevLogSec = LogSec[pointer - 1];
-    if (pointer >= 0) logSec.currentLogSec = LogSec[pointer];
-    if (pointer + 1 < LogSec.length) logSec.nextLogSec = LogSec[pointer + 1];
-    if (pointer + 2 < LogSec.length) logSec.next2LogSec = LogSec[pointer + 2];
+    if (pointer - 1 >= 0) logSec.prevLogSec = l[pointer - 1];
+    if (pointer >= 0) logSec.currentLogSec = l[pointer];
+    if (pointer + 1 < l.length) logSec.nextLogSec = l[pointer + 1];
+    if (pointer + 2 < l.length) logSec.next2LogSec = l[pointer + 2];
 
     // ひとつ前のlogSectionの内容をディープコピー
     const supply = logSec.prevLogSec.supply.clone();
     const firstPlayer = logSec.prevLogSec.firstPlayer.clone();
     const secondPlayer = logSec.prevLogSec.secondPlayer.clone();
+
+    // 匿名化対応：Turnに含まれるプレイヤー名を消去する
+    let currentLogSection = logSec.currentLogSec.logSection;
+    if (currentLogSection.includes('Turn')) {
+        currentLogSection = currentLogSection.replace(/(Turn \d+) .+/, '$1');
+        if(firstPlayer.getTurn() === secondPlayer.getTurn()) {
+            // firstPlayerのターンが始まる状態
+            currentLogSection += ' - ' + firstPlayer.getPlayerName();
+        } else if (firstPlayer.getTurn() > secondPlayer.getTurn()) {
+            // secondPlayerのターンが始まる状態
+            currentLogSection += ' - ' + secondPlayer.getPlayerName();
+        }
+    } 
 
     // 今回のログの内容でクラスを更新する
     analyze(
@@ -61,7 +67,7 @@ export function logAnalyzer(
         supply: supply,
         firstPlayer: firstPlayer,
         secondPlayer: secondPlayer,
-        logSection: logSec.currentLogSec.logSection
+        logSection: currentLogSection,
     };
     return logSection;
 }
@@ -95,7 +101,7 @@ function analyze(
      クリーンナップ処理
     */
     if (logArray[0] === 'Turn') {
-        cleanUp(playerMap, prevLogArray);
+        cleanUp(firstPlayer, secondPlayer);
         return;
     } 
 

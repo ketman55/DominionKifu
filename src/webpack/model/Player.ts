@@ -10,6 +10,7 @@ export class Player {
     private turnDraws: Map<string, number> = new Map(); // ターン中に引いた合計枚数
     
     private playerName: string = '';
+    private turn: number = 0; // 現在のターン数
 
     constructor() {
         this.totalGains.set('card', 0);
@@ -30,6 +31,7 @@ export class Player {
         player.totalDraws = new Map(Array.from(this.totalDraws.entries()).map(([key, card]) => [key, card]));
         player.turnDraws = new Map(Array.from(this.turnDraws.entries()).map(([key, card]) => [key, card]));
         player.playerName = this.playerName;
+        player.turn = this.turn;
         return player;
     }
 
@@ -172,5 +174,20 @@ export class Player {
     // プレイヤー名に一致するかどうかを判定するメソッド
     isPlayerNameMatch(playerName: string): boolean {
         return this.playerName === playerName;
+    }
+
+    // ターン数を取得するメソッド
+    getTurn(): number {
+        return this.turn;
+    }
+
+    // ターン数を設定するメソッド
+    setTurn(turn: number): void {
+        this.turn = turn;
+    }
+
+    // ターン数をインクリメントするメソッド
+    incrementTurn(): void {
+        this.turn++;
     }
 }
