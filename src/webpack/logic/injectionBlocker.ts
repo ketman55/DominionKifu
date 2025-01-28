@@ -1,4 +1,4 @@
-import DOMPurify from 'dompurify';
+import sanitizeHtml from 'sanitize-html';
 
 /**
  * HTMLインジェクションを防ぐために、入力された文字列をサニタイズします。
@@ -6,5 +6,5 @@ import DOMPurify from 'dompurify';
  * @returns 
  */
 export function sanitizeInput(input: string): string {
-  return DOMPurify.sanitize(input);
+  return sanitizeHtml(input);
 }
