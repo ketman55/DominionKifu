@@ -1,5 +1,6 @@
 import { GameLogInterface } from "../../webpack/interface/GameLogInterface";
 import { getDb } from "../database/makeLokiDb";
+import { sanitizeInput } from "../../webpack/logic/injectionBlocker";
 
 export function searchGameLog(gameNumber: string): GameLogInterface {
     const db = getDb();
@@ -23,6 +24,12 @@ export function searchAllGameNumber(): string[] {
 }
 
 export function insertGameLog(gameLog: GameLogInterface): void {
+    // インジェクション対策
+    gameLog.gameSupply = sanitizeInput(gameLog.gameSupply);
+    gameLog.gameLog = sanitizeInput(gameLog.gameLog);
+    gameLog.gameNumber = sanitizeInput(gameLog.gameNumber);
+    
+    // 登録
     const db = getDb();
     const gameLogCollection = db.getCollection<GameLogInterface>('gameLog');
     gameLogCollection.insert(gameLog);
