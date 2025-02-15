@@ -16,3 +16,6 @@ build/
 # Ignore OS specific files
 .DS_Store
 Thumbs.db
+
+# User Settings
+dominionkifu.db
