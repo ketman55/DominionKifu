@@ -29,7 +29,7 @@ npm run build
 
 2. ローカルで起動
 
-  - 以下を実行後、http://localhost:3000にアクセス
+  - 以下を実行後、http://localhost:3000 にアクセス
 
 ```
 npm run start
