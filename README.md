@@ -14,3 +14,23 @@ WIP
 * ここで買った金貨は結局何回使うことが出来たのか？
 
 こういったことを考察することが出来ます。
+
+## 開発環境構築
+
+- 事前準備
+  - node.jsのインストール
+    - [note.jsの公式サイト](https://nodejs.org/ja)
+
+1. スクリプトのbuild
+
+```
+npm run webpack
+```
+
+2. ローカルで起動
+
+  - 以下を実行後、http://localhost:3000 にアクセス
+
+```
+npm run app-launch
+```
