@@ -19,7 +19,7 @@ WIP
 
 - 事前準備
   - node.jsのインストール
-    - [text](https://nodejs.org/ja)
+    - [note.jsの公式サイト](https://nodejs.org/ja)
 
 1. スクリプトのbuild
 
