@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "webpack",
-    "start": "ts-node src/server/controller/index.ts"
+    "webpack": "webpack",
+    "app-launch": "ts-node src/server/controller/index.ts"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",

@@ -24,7 +24,7 @@ WIP
 1. スクリプトのbuild
 
 ```
-npm run build
+npm run webpack
 ```
 
 2. ローカルで起動
@@ -32,5 +32,5 @@ npm run build
   - 以下を実行後、http://localhost:3000 にアクセス
 
 ```
-npm run start
+npm run app-launch
 ```
