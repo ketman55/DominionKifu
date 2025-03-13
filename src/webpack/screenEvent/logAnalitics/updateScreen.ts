@@ -336,19 +336,19 @@ function updatePlayerArea(
         }
 
         // テーブルの再描画
-        player.getExileArea().forEach(card => {
+        player.getExileArea().forEach((count, name) => {
             const row = playerExileTableBody.insertRow();
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
-            cell1.textContent = card.name;
-            cell2.textContent = card.count.toString();
+            cell1.textContent = name;
+            cell2.textContent = count.toString();
 
 
             // 増減したカードの背景色を変更
-            const prevCount = prevPlayer.getExileArea().find(c => c.name === card.name)?.count || 0;
-            cell2.style.backgroundColor = getBackgroundColor(card.count, prevCount);
-            if (card.count !== prevCount) {
-                cell2.textContent = prevCount + "→" + card.count;
+            const prevCount = prevPlayer.getExileArea().get(name) || 0;
+            cell2.style.backgroundColor = getBackgroundColor(count, prevCount);
+            if (count !== prevCount) {
+                cell2.textContent = prevCount + "→" + count;
             }
         });
     }

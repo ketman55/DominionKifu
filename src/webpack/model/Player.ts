@@ -12,7 +12,7 @@ export class Player {
     private turnDraws: Map<string, number> = new Map(); // ターン中に引いた合計枚数
     private turnExiles: Map<string, number> = new Map(); // ターン中に追放した合計枚数
     
-    private exileArea: CardInterface[] = [];  // 追放したカード
+    private exileArea: Map<string, number> = new Map();  // 現在の追放エリアの状況
 
     private playerName: string = '';
     private turn: number = 0; // 現在のターン数
@@ -39,6 +39,7 @@ export class Player {
         player.turnDraws = new Map(Array.from(this.turnDraws.entries()).map(([key, card]) => [key, card]));
         player.totalExiles = new Map(Array.from(this.totalExiles.entries()).map(([key, card]) => [key, card]));
         player.turnExiles = new Map(Array.from(this.turnExiles.entries()).map(([key, card]) => [key, card]));
+        player.exileArea = new Map(Array.from(this.exileArea.entries()).map(([key, card]) => [key, card]));
         player.playerName = this.playerName;
         player.turn = this.turn;
         return player;
@@ -166,25 +167,25 @@ export class Player {
     }
     
     // 追放札を取得するメソッド
-    getExileArea(): CardInterface[] {
+    getExileArea(): Map<string, number> {
         return this.exileArea;
     }
 
     // 追放札に新しいカードを追加するメソッド
     addToExiles(cardName: string, count: number): void {
-        const existingCard = this.exileArea.find(card => card.name === cardName);
+        const existingCard = this.exileArea.get(cardName);
         if (existingCard) {
-            existingCard.count += count;
+            this.exileArea.set(cardName, existingCard + count);
         } else {
-            this.exileArea.push({ name: cardName, count });
+            this.exileArea.set(cardName, count);
         }
     }
     
-    // 追放札のカードを取り除くメソッド
-    removeFromExile(cardName: string): void {
-        const existingCard = this.exileArea.find(card => card.name === cardName);
+    // 追放札のカードを捨て札にするメソッド
+    discardFromExile(cardName: string): void {
+        const existingCard = this.exileArea.get(cardName);
         if (existingCard) {
-            existingCard.count = 0;
+            this.exileArea.set(cardName, 0);
         } else {
             // 本来はここに来ないはず
             console.error(`You tried to discard "${cardName}", which does not exist in the exile area.`);
