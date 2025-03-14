@@ -12,11 +12,13 @@ export function cleanUp(
         // firstPlayerのターンが始まる状態
         secondPlayer.resetTurnPlays();
         secondPlayer.resetTurnDraws();
+        secondPlayer.resetTurnExiles();
         firstPlayer.incrementTurn();
     } else if (firstPlayerTurn > secondPlayerTurn) {
         // secondPlayerのターンが始まる状態
         firstPlayer.resetTurnPlays();
         firstPlayer.resetTurnDraws();
+        firstPlayer.resetTurnExiles();
         secondPlayer.incrementTurn();
     }
 }

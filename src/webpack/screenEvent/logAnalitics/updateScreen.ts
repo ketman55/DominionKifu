@@ -191,14 +191,14 @@ function updatePlayerArea(
             " / " + lastPlayer.getTurn().toString();
     }
 
-    // テーブルの更新
+    // デッキテーブルの更新
     const prevPlayer = playerSwitch === 1 ? prevGameLog.firstPlayer : prevGameLog.secondPlayer;
-    const tableElement = playerSwitch === 1 ? 'FirstPlayerDeckTable' : 'SecondPlayerDeckTable';
+    const deckTableElement = playerSwitch === 1 ? 'FirstPlayerDeckTable' : 'SecondPlayerDeckTable';
 
-    const playerDeckTableBody = document.getElementById(tableElement)?.getElementsByTagName('tbody')[0];
-    let firstPlayerSum = new Array(7).fill(0);
+    const playerDeckTableBody = document.getElementById(deckTableElement)?.getElementsByTagName('tbody')[0];
+    let firstPlayerSum = new Array(8).fill(0);
     if (playerDeckTableBody) {
-        // テーブルのリセット
+        // デッキテーブルのリセット
         while (playerDeckTableBody.firstChild) {
             playerDeckTableBody.removeChild(playerDeckTableBody.firstChild);
         }
@@ -213,42 +213,50 @@ function updatePlayerArea(
             const cell5 = row.insertCell(4);
             const cell6 = row.insertCell(5);
             const cell7 = row.insertCell(6);
+            const cell8 = row.insertCell(7);
+            const cell9 = row.insertCell(8);
 
             const nowInDeck = player.getNowInDeck().get(index) || 0;
             const turnDraws = player.getTurnDraws().get(index) || 0;
             const turnPlays = player.getTurnPlays().get(index) || 0;
+            const turnExiles = player.getTurnExiles().get(index) || 0;
 
             const totalGains = player.getTotalGains().get(index) || 0;
             const totalDraws = player.getTotalDraws().get(index) || 0;
             const totalPlays = player.getTotalPlays().get(index) || 0;
+            const totalExiles = player.getTotalExiles().get(index) || 0;
 
             cell1.textContent = index.toString();
 
             cell2.textContent = nowInDeck.toString();
             cell3.textContent = turnDraws.toString();
             cell4.textContent = turnPlays.toString();
+            cell5.textContent = turnExiles.toString()
 
-            cell5.textContent = totalGains.toString();
-            cell6.textContent = totalDraws.toString();
-            cell7.textContent = totalPlays.toString();
-
+            cell6.textContent = totalGains.toString();
+            cell7.textContent = totalDraws.toString();
+            cell8.textContent = totalPlays.toString();
+            cell9.textContent = totalExiles.toString();
 
             firstPlayerSum[0] += nowInDeck;
             firstPlayerSum[1] += turnDraws;
             firstPlayerSum[2] += turnPlays;
-            firstPlayerSum[3] += totalGains;
-            firstPlayerSum[4] += totalDraws;
-            firstPlayerSum[5] += totalPlays;
-            firstPlayerSum[6] += totalGains;
+            firstPlayerSum[3] += turnExiles;
+            firstPlayerSum[4] += totalGains;
+            firstPlayerSum[5] += totalDraws;
+            firstPlayerSum[6] += totalPlays;
+            firstPlayerSum[7] += totalExiles;
 
             // 増減したカードの背景色を変更
             const prevNowInDeck = prevPlayer.getNowInDeck().get(index) || 0;
             const prevTurnDraws = prevPlayer.getTurnDraws().get(index) || 0;
             const prevTurnPlays = prevPlayer.getTurnPlays().get(index) || 0;
+            const prevTurnExiles = prevPlayer.getTurnExiles().get(index) || 0;
 
             const prevTotalGains = prevPlayer.getTotalGains().get(index) || 0;
             const prevTotalDraws = prevPlayer.getTotalDraws().get(index) || 0;
             const prevTotalPlays = prevPlayer.getTotalPlays().get(index) || 0;
+            const prevTotalExiles = prevPlayer.getTotalExiles().get(index) || 0;
 
 
             if (nowInDeck !== prevNowInDeck) {
@@ -263,24 +271,32 @@ function updatePlayerArea(
                 cell4.style.backgroundColor = getBackgroundColor(turnPlays, prevTurnPlays);
                 cell4.textContent = prevTurnPlays + "→" + turnPlays.toString();
             }
+            if (turnExiles !== prevTurnExiles) {
+                cell5.style.backgroundColor = getBackgroundColor(turnExiles, prevTurnExiles);
+                cell5.textContent = prevTurnExiles + "→" + turnExiles.toString();
+            }
 
             /*
             WIP：合計系は色を変えない方が観易いかもしれないので一旦コメントアウト
             if (totalGains !== prevTotalGains) {
-                cell5.style.backgroundColor = getBackgroundColor(totalGains, prevTotalGains);
-                cell5.textContent = prevTotalGains + "→" + totalGains;
+                cell6.style.backgroundColor = getBackgroundColor(totalGains, prevTotalGains);
+                cell6.textContent = prevTotalGains + "→" + totalGains;
             }
             if (totalDraws !== prevTotalDraws) {
-                cell6.style.backgroundColor = getBackgroundColor(totalDraws, prevTotalDraws);
-                cell6.textContent = prevTotalDraws + "→" + totalDraws.toString();
+                cell7.style.backgroundColor = getBackgroundColor(totalDraws, prevTotalDraws);
+                cell7.textContent = prevTotalDraws + "→" + totalDraws.toString();
             }
             if (totalPlays !== prevTotalPlays) {
-                cell7.style.backgroundColor = getBackgroundColor(totalPlays, prevTotalPlays);
-                cell7.textContent = prevTotalPlays + "→" + totalPlays.toString();
+                cell8.style.backgroundColor = getBackgroundColor(totalPlays, prevTotalPlays);
+                cell8.textContent = prevTotalPlays + "→" + totalPlays.toString();
+            }
+            if (totalExiles !== prevTotalExiles) {
+                cell9.style.backgroundColor = getBackgroundColor(totalExiles, prevTotalExiles);
+                cell9.textContent = prevTotalExiles + "→" + totalExiles.toString();
             }*/
         });
     }
-    const playerDeckTableFoot = document.getElementById(tableElement)?.getElementsByTagName('tfoot')[0];
+    const playerDeckTableFoot = document.getElementById(deckTableElement)?.getElementsByTagName('tfoot')[0];
     if (playerDeckTableFoot) {
         // テーブルのリセット
         while (playerDeckTableFoot.firstChild) {
@@ -296,14 +312,45 @@ function updatePlayerArea(
         const cell5 = row.insertCell(4);
         const cell6 = row.insertCell(5);
         const cell7 = row.insertCell(6);
+        const cell8 = row.insertCell(7);
+        const cell9 = row.insertCell(8);
 
         cell1.textContent = "Sum";
-        cell2.textContent = firstPlayerSum[0].toString();
-        cell3.textContent = firstPlayerSum[1].toString();
-        cell4.textContent = firstPlayerSum[2].toString();
-        cell5.textContent = firstPlayerSum[3].toString();
-        cell6.textContent = firstPlayerSum[4].toString();
-        cell7.textContent = firstPlayerSum[5].toString();
+        cell2.textContent = firstPlayerSum[0].toString();  // nowInDeck
+        cell3.textContent = firstPlayerSum[1].toString();  // turnDraws
+        cell4.textContent = firstPlayerSum[2].toString();  // turnPlays
+        cell5.textContent = firstPlayerSum[3].toString();  // turnExiles
+        cell6.textContent = firstPlayerSum[4].toString();  // totalGains
+        cell7.textContent = firstPlayerSum[5].toString();  // totalDraws
+        cell8.textContent = firstPlayerSum[6].toString();  // totalPlays
+        cell9.textContent = firstPlayerSum[7].toString();  // totalExiles
+    }
+
+    // 追放エリアテーブルの更新
+    const exileTableElement = playerSwitch === 1 ? 'FirstPlayerExileAreaTable' : 'SecondPlayerExileAreaTable';
+    const playerExileTableBody = document.getElementById(exileTableElement)?.getElementsByTagName('tbody')[0];
+    if (playerExileTableBody) {
+        // テーブルのリセット
+        while (playerExileTableBody.firstChild) {
+            playerExileTableBody.removeChild(playerExileTableBody.firstChild);
+        }
+
+        // テーブルの再描画
+        player.getExileArea().forEach((count, name) => {
+            const row = playerExileTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = name;
+            cell2.textContent = count.toString();
+
+
+            // 増減したカードの背景色を変更
+            const prevCount = prevPlayer.getExileArea().get(name) || 0;
+            cell2.style.backgroundColor = getBackgroundColor(count, prevCount);
+            if (count !== prevCount) {
+                cell2.textContent = prevCount + "→" + count;
+            }
+        });
     }
 }
 

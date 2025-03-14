@@ -11,6 +11,7 @@ import { plays } from "./methods/plays";
 import { buys } from "./methods/buys";
 import { trashes } from "./methods/trashes";
 import { gains } from "./methods/gains";
+import { exiles, discardFromExile } from "./methods/exile";
 
 interface logSec {
     prevLogSec: LogSectionInterface;
@@ -111,6 +112,8 @@ function analyze(
     if (logArray.length < 2) return;
     const verb = logArray[1];
     const nextOfVerb = logArray[2];
+    const lastTwoWords = logArray.slice(-2).join(" ");
+
 
     // ログの内容によって処理を分岐する
     switch (verb) {
@@ -145,5 +148,17 @@ function analyze(
         case 'trashes':
             trashes(playerMap, logArray, supply);
             break;
+
+        case 'exiles': // カードを追放する
+            exiles(playerMap, logArray, prevLogArray, supply);
+            break
+
+        case 'discards':
+            // 追放していたカードを捨て札にした場合
+            if (lastTwoWords == "from Exile") {
+                discardFromExile(playerMap, logArray);
+                break
+            }
+
     }
 }
