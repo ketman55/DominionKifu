@@ -4,39 +4,35 @@ import { Player } from "../../../model/Player";
 
 export function draws(
     playerMap: Map<string, Player>,
-    logArray: string[]): void {
+    playerName: string,
+    cards: Array<{ name: string, quantity: number }>): void {
 
     // プレイヤーを特定
-    const playerName = logArray[0];
     const player = playerMap.get(playerName);
     if (!player) {
+        console.warn(`Player ${playerName} not found in draws method.`);
         return;
     }
 
-    // 例：k draws 3 Coppers and 2 Estates.
-    let count = 0;
-    let cardName = '';
-    logArray.forEach((text, index) => {
-
-        if (!isNaN(Number(text))) {
-            // textが数字だった場合はcountに代入
-            count = Number(text);
-        } else if(text === 'a' || text === 'an') {
-            // aかanだった場合はcountに1を代入
-            count = 1;
-        } else {
-            try {
-                cardName = pluralize.singular(text);　// 複数形を単数形に変換
-            } catch (e) {
-                console.log(e);
-                cardName = text; // ライブラリが受け付けない入力の場合はそのままの値を使う
-            }
-
-            // cardNameがinitialCardCountsに含まれる場合は更新
-            if (cardName in initialCardCounts) {                
-                player.addToTotalDraws(cardName, count);
-                player.addToTurnDraws(cardName, count);
-            }
+    // Process the provided cards array
+    for (const card of cards) {
+        let singularCardName = '';
+        try {
+            singularCardName = pluralize.singular(card.name); // 複数形を単数形に変換
+        } catch (e) {
+            console.log(e); // Log the error if pluralize fails
+            singularCardName = card.name; // Use the original name if singularization fails
         }
-    });
+
+        // cardNameがinitialCardCountsに含まれる場合は更新
+        if (singularCardName in initialCardCounts) {
+            player.addToTotalDraws(singularCardName, card.quantity);
+            player.addToTurnDraws(singularCardName, card.quantity);
+        } else {
+            // It's possible to draw cards not in initialCardCounts (e.g., from other expansions/sets not tracked)
+            // So, a warning might be too noisy here, but consider if specific game logic requires the card to be known.
+            // For now, we'll only act on known cards.
+            // console.warn(`Card ${singularCardName} (original: ${card.name}) not found in initialCardCounts during draws.`);
+        }
+    }
 }
