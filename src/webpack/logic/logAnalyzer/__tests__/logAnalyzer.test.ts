@@ -48,7 +48,7 @@ function setupTestEnvironment(
     const testSupplyCounts = { ...initialCardCounts };
 
     // Ensure multi-word cards used in tests are present in the test supply if not already.
-    const criticalTestCards = ["Cabin Boy", "Grand Market", "Border Village", "Council Room", "Ruined Library"];
+    const criticalTestCards = ["Cabin Boy", "Grand Market", "Border Village", "Council Room", "Ruined Library", "Sentry"]; // Added Sentry
     criticalTestCards.forEach(cardFullName => {
         const singularName = pluralize.singular(cardFullName);
         if (!(singularName in testSupplyCounts)) {
@@ -182,6 +182,23 @@ runTest("TestPlayMultipleCardsWithMultiWord", () => {
     assertValue(result.firstPlayer.getTurnPlays().get("Copper"), 2, "Copper plays");
     assertValue(result.firstPlayer.getTurnPlays().get("Silver"), 1, "Silver plays");
     assertValue(result.firstPlayer.getTurnPlays().get("Council Room"), 1, "Council Room plays");
+});
+
+runTest("TestBuysAndGainsSingleCard", () => {
+    const playerName = "P1";
+    const cardName = "Sentry"; // Sentry is already singular
+    const log = `${playerName} buys and gains a ${cardName}.`;
+    const logSections = setupTestEnvironment(playerName, log);
+
+    const initialSentrySupplyCount = getSupplyCardCount_TestHelper(logSections[0].supply, cardName);
+    const initialPlayerSentryCount_NowInDeck = logSections[0].firstPlayer.getNowInDeck().get(cardName) || 0;
+    const initialPlayerSentryCount_TotalGains = logSections[0].firstPlayer.getTotalGains().get(cardName) || 0;
+
+    const result = logAnalyzer(1, logSections);
+
+    assertValue(getSupplyCardCount_TestHelper(result.supply, cardName), initialSentrySupplyCount - 1, `${cardName} supply count after buys and gains`);
+    assertValue(result.firstPlayer.getNowInDeck().get(cardName), initialPlayerSentryCount_NowInDeck + 1, `${cardName} in player deck after buys and gains`);
+    assertValue(result.firstPlayer.getTotalGains().get(cardName), initialPlayerSentryCount_TotalGains + 1, `${cardName} in player total gains after buys and gains`);
 });
 
 console.log("--- logAnalyzer Test Suite Finished ---");

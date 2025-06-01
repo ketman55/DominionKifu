@@ -112,7 +112,23 @@ function analyze(
 
     const playerName = initialWords[0];
     const verb = initialWords[1];
-    let cardPhrase = initialWords.slice(2).join(' ');
+    let wordsForCardParsing = initialWords.slice(2); // Default slice
+
+    // Handle "buys and gains" pattern
+    if (verb === "buys" &&
+        initialWords.length > 3 && // Ensure there are enough words to check
+        initialWords[2]?.toLowerCase() === "and" &&
+        initialWords[3]?.toLowerCase() === "gains") {
+        wordsForCardParsing = initialWords.slice(4); // Skip "and gains"
+    }
+    // Add similar conditions for other known compound phrases if necessary.
+    // For example, some logs might use "buys & gains".
+    // else if (verb === "buys" && initialWords.length > 3 && initialWords[2] === "&" && initialWords[3]?.toLowerCase() === "gains") {
+    //     wordsForCardParsing = initialWords.slice(4);
+    // }
+    // For now, the primary target is "buys and gains".
+
+    let cardPhrase = wordsForCardParsing.join(' ');
 
     const parsedItems: Array<{type: string, value?: string, name?: string, quantity?: number}> = [];
     parsedItems.push({ type: 'player', value: playerName });
