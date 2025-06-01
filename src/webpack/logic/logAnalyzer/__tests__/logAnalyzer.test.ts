@@ -27,6 +27,15 @@ function assertValue(
     }
 }
 
+function getSupplyCardCount_TestHelper(supplyInstance: Supply, cardName: string): number {
+    const basicCard = supplyInstance.getBasicArea().find(c => c.name === cardName);
+    if (basicCard) return basicCard.count;
+    const kingdomCard = supplyInstance.getKingdomArea().find(c => c.name === cardName);
+    if (kingdomCard) return kingdomCard.count;
+    // Also check other areas if necessary, e.g. nonSupply cards if they can be tracked in Supply object
+    return 0;
+}
+
 function setupTestEnvironment(
     playerName: string,
     logSectionString: string,
@@ -39,12 +48,10 @@ function setupTestEnvironment(
     const testSupplyCounts = { ...initialCardCounts };
 
     // Ensure multi-word cards used in tests are present in the test supply if not already.
-    // This makes tests self-contained regarding card availability in supply.
     const criticalTestCards = ["Cabin Boy", "Grand Market", "Border Village", "Council Room", "Ruined Library"];
     criticalTestCards.forEach(cardFullName => {
         const singularName = pluralize.singular(cardFullName);
         if (!(singularName in testSupplyCounts)) {
-            // console.log(`Note: Adding '${singularName}' to test supply for this test run.`);
             testSupplyCounts[singularName] = 10; // Default quantity for cards not in main supply
         }
     });
@@ -52,26 +59,37 @@ function setupTestEnvironment(
     // Initialize player's deck for specific scenarios (e.g., trashing)
     if (initialPlayerDeckContents) {
         for (const cardName in initialPlayerDeckContents) {
-            // This assumes Player class has a method to set initial deck state,
-            // or we manipulate its internal `nowInDeck` map directly for testing.
-            // For now, using addToNowInDeck which should also initialize.
             player.addToNowInDeck(cardName, initialPlayerDeckContents[cardName]);
+        }
+    }
+
+    const supply = new Supply();
+    const basicCardNames = ["Copper", "Silver", "Gold", "Estate", "Duchy", "Province", "Curse", "Potion", "Platinum", "Colony"];
+    for (const cardName in testSupplyCounts) {
+        const count = testSupplyCounts[cardName];
+        // Ensure cardName is the key from initialCardCounts (which should be singular and correctly spaced now)
+        if (basicCardNames.includes(cardName)) {
+            supply.addCardToBasic(cardName, count);
+        } else {
+            // Assume other cards are kingdom cards.
+            // The initialCardCounts should have the correct names (singular, spaced)
+            supply.addCardToKingdom(cardName, count);
         }
     }
 
     const prevLog: LogSectionInterface = {
         firstPlayer: player,
         secondPlayer: new Player(),
-        supply: new Supply(testSupplyCounts), // Use the (potentially modified) test supply counts
+        supply: supply, // use the populated supply object
         logSection: "Turn 0 - Previous state",
     };
-    prevLog.secondPlayer.setPlayerName("Player2"); // Dummy second player
+    prevLog.secondPlayer.setPlayerName("Player2");
 
 
     const currentLog: LogSectionInterface = {
         firstPlayer: player.clone(),
         secondPlayer: prevLog.secondPlayer.clone(),
-        supply: prevLog.supply.clone(), // Clone supply from previous log section
+        supply: prevLog.supply.clone(),
         logSection: logSectionString,
     };
 
@@ -111,12 +129,12 @@ runTest("TestGainMultiWordCard", () => {
     const singularCard = pluralize.singular(cardGained);
     const log = `${playerName} gains a ${cardGained}.`;
     const logSections = setupTestEnvironment(playerName, log);
-    const initialSupply = logSections[0].supply.getCardCount(singularCard) || 0;
+    const initialSupply = getSupplyCardCount_TestHelper(logSections[0].supply, singularCard);
 
     const result = logAnalyzer(1, logSections);
 
     assertValue(result.firstPlayer.getNowInDeck().get(singularCard), 1, `${singularCard} in deck after gain`);
-    assertValue(result.supply.getCardCount(singularCard), initialSupply - 1, `${singularCard} supply count after gain`);
+    assertValue(getSupplyCardCount_TestHelper(result.supply, singularCard), initialSupply - 1, `${singularCard} supply count after gain`);
 });
 
 runTest("TestBuyMultiWordCard", () => {
@@ -125,12 +143,12 @@ runTest("TestBuyMultiWordCard", () => {
     const singularCard = pluralize.singular(cardBought);
     const log = `${playerName} buys and gains a ${cardBought}.`;
     const logSections = setupTestEnvironment(playerName, log);
-    const initialSupply = logSections[0].supply.getCardCount(singularCard) || 0;
+    const initialSupply = getSupplyCardCount_TestHelper(logSections[0].supply, singularCard);
 
     const result = logAnalyzer(1, logSections);
 
     assertValue(result.firstPlayer.getNowInDeck().get(singularCard), 1, `${singularCard} in deck after buy`);
-    assertValue(result.supply.getCardCount(singularCard), initialSupply - 1, `${singularCard} supply count after buy`);
+    assertValue(getSupplyCardCount_TestHelper(result.supply, singularCard), initialSupply - 1, `${singularCard} supply count after buy`);
 });
 
 runTest("TestTrashMultiWordCard", () => {
@@ -140,19 +158,18 @@ runTest("TestTrashMultiWordCard", () => {
     const log = `${playerName} trashes a ${cardTrashed}.`;
 
     const logSections = setupTestEnvironment(playerName, log, { [singularCard]: 1 });
-    const initialTrashPileCount = logSections[0].supply.getTrash().get(singularCard) || 0;
-    // Player.decreaseFromNowInDeck should make the card count undefined or 0 if all are removed.
-    // The trashing logic in trashes.ts depends on `singularCardName in initialCardCounts`.
-    // setupTestEnvironment ensures Ruined Library is in the test supply for this.
+
+    const initialTrashArea_TestHelper = logSections[0].supply.getTrashArea();
+    const initialCardInTrash_TestHelper = initialTrashArea_TestHelper.find(c => c.name === singularCard);
+    const initialTrashPileCount = initialCardInTrash_TestHelper ? initialCardInTrash_TestHelper.count : 0;
 
     const result = logAnalyzer(1, logSections);
 
-    // If player had 1, and trashed 1, count becomes 0. If map stores 0, actual is 0. If key is deleted, actual is undefined.
-    // Player.decreaseFromNowInDeck implementation:
-    // if (newCount <= 0) this.nowInDeck.delete(cardName); else this.nowInDeck.set(cardName, newCount);
-    // So, it should be undefined.
     assertValue(result.firstPlayer.getNowInDeck().get(singularCard), undefined, `${singularCard} in player deck after trash`);
-    assertValue(result.supply.getTrash().get(singularCard), initialTrashPileCount + 1, `${singularCard} in trash pile after trash`);
+
+    const resultTrashArea_TestHelper = result.supply.getTrashArea();
+    const resultCardInTrash_TestHelper = resultTrashArea_TestHelper.find(c => c.name === singularCard);
+    assertValue(resultCardInTrash_TestHelper ? resultCardInTrash_TestHelper.count : 0, initialTrashPileCount + 1, `${singularCard} in trash pile after trash`);
 });
 
 
