@@ -1,4 +1,3 @@
-```typescript
 import { logAnalyzer } from '../logAnalyzer';
 import { LogSectionInterface } from '../../../interface/LogSectionInterface';
 import { Player } from '../../../model/Player';
@@ -169,4 +168,3 @@ runTest("TestPlayMultipleCardsWithMultiWord", () => {
 });
 
 console.log("--- logAnalyzer Test Suite Finished ---");
-```

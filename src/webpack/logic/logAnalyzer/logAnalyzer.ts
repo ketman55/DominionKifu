@@ -180,7 +180,7 @@ function analyze(
             break;
 
         case 'draws': // デッキからカードを引く
-            draws(playerMap, cards); // Pass only card info
+            draws(playerMap, playerName, cards); // Pass only card info
             break;
 
         case 'shuffles': // 山札をシャッフルする
