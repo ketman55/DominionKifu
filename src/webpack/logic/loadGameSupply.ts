@@ -14,7 +14,7 @@ import { initialCardCounts } from "../../webpack/enum/initialCardCounts";
 export function loadGameSupply(supply: Supply, gameSupply: string): void {
     // カンマ区切りの文字列を配列に変換、空白を削除
     const gameSupplyList
-        = gameSupply.split(',').map(cardName => cardName.replace(/\s+/g, ''));
+        = gameSupply.split(',').map(cardName => cardName.trim());
 
     // 基本カードの初期設定
     // 植民地、ポーションは未実装

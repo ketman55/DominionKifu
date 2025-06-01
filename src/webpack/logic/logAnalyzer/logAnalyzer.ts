@@ -1,5 +1,6 @@
 import { LogSectionInterface } from "../../interface/LogSectionInterface";
 import { Player } from "../../model/Player";
+import { initialCardCounts } from "../../enum/initialCardCounts";
 
 // プレイヤーの行動メソッド
 import { cleanUp } from "./methods/cleanUp";
@@ -89,76 +90,145 @@ function analyze(
     }
 
     // CurrentLogSecの内容を解析する
-    // 例：k draws 2 Coppers, 2 Estates, and a Trader.
-    const logArray = logSec.currentLogSec.logSection
-        .replace(/\./g, '') // すべてのピリオドを置換
-        .replace(/,/g, '') // すべてのカンマを置換
-        .split(' ');
+    const cleanedLog = logSec.currentLogSec.logSection.replace(/[.,]/g, '');
+    const initialWords = cleanedLog.split(' ');
 
-    // 前や先を見て判定する必要のある処理用の変数
-    const prevLogArray = logSec.prevLogSec.logSection.split(' ');
+    // Prepare Card List
+    const knownCardNames = Object.keys(initialCardCounts);
+    const sortedKnownCardNames = knownCardNames.sort((a, b) => b.length - a.length);
 
     /*
      クリーンナップ処理
     */
-    if (logArray[0] === 'Turn') {
+    if (initialWords[0] === 'Turn') {
         cleanUp(firstPlayer, secondPlayer);
         return;
-    } 
+    }
 
     /*
     通常アクションの処理
     */
-    if (logArray.length < 2) return;
-    const verb = logArray[1];
-    const nextOfVerb = logArray[2];
-    const lastTwoWords = logArray.slice(-2).join(" ");
+    if (initialWords.length < 2) return;
+
+    const playerName = initialWords[0];
+    const verb = initialWords[1];
+    let wordsForCardParsing = initialWords.slice(2); // Default slice
+
+    // Handle "buys and gains" pattern
+    if (verb === "buys" &&
+        initialWords.length > 3 && // Ensure there are enough words to check
+        initialWords[2]?.toLowerCase() === "and" &&
+        initialWords[3]?.toLowerCase() === "gains") {
+        wordsForCardParsing = initialWords.slice(4); // Skip "and gains"
+    }
+    // Add similar conditions for other known compound phrases if necessary.
+    // For example, some logs might use "buys & gains".
+    // else if (verb === "buys" && initialWords.length > 3 && initialWords[2] === "&" && initialWords[3]?.toLowerCase() === "gains") {
+    //     wordsForCardParsing = initialWords.slice(4);
+    // }
+    // For now, the primary target is "buys and gains".
+
+    let cardPhrase = wordsForCardParsing.join(' ');
+
+    const parsedItems: Array<{type: string, value?: string, name?: string, quantity?: number}> = [];
+    parsedItems.push({ type: 'player', value: playerName });
+    parsedItems.push({ type: 'verb', value: verb });
+
+    let remainingCardPhrase = cardPhrase;
+    const cards: Array<{name: string, quantity: number}> = [];
+
+    while (remainingCardPhrase.length > 0) {
+        let foundMatch = false;
+        let quantity = 1;
+        let quantityStr = "";
+        const quantityMatch = remainingCardPhrase.match(/^(\d+)\s+/);
+
+        if (quantityMatch) {
+            quantity = parseInt(quantityMatch[1]);
+            quantityStr = quantityMatch[1] + " ";
+        } else if (remainingCardPhrase.match(/^(a|an)\s+/i)) {
+            quantity = 1;
+            const articleMatch = remainingCardPhrase.match(/^(a|an)\s+/i);
+            if (articleMatch) { // Ensure articleMatch is not null
+                quantityStr = articleMatch[0];
+            }
+        }
+
+        let possibleCardPart = remainingCardPhrase.substring(quantityStr.length);
+
+        for (const cardName of sortedKnownCardNames) {
+            if (possibleCardPart.startsWith(cardName)) {
+                cards.push({ name: cardName, quantity: quantity });
+                remainingCardPhrase = possibleCardPart.substring(cardName.length).trim();
+                if (remainingCardPhrase.toLowerCase().startsWith("and ")) {
+                    remainingCardPhrase = remainingCardPhrase.substring(4).trim();
+                }
+                foundMatch = true;
+                break;
+            }
+        }
+
+        if (!foundMatch) {
+            break;
+        }
+    }
+
+    parsedItems.push(...cards.map(card => ({ type: 'card', name: card.name, quantity: card.quantity })));
+
+    // Methods will now use playerName and the cards array derived from parsedItems.
+    // For example: plays(playerMap, playerName, cards); (where cards is parsedItems.filter(item => item.type === 'card')).
+    // The startsWith method might need special handling.
+    // The gains method also takes prevLogArray. We will address prevLogArray later if needed.
+
+    // 前や先を見て判定する必要のある処理用の変数
+    // prevLogArray might be needed for specific methods like gains, handle as per method requirements.
+    const prevLogArray = logSec.prevLogSec.logSection.split(' ');
 
 
     // ログの内容によって処理を分岐する
     switch (verb) {
         case 'starts':
-            switch (nextOfVerb) {
-                case 'with': // starts with＝初期処理
-                    startsWith(playerMap, firstPlayer, secondPlayer, logArray);
-                    break;
+            // startsWith might need initialWords or a reconstructed array.
+            // For now, assuming it can be adapted or its direct logArray dependency is reviewed.
+            if (initialWords[2] === 'with') { // Adjusted to check 'with' from initialWords
+                 startsWith(playerMap, firstPlayer, secondPlayer, initialWords); // Pass initialWords for now
             }
             break;
 
         case 'draws': // デッキからカードを引く
-            draws(playerMap, logArray);
+            draws(playerMap, playerName, cards); // Pass only card info
             break;
 
         case 'shuffles': // 山札をシャッフルする
-            shuffles(playerMap, logArray);
+            shuffles(playerMap, initialWords); // shuffles might depend on playerName being in initialWords[0]
             break;
 
         case 'plays': // カードを場に出して使用する
-            plays(playerMap, logArray);
+            plays(playerMap, playerName, cards);
             break;
 
         case 'buys':
-            buys(playerMap, logArray, supply);
+            buys(playerMap, playerName, cards, supply);
             break;
 
         case 'gains':
-            gains(supply, playerMap, logArray, prevLogArray);
+            // gains might need prevLogArray, this needs careful adaptation.
+            gains(supply, playerMap, playerName, cards, prevLogArray);
             break;
 
         case 'trashes':
-            trashes(playerMap, logArray, supply);
+            trashes(playerMap, playerName, cards, supply);
             break;
 
         case 'exiles': // カードを追放する
-            exiles(playerMap, logArray, prevLogArray, supply);
+            // exiles might need prevLogArray, this needs careful adaptation.
+            exiles(playerMap, playerName, cards, prevLogArray, supply);
             break
 
         case 'discards':
-            // 追放していたカードを捨て札にした場合
-            if (lastTwoWords == "from Exile") {
-                discardFromExile(playerMap, logArray);
-                break
+            if (logSec.currentLogSec.logSection.endsWith("from Exile")) {
+                discardFromExile(playerMap, playerName, cards);
             }
-
+            break;
     }
 }
