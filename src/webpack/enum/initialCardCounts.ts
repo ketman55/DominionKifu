@@ -94,11 +94,7 @@ export const initialCardCounts: { [key: string]: number } = {
     Torturer: lowData.Standard,
     'Trading Post': lowData.Standard,
     Upgrade: lowData.Standard,
-    Farm: lowData.Standard, // Assuming Farm is Harem from Intrigue 1E/2E differences? Harem is $6 Treasure-Victory. Farm is not listed directly in Intrigue 2E set.
-    // Harem from Intrigue is listed as Nobles in 2E, or Harem if from Prosperity.
-    // The original file has 'Farm: lowData.Standard' under Intrigue. This might be an error in the original file or a custom card.
-    // For now, I will keep 'Farm' as is, as it's not in the transformation list.
-    // Transformation list has Harem -> Harem, but there's no Harem key here under Intrigue.
+    Farm: lowData.Standard,
     Nobles: lowData.Victory,
 
     //Removedcards:
@@ -113,26 +109,26 @@ export const initialCardCounts: { [key: string]: number } = {
     Haven: lowData.Standard,
     Lighthouse: lowData.Standard,
     'Native Village': lowData.Standard,
-    Astrolabe: lowData.Standard, // Not in transformation list, assuming it's correct or a new card
+    Astrolabe: lowData.Standard,
     'Fishing Village': lowData.Standard,
     Lookout: lowData.Standard,
-    Monkey: lowData.Standard, // Not in transformation list
+    Monkey: lowData.Standard,
     'Sea Chart': lowData.Standard,
     Smugglers: lowData.Standard,
     Warehouse: lowData.Standard,
-    Blockade: lowData.Standard, // Not in transformation list
+    Blockade: lowData.Standard,
     Caravan: lowData.Standard,
     Cutpurse: lowData.Standard,
     Island: lowData.Victory,
-    Sailor: lowData.Standard, // Not in transformation list
+    Sailor: lowData.Standard,
     Salvager: lowData.Standard,
-    TidePools: lowData.Standard, // Not in transformation list
+    TidePools: lowData.Standard,
     'Treasure Map': lowData.Standard,
     Bazaar: lowData.Standard,
-    Corsair: lowData.Standard, // Not in transformation list
+    Corsair: lowData.Standard,
     'Merchant Ship': lowData.Standard,
     Outpost: lowData.Standard,
-    Pirate: lowData.Standard, // Not in transformation list - note: Pirate Ship is separate
+    Pirate: lowData.Standard,
     'Sea Witch': lowData.Standard,
     Tactician: lowData.Standard,
     Treasury: lowData.Standard,
@@ -149,7 +145,7 @@ export const initialCardCounts: { [key: string]: number } = {
     'Ghost Ship': lowData.Standard,
 
     //Alchemy
-    'Transmute': lowData.Standard, // Assuming PTransmute -> Transmute
+    'Transmute': lowData.Standard,
     Vineyard: lowData.Standard,
     Herbalist: lowData.Standard,
     Apothecary: lowData.Standard,
@@ -174,7 +170,7 @@ export const initialCardCounts: { [key: string]: number } = {
     "Worker's Village": lowData.Standard,
     Charlatan: lowData.Standard,
     City: lowData.Standard,
-    Collection: lowData.Standard, // Not in transformation list
+    Collection: lowData.Standard,
     'Crystal Ball': lowData.Standard,
     Magnate: lowData.Standard,
     Mint: lowData.Standard,
@@ -203,36 +199,33 @@ export const initialCardCounts: { [key: string]: number } = {
     //Cornucopia&Guilds combined section
     'Candlestick Maker': lowData.Standard,
     Hamlet: lowData.Standard,
-    Farrier: lowData.Standard, // Not in transformation list
+    Farrier: lowData.Standard,
     Stonemason: lowData.Standard,
     Menagerie: lowData.Standard,
-    Shop: lowData.Standard, // Not in transformation list
-    Infirmary: lowData.Standard, // Not in transformation list
+    Shop: lowData.Standard,
+    Infirmary: lowData.Standard,
     Advisor: lowData.Standard,
-    Farmhands: lowData.Standard, // Not in transformation list
+    Farmhands: lowData.Standard,
     Plaza: lowData.Standard,
     Remake: lowData.Standard,
     'Young Witch': lowData.Standard,
     Herald: lowData.Standard,
     Baker: lowData.Standard,
     Butcher: lowData.Standard,
-    Carnival: lowData.Standard, // Not in transformation list
-    Ferryman: lowData.Standard, // Not in transformation list
-    Footpad: lowData.Standard, // Not in transformation list
+    Carnival: lowData.Standard,
+    Ferryman: lowData.Standard,
+    Footpad: lowData.Standard,
     'Horn of Plenty': lowData.Standard,
     'Hunting Party': lowData.Standard,
     Jester: lowData.Standard,
     Journeyman: lowData.Standard,
-    // JoustRewards -> Joust Rewards (is this for Joust itself, or its rewards? Prizes are separate)
-    // Assuming Joust is the card, not JoustRewards. If JoustRewards is a collective term, it's not a card.
-    // The transformation list has JoustRewards -> Joust Rewards. For now, I'll treat it as a card placeholder.
-    'Joust': lowData.Standard, // Placeholder, might need specific handling if it's a category
-    Coronet: lowData.Special, // Not in transformation list
-    Courser: lowData.Special, // Not in transformation list
-    Demesne: lowData.Special, // Not in transformation list
-    Housecarl: lowData.Special, // Not in transformation list
+    'Joust': lowData.Standard,
+    Coronet: lowData.Special,
+    Courser: lowData.Special,
+    Demesne: lowData.Special,
+    Housecarl: lowData.Special,
     'Huge Turnip': lowData.Special,
-    Renown: lowData.Special, // Not in transformation list
+    Renown: lowData.Special,
     'Merchant Guild': lowData.Standard,
     Soothsayer: lowData.Standard,
     Fairgrounds: lowData.Victory,
@@ -244,7 +237,7 @@ export const initialCardCounts: { [key: string]: number } = {
     'Farming Village': lowData.Standard,
     'Horse Traders': lowData.Standard,
     Taxman: lowData.Standard,
-    'Tournament': lowData.Standard, // Assuming TournamentPrizes means the card Tournament that gives Prizes
+    'Tournament': lowData.Standard,
     'Bag of Gold': lowData.Special,
     Diadem: lowData.Special,
     Followers: lowData.Special,
@@ -261,28 +254,28 @@ export const initialCardCounts: { [key: string]: number } = {
     Scheme: lowData.Standard,
     Tunnel: lowData.Victory,
     'Jack of All Trades': lowData.Standard,
-    Nomads: lowData.Standard, // Not in transformation list
+    Nomads: lowData.Standard,
     'Spice Merchant': lowData.Standard,
     Trader: lowData.Standard,
-    Trail: lowData.Standard, // Not in transformation list
-    Weaver: lowData.Standard, // Not in transformation list
-    Berserker: lowData.Standard, // Not in transformation list
+    Trail: lowData.Standard,
+    Weaver: lowData.Standard,
+    Berserker: lowData.Standard,
     Cartographer: lowData.Standard,
-    Cauldron: lowData.Standard, // Not in transformation list
+    Cauldron: lowData.Standard,
     Haggler: lowData.Standard,
     Highway: lowData.Standard,
     Inn: lowData.Standard,
     Margrave: lowData.Standard,
-    Souk: lowData.Standard, // Not in transformation list
+    Souk: lowData.Standard,
     Stables: lowData.Standard,
-    Wheelwright: lowData.Standard, // Not in transformation list
+    Wheelwright: lowData.Standard,
     "Witch's Hut": lowData.Standard,
     'Border Village': lowData.Standard,
     Farmland: lowData.Victory,
 
     //Removedcards from Hinterlands:
-    Duchess: lowData.Standard, // Corrected from Duches
-    Oracle: lowData.Standard, // Corrected from racle
+    'Duchess': lowData.Standard,
+    'Oracle': lowData.Standard,
     'Noble Brigand': lowData.Standard,
     'Nomad Camp': lowData.Standard,
     'Silk Road': lowData.Victory,
@@ -292,25 +285,25 @@ export const initialCardCounts: { [key: string]: number } = {
     Mandarin: lowData.Standard,
 
     //DarkAges
-    'Abandoned Mine': lowData.Standard, // from RuinsAbandonedMine
+    'Abandoned Mine': lowData.Standard,
     'Ruined Library': lowData.Standard,
     'Ruined Market': lowData.Standard,
     'Ruined Village': lowData.Standard,
     Survivors: lowData.Standard,
     Spoils: lowData.Standard,
     'Poor House': lowData.Standard,
-    Hovel: lowData.Standard, // from SheltersHovel
+    Hovel: lowData.Standard,
     Necropolis: lowData.Standard,
     'Overgrown Estate': lowData.Standard,
     Beggar: lowData.Standard,
     Squire: lowData.Standard,
     Vagrant: lowData.Standard,
     Forager: lowData.Standard,
-    Hermit: lowData.Standard, // from HermitMadman
+    'Hermit': lowData.Standard,
     'Market Square': lowData.Standard,
     Sage: lowData.Standard,
     Storeroom: lowData.Standard,
-    Urchin: lowData.Standard, // from UrchinMercenary
+    'Urchin': lowData.Standard,
     Armory: lowData.Standard,
     'Death Cart': lowData.Standard,
     Feodum: lowData.Victory,
@@ -331,15 +324,15 @@ export const initialCardCounts: { [key: string]: number } = {
     'Junk Dealer': lowData.Standard,
     Knights: lowData.Standard,
     'Dame Anna': lowData.Special,
-    'Dame Josephine': lowData.Special, // from Josephine
-    'Dame Molly': lowData.Special, // from Molly
-    'Dame Natalie': lowData.Special, // from Natalie
-    'Dame Sylvia': lowData.Special, // from Sylvia
-    'Sir Bailey': lowData.Special, // from SirsBailey
-    'Sir Destry': lowData.Special, // from Destry
-    'Sir Martin': lowData.Special, // from Martin
-    'Sir Michael': lowData.Special, // from Michael
-    'Sir Vander': lowData.Special, // from Vander
+    'Dame Josephine': lowData.Special,
+    'Dame Molly': lowData.Special,
+    'Dame Natalie': lowData.Special,
+    'Dame Sylvia': lowData.Special,
+    'Sir Bailey': lowData.Special,
+    'Sir Destry': lowData.Special,
+    'Sir Martin': lowData.Special,
+    'Sir Michael': lowData.Special,
+    'Sir Vander': lowData.Special,
     Mystic: lowData.Standard,
     Pillage: lowData.Standard,
     Rebuild: lowData.Standard,
@@ -420,7 +413,7 @@ export const initialCardCounts: { [key: string]: number } = {
     Emporium: lowData.Standard,
     Settlers: lowData.Standard,
     'Bustling Village': lowData.Standard,
-    Castles: lowData.Standard, // This is a category, not a card. Humble Castle etc. are below.
+    Castles: lowData.Standard,
     'Humble Castle': lowData.Standard,
     'Crumbling Castle': lowData.Standard,
     'Small Castle': lowData.Standard,
@@ -464,7 +457,7 @@ export const initialCardCounts: { [key: string]: number } = {
     Dominate: lowData.Standard,
 
     //Landmarks:
-    Aqueduct: lowData.Standard, // Aqueduct is a landmark, usually not counted in initialCardCounts this way.
+    Aqueduct: lowData.Standard,
     Arena: lowData.Standard,
     'Bandit Fort': lowData.Standard,
     Basilica: lowData.Standard,
@@ -493,11 +486,11 @@ export const initialCardCounts: { [key: string]: number } = {
     'Faithful Hound': lowData.Standard,
     Guardian: lowData.Standard,
     Monastery: lowData.Standard,
-    Pixie: lowData.Standard, // from PixieGoat
-    Tracker: lowData.Standard, // from TrackerPouch
+    'Pixie': lowData.Standard,
+    'Tracker': lowData.Standard,
     Imp: lowData.Standard,
     Changeling: lowData.Standard,
-    Fool: lowData.Standard, // from FoolLostintheWoods
+    'Fool': lowData.Standard,
     'Lucky Coin': lowData.Standard,
     'Ghost Town': lowData.Standard,
     Leprechaun: lowData.Standard,
@@ -512,10 +505,10 @@ export const initialCardCounts: { [key: string]: number } = {
     "Devil's Workshop": lowData.Standard,
     Exorcist: lowData.Standard,
     Necromancer: lowData.Standard,
-    'Zombie Apprentice': lowData.Standard, // from ZombiesApprentice
-    'Zombie Mason': lowData.Standard, // from ZombiesMason
-    'Zombie Spy': lowData.Standard, // from ZombiesSpy
-    Shepherd: lowData.Standard, // from ShepherdPasture
+    'Zombie Apprentice': lowData.Standard,
+    'Zombie Mason': lowData.Standard,
+    'Zombie Spy': lowData.Standard,
+    'Shepherd': lowData.Standard,
     Skulk: lowData.Standard,
     Ghost: lowData.Standard,
     Cobbler: lowData.Standard,
@@ -528,45 +521,45 @@ export const initialCardCounts: { [key: string]: number } = {
     'Sacred Grove': lowData.Standard,
     Tormentor: lowData.Standard,
     'Tragic Hero': lowData.Standard,
-    Vampire: lowData.Standard, // from VampireBat
+    'Vampire': lowData.Standard,
     Werewolf: lowData.Standard,
     Raider: lowData.Standard,
 
     //Boons (These are typically not in initialCardCounts as buyable piles)
     "The Earth's Gift": lowData.Standard,
-    "The Field's Gift": lowData.Standard, // From Field
-    "The Flame's Gift": lowData.Standard, // From Flame
-    "The Forest's Gift": lowData.Standard, // From Forest
-    "The Moon's Gift": lowData.Standard, // From Moon
-    "The Mountain's Gift": lowData.Standard, // From Mountain
-    "The River's Gift": lowData.Standard, // From River
-    "The Sea's Gift": lowData.Standard, // From Sea
-    "The Sky's Gift": lowData.Standard, // From Sky
-    "The Sun's Gift": lowData.Standard, // From Sun
-    "The Swamp's Gift": lowData.Standard, // From Swamp
-    "The Wind's Gift": lowData.Standard, // From Wind
+    "The Field's Gift": lowData.Standard,
+    "The Flame's Gift": lowData.Standard,
+    "The Forest's Gift": lowData.Standard,
+    "The Moon's Gift": lowData.Standard,
+    "The Mountain's Gift": lowData.Standard,
+    "The River's Gift": lowData.Standard,
+    "The Sea's Gift": lowData.Standard,
+    "The Sky's Gift": lowData.Standard,
+    "The Sun's Gift": lowData.Standard,
+    "The Swamp's Gift": lowData.Standard,
+    "The Wind's Gift": lowData.Standard,
 
     //Hexes (Also typically not in initialCardCounts as buyable piles)
     'Bad Omens': lowData.Standard,
-    Delusion: lowData.Standard, // State
-    Deluded: lowData.Standard, // State
-    Envy: lowData.Standard, // from EnvyEnvious, Envious is state
+    Delusion: lowData.Standard,
+    Deluded: lowData.Standard,
+    'Envy': lowData.Standard,
     Famine: lowData.Standard,
     Fear: lowData.Standard,
     Greed: lowData.Standard,
     Haunting: lowData.Standard,
     Locusts: lowData.Standard,
-    Misery: lowData.Standard, // State
-    Miserable: lowData.Standard, // State
-    'Twice Miserable': lowData.Standard, // State
+    Misery: lowData.Standard,
+    Miserable: lowData.Standard,
+    'Twice Miserable': lowData.Standard,
     Plague: lowData.Standard,
     Poverty: lowData.Standard,
     War: lowData.Standard,
 
     //Renaissance
     'Border Guard': lowData.Standard,
-    Horn: lowData.Standard, // Artifact
-    Lantern: lowData.Standard, // Artifact
+    Horn: lowData.Standard,
+    Lantern: lowData.Standard,
     Ducat: lowData.Standard,
     Lackeys: lowData.Standard,
     'Acting Troupe': lowData.Standard,
@@ -574,7 +567,7 @@ export const initialCardCounts: { [key: string]: number } = {
     Experiment: lowData.Standard,
     Improve: lowData.Standard,
     'Flag Bearer': lowData.Standard,
-    Flag: lowData.Standard, // Artifact
+    Flag: lowData.Standard,
     Hideout: lowData.Standard,
     Inventor: lowData.Standard,
     'Mountain Village': lowData.Standard,
@@ -590,9 +583,9 @@ export const initialCardCounts: { [key: string]: number } = {
     Seer: lowData.Standard,
     Spices: lowData.Standard,
     Swashbuckler: lowData.Standard,
-    'Treasure Chest': lowData.Standard, // Artifact
+    'Treasure Chest': lowData.Standard,
     Treasurer: lowData.Standard,
-    Key: lowData.Standard, // Artifact
+    Key: lowData.Standard,
     Villain: lowData.Standard,
 
     //Projects (Typically not in initialCardCounts as buyable piles)
@@ -707,25 +700,25 @@ export const initialCardCounts: { [key: string]: number } = {
     Acolyte: lowData.Standard,
     Sorceress: lowData.Standard,
     Sibyl: lowData.Standard,
-    Clashes: lowData.Standard, // This might be a category, or a card
+    Clashes: lowData.Standard,
     'Battle Plan': lowData.Standard,
     Archer: lowData.Standard,
     Warlord: lowData.Standard,
     Territory: lowData.Standard,
-    'Forts Tent': lowData.Standard, // Forts is likely category, Tent is card
+    'Forts Tent': lowData.Standard,
     Garrison: lowData.Standard,
-    HillFort: lowData.Standard, // Hill Fort
+    HillFort: lowData.Standard,
     Stronghold: lowData.Standard,
     Importer: lowData.Standard,
     'Merchant Camp': lowData.Standard,
-    Odysseys: lowData.Standard, // This might be a category
+    Odysseys: lowData.Standard,
     'Old Map': lowData.Standard,
     Voyage: lowData.Standard,
     'Sunken Treasure': lowData.Standard,
     'Distant Shore': lowData.Standard,
     Sentinel: lowData.Standard,
     Underling: lowData.Standard,
-    Wizards: lowData.Standard, // This might be a category
+    Wizards: lowData.Standard,
     Student: lowData.Standard,
     Conjurer: lowData.Standard,
     Sorcerer: lowData.Standard,
@@ -755,7 +748,7 @@ export const initialCardCounts: { [key: string]: number } = {
     'Band of Nomads': lowData.Standard,
     'Cave Dwellers': lowData.Standard,
     'Circle of Witches': lowData.Standard,
-    Citystate: lowData.Standard, // This is an Ally
+    Citystate: lowData.Standard,
     'Coastal Haven': lowData.Standard,
     "Crafters' Guild": lowData.Standard,
     'Desert Guides': lowData.Standard,
@@ -852,8 +845,8 @@ export const initialCardCounts: { [key: string]: number } = {
     Prosper: lowData.Standard,
 
     //Traits (Typically not in initialCardCounts as buyable piles)
-    'Cheap': lowData.Standard, // Cheap is a Trait name
-    Cursed: lowData.Standard, // This is a Trait name, distinct from Curse card
+    'Cheap': lowData.Standard,
+    Cursed: lowData.Standard,
     Fated: lowData.Standard,
     Fawning: lowData.Standard,
     Friendly: lowData.Standard,
@@ -933,9 +926,9 @@ export const initialCardCounts: { [key: string]: number } = {
     Avanto: lowData.Standard,
     'Walled Village': lowData.Standard,
     Governor: lowData.Standard,
-    Marchland: lowData.Standard, // Not in transformation list
+    Marchland: lowData.Standard,
     Stash: lowData.Standard,
-    Captain: lowData.Standard, // Not in transformation list
+    Captain: lowData.Standard,
     Prince: lowData.Standard,
 
     //Events (Promo):
