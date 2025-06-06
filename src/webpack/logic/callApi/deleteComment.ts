@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { API_BASE_URL } from "../../enum/clientEnv";
 
 export async function deleteCommentApi(gameNumber: string, pointer: number, adminToken: string): Promise<void> {
     try {
-        const response = await axios.delete(`/api/comment/${gameNumber}/${pointer}`, {
+        const response = await axios.delete(API_BASE_URL + `/api/comment/${gameNumber}/${pointer}`, {
             headers: {
                 'Authorization': `Bearer ${adminToken}`
             }

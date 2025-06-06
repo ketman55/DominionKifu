@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_BASE_URL } from "../../enum/clientEnv";
 
 interface LoginResponse {
     success: boolean;
@@ -9,7 +10,7 @@ interface LoginResponse {
 
 export async function adminLoginApi(password: string): Promise<LoginResponse> {
     try {
-        const response = await axios.post('/api/admin/login', {
+        const response = await axios.post(API_BASE_URL + '/api/admin/login', {
             password: password
         });
         

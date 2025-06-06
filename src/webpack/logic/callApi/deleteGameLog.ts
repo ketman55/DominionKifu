@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { API_BASE_URL } from "../../enum/clientEnv";
 
 export async function deleteGameLogApi(gameNumber: string, adminToken: string): Promise<void> {
     try {
-        const response = await axios.delete(`/api/gamelog/${gameNumber}`, {
+        const response = await axios.delete(API_BASE_URL + `/api/gamelog/${gameNumber}`, {
             headers: {
                 'Authorization': `Bearer ${adminToken}`
             }
