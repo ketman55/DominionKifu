@@ -35,3 +35,20 @@ export function insertGameLog(gameLog: GameLogInterface): void {
     gameLogCollection.insert(gameLog);
     db.saveDatabase();
 }
+
+export function deleteGameLog(gameNumber: string): boolean {
+    // インジェクション対策
+    const sanitizedGameNumber = sanitizeInput(gameNumber);
+    
+    const db = getDb();
+    const gameLogCollection = db.getCollection<GameLogInterface>('gameLog');
+    const gameLog = gameLogCollection.findOne({ gameNumber: sanitizedGameNumber });
+    
+    if (gameLog) {
+        gameLogCollection.remove(gameLog);
+        db.saveDatabase();
+        return true;
+    }
+    
+    return false;
+}

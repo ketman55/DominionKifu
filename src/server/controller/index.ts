@@ -3,6 +3,7 @@ import { startDb } from '../database/makeLokiDb';
 import cors from 'cors';
 import { gameLogController } from './gameLogController';
 import { commentController } from './commentController';
+import { authController } from './authController';
 import path from 'path';
 
 const app = express();
@@ -27,6 +28,9 @@ gameLogController(app);
 
 // Commentのエンドポイント
 commentController(app);
+
+// 認証のエンドポイント
+authController(app);
 
 // サーバの起動
 app.listen(port, () => {

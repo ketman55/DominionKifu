@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - DominionKifu</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+
+<body>
+    <div class="menu">
+        <li><a href="gameDataInput.html">Home</a></li>
+        <li><a href="admin.html">Admin</a></li>
+    </div>
+
+    <div id="MainContent">
+        <!-- 認証セクション -->
+        <div id="AuthSection" class="section">
+            <h2>Admin Authentication</h2>
+            <div class="form-group">
+                <label for="adminPassword">Admin Password:</label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password">
+                <button id="loginButton">Login</button>
+            </div>
+            <div id="authMessage" class="message"></div>
+        </div>
+
+        <!-- 管理パネル（認証後に表示） -->
+        <div id="AdminPanel" class="section" style="display: none;">
+            <h2>Admin Panel</h2>
+            
+            <!-- ゲームログ管理 -->
+            <div class="admin-section">
+                <h3>Game Log Management</h3>
+                <div id="gameLogList">
+                    <table id="gameLogTable">
+                        <thead>
+                            <tr>
+                                <th>Game Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ゲームログ一覧がここに表示されます -->
+                        </tbody>
+                    </table>
+                </div>
+                <button id="refreshGameLogs">Refresh Game Logs</button>
+            </div>
+
+            <!-- コメント管理 -->
+            <div class="admin-section">
+                <h3>Comment Management</h3>
+                <div id="commentList">
+                    <table id="commentTable">
+                        <thead>
+                            <tr>
+                                <th>Game Number</th>
+                                <th>Pointer</th>
+                                <th>User</th>
+                                <th>Comment</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- コメント一覧がここに表示されます -->
+                        </tbody>
+                    </table>
+                </div>
+                <button id="refreshComments">Refresh Comments</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 確認ダイアログ -->
+    <div id="confirmDialog" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Confirm Deletion</h3>
+            <p id="confirmMessage"></p>
+            <div class="modal-buttons">
+                <button id="confirmYes" class="btn-danger">Yes, Delete</button>
+                <button id="confirmNo" class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- スクリプト定義 -->
+    <script src="./dist/screenEvent/admin/adminController.bundle.js"></script>
+</body>
+
+</html>

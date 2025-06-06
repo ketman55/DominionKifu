@@ -1,6 +1,7 @@
-import { searchComment, searchAllComment, insertComment } from '../repository/commentRepository';
+import { searchComment, searchAllComment, insertComment, deleteComment } from '../repository/commentRepository';
 import { CommentInterface } from '../../webpack/interface/CommentInterface';
 import express, { Request, Response } from 'express';
+import { adminAuth } from '../middleware/authMiddleware';
 
 export function commentController(app: express.Application) {
     
@@ -37,5 +38,24 @@ export function commentController(app: express.Application) {
     app.get('/api/all/comment', (req: Request, res: Response) => {
         const commentArray = searchAllComment();
         res.json(commentArray);
+    });
+
+    // コメント削除エンドポイント（管理者のみ）
+    app.delete('/api/comment/:gameNumber/:pointer', adminAuth, (req: Request, res: Response) => {
+        // リクエストパラメータからデータを取得
+        const gameNumber = req.params.gameNumber as string;
+        const pointer = parseInt(req.params.pointer);
+
+        // データベースからデータを削除
+        if (gameNumber && !isNaN(pointer)) {
+            const result = deleteComment(gameNumber, pointer);
+            if (result) {
+                res.send('Comment is deleted.');
+            } else {
+                res.status(404).send('Comment not found');
+            }
+        } else {
+            res.status(400).send('Game number and pointer are required');
+        }
     });
 }

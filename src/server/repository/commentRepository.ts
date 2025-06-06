@@ -29,3 +29,20 @@ export function insertComment(comment: CommentInterface) {
     commentCollection.insert(comment);
     db.saveDatabase();
 }
+
+export function deleteComment(gameNumber: string, pointer: number): boolean {
+    // インジェクション対策
+    const sanitizedGameNumber = sanitizeInput(gameNumber);
+    
+    const db = getDb();
+    const commentCollection = db.getCollection<CommentInterface>('comment');
+    const comment = commentCollection.findOne({ gameNumber: sanitizedGameNumber, pointer: pointer });
+    
+    if (comment) {
+        commentCollection.remove(comment);
+        db.saveDatabase();
+        return true;
+    }
+    
+    return false;
+}
