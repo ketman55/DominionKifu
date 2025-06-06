@@ -4,11 +4,12 @@ import { checkAdminCredentials } from '../middleware/authMiddleware';
 export function authController(app: express.Application) {
     
     // 管理者認証エンドポイント
-    app.post('/api/admin/login', (req: Request, res: Response) => {
+    app.post('/api/admin/login', (req: Request, res: Response): void => {
         const { password } = req.body;
         
         if (!password) {
-            return res.status(400).json({ error: 'Password is required' });
+            res.status(400).json({ error: 'Password is required' });
+            return;
         }
         
         if (checkAdminCredentials(password)) {
