@@ -1,6 +1,6 @@
 import { deleteGameLogApi } from '../../logic/callApi/deleteGameLog';
 import { deleteCommentApi } from '../../logic/callApi/deleteComment';
-import { getGameNumberListApi } from '../../logic/callApi/getGameNumberList';
+import { getGameNumberList } from '../../logic/callApi/getGameNumberList';
 import { getAllCommentsApi } from '../../logic/callApi/getAllComments';
 import { adminLoginApi } from '../../logic/callApi/adminLogin';
 
@@ -54,7 +54,7 @@ async function handleLogin() {
     try {
         const result = await adminLoginApi(password);
         if (result.success) {
-            adminToken = result.token;
+            adminToken = result.token || null;
             showAdminPanel();
             showMessage('Login successful', 'success');
             await loadGameLogs();
@@ -91,7 +91,7 @@ async function loadGameLogs() {
     if (!adminToken) return;
 
     try {
-        const gameNumbers = await getGameNumberListApi();
+        const gameNumbers = await getGameNumberList();
         const tableBody = document.querySelector('#gameLogTable tbody') as HTMLTableSectionElement;
         
         tableBody.innerHTML = '';
