@@ -352,6 +352,32 @@ function updatePlayerArea(
             }
         });
     }
+
+    // Set-asideエリアテーブルの更新
+    const setAsideTableElement = playerSwitch === 1 ? 'FirstPlayerSetAsideAreaTable' : 'SecondPlayerSetAsideAreaTable';
+    const playerSetAsideTableBody = document.getElementById(setAsideTableElement)?.getElementsByTagName('tbody')[0];
+    if (playerSetAsideTableBody) {
+        // テーブルのリセット
+        while (playerSetAsideTableBody.firstChild) {
+            playerSetAsideTableBody.removeChild(playerSetAsideTableBody.firstChild);
+        }
+
+        // テーブルの再描画
+        player.getSetAsideArea().forEach((count, name) => {
+            const row = playerSetAsideTableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = name;
+            cell2.textContent = count.toString();
+
+            // 増減したカードの背景色を変更
+            const prevCount = prevPlayer.getSetAsideArea().get(name) || 0;
+            cell2.style.backgroundColor = getBackgroundColor(count, prevCount);
+            if (count !== prevCount) {
+                cell2.textContent = prevCount + "→" + count;
+            }
+        });
+    }
 }
 
 

@@ -13,6 +13,7 @@ export class Player {
     private turnExiles: Map<string, number> = new Map(); // ターン中に追放した合計枚数
     
     private exileArea: Map<string, number> = new Map();  // 現在の追放エリアの状況
+    private setAsideArea: Map<string, number> = new Map(); // 現在のset-asideエリアの状況
 
     private playerName: string = '';
     private turn: number = 0; // 現在のターン数
@@ -40,6 +41,7 @@ export class Player {
         player.totalExiles = new Map(Array.from(this.totalExiles.entries()).map(([key, card]) => [key, card]));
         player.turnExiles = new Map(Array.from(this.turnExiles.entries()).map(([key, card]) => [key, card]));
         player.exileArea = new Map(Array.from(this.exileArea.entries()).map(([key, card]) => [key, card]));
+        player.setAsideArea = new Map(Array.from(this.setAsideArea.entries()).map(([key, card]) => [key, card]));
         player.playerName = this.playerName;
         player.turn = this.turn;
         return player;
@@ -225,6 +227,34 @@ export class Player {
     // ゲーム中に追放した合計枚数を取得するメソッド
     getTotalExiles(): Map<string, number> {
         return this.totalExiles;
+    }
+
+    // set-asideエリアを取得するメソッド
+    getSetAsideArea(): Map<string, number> {
+        return this.setAsideArea;
+    }
+
+    // set-asideエリアに新しいカードを追加するメソッド
+    addToSetAside(cardName: string, count: number): void {
+        const existingCard = this.setAsideArea.get(cardName);
+        if (existingCard) {
+            this.setAsideArea.set(cardName, existingCard + count);
+        } else {
+            this.setAsideArea.set(cardName, count);
+        }
+    }
+
+    // set-asideエリアからカードを手札に戻すメソッド
+    moveFromSetAsideToHand(cardName: string, count: number): void {
+        const existingCard = this.setAsideArea.get(cardName);
+        if (existingCard && existingCard >= count) {
+            this.setAsideArea.set(cardName, existingCard - count);
+            if (this.setAsideArea.get(cardName) === 0) {
+                this.setAsideArea.delete(cardName);
+            }
+        } else {
+            console.error(`Not enough "${cardName}" in set-aside area to move to hand.`);
+        }
     }
 
     // プレイヤー名を取得するメソッド
