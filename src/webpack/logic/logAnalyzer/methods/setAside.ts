@@ -22,6 +22,8 @@ export function setAside(
         const cardInfo = parseCardFromText(cardToSetAside);
         if (cardInfo) {
             player.addToSetAside(cardInfo.name, cardInfo.quantity);
+            // nowInDeckからカードを減らす
+            player.decreaseFromNowInDeck(cardInfo.name, cardInfo.quantity);
         }
     }
 }
@@ -48,6 +50,8 @@ export function putInHand(
         const cardInfo = parseCardFromText(cardToPutInHand);
         if (cardInfo) {
             player.moveFromSetAsideToHand(cardInfo.name, cardInfo.quantity);
+            // nowInDeckにカードを追加
+            player.addToNowInDeck(cardInfo.name, cardInfo.quantity);
         }
     }
 }
