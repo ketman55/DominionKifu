@@ -14,6 +14,7 @@ import { trashes } from "./methods/trashes";
 import { gains } from "./methods/gains";
 import { exiles, discardFromExile } from "./methods/exile";
 import { returns } from "./methods/return";
+import { setAside, putInHand } from "./methods/setAside";
 
 interface logSec {
     prevLogSec: LogSectionInterface;
@@ -234,6 +235,18 @@ function analyze(
 
         case 'returns':
             returns(playerMap, playerName, cards, supply);
+            break;
+
+        case 'sets':
+            if (logSec.currentLogSec.logSection.includes('aside with')) {
+                setAside(playerMap, playerName, cards, logSec.currentLogSec.logSection);
+            }
+            break;
+
+        case 'puts':
+            if (logSec.currentLogSec.logSection.includes('in hand')) {
+                putInHand(playerMap, playerName, cards, logSec.currentLogSec.logSection);
+            }
             break;
     }
 }
