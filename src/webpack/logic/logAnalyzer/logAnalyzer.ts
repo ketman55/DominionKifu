@@ -13,6 +13,7 @@ import { buys } from "./methods/buys";
 import { trashes } from "./methods/trashes";
 import { gains } from "./methods/gains";
 import { exiles, discardFromExile } from "./methods/exile";
+import { returns } from "./methods/return";
 
 interface logSec {
     prevLogSec: LogSectionInterface;
@@ -229,6 +230,10 @@ function analyze(
             if (logSec.currentLogSec.logSection.endsWith("from Exile")) {
                 discardFromExile(playerMap, playerName, cards);
             }
+            break;
+
+        case 'returns':
+            returns(playerMap, playerName, cards, supply);
             break;
     }
 }
