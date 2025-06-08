@@ -31,6 +31,9 @@ export function returns(
             // プレイヤーのデッキからカードを削除
             player.decreaseFromNowInDeck(singularCardName, card.quantity);
             
+            // プレイヤーの総獲得数からも削除
+            player.decreaseFromTotalGains(singularCardName, card.quantity);
+            
             // サプライにカードを戻す
             supply.increaseCardCount(singularCardName, card.quantity);
         } else {
